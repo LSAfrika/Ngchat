@@ -8,7 +8,7 @@ import { UiService } from 'src/app/services/ui.service';
 })
 export class SidenavComponent implements OnInit {
 
-  constructor(private ui:UiService) { }
+  constructor(public ui:UiService) { }
 
   tab=1
   chatss=[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]

@@ -1,6 +1,6 @@
 
 
-<div class="chat ">
+<div class="chat "  [ngClass]="{'darkmode':ui.darkmode}">
   
     <div  *ngFor="let name of ui.names; let i=index" class="w-full  flex justify-start flex-1 mb-1 border-b-2 border-b-slate-200">
         <div class="w-[15%] h-fit py-1  flex justify-center items-center  ">

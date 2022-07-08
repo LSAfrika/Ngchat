@@ -8,7 +8,7 @@ import { UiService } from 'src/app/services/ui.service';
 })
 export class ChatComponent implements OnInit {
 
-  constructor(private ui:UiService) { }
+  constructor(public ui:UiService) { }
 
   names:string[]=[]
 

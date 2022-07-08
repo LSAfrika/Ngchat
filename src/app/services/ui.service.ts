@@ -10,6 +10,7 @@ export class UiService {
   openmodal=false
   openchatpage=false
   chatpageanimation=''
+  darkmode=true
   shrinknav=''
   names =['henry','chege','wilson','jane','camil','mary','john','david','rafael','raphael','kim','henry',]
   selecteduser:number=0
@@ -24,8 +25,14 @@ this.openmodal=true
 
   open_chat(){
  this.openchatpage=true
-    this.chatpageanimation='animatein'
+    
     this.shrinknav='lg:w-[25%]'
+     if(this.darkmode){
+    this.chatpageanimation='animatein darkmode'
+
+     }else{
+      this.chatpageanimation='animatein'
+     }
   }
   close_chat(){
     this.shrinknav=''
@@ -40,6 +47,11 @@ this.openmodal=true
 
   username():string{
     return this.names[this.selecteduser]
+  }
+
+
+  activatedarkmode(){
+    this.darkmode=!this.darkmode
   }
 
 
