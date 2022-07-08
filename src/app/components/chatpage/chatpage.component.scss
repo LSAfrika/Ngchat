@@ -1,0 +1,29 @@
+.animatein{
+    animation: in .25s forwards  ;
+}
+
+.animateout{
+    animation: out .25s forwards  ;
+
+
+}
+
+@keyframes in {
+    0%{
+        top: -100%;
+    }
+    100%{
+        top:0%
+    }
+    
+}
+
+@keyframes out {
+    0%{
+        top: 0%;
+    }
+    100%{
+        top:-100%
+    }
+    
+}

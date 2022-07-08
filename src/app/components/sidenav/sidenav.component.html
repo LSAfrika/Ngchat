@@ -1,0 +1,72 @@
+<div class="sidenav ">
+
+  
+
+
+<div class="tabs">
+<div (click)="chats()" class="flex items-center justify-center w-[50%]  hover:cursor-pointer py-2 " [ngClass]="{'activetab':tab===1}">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" />
+      </svg>
+      <h1>chats</h1>
+</div>
+ <div (click)="contacts()" class="flex items-center justify-center w-[50%] hover:cursor-pointer py-2 " [ngClass]="{'activetab':tab===2}">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+      </svg>
+      <h1>contacts</h1>
+ </div>
+</div>
+
+
+<div class="chat-contacts ">
+<div *ngIf="tab===1" class="sidenavcontainer ">
+
+
+    <div   *ngFor="let name of names;let i=index" class="w-full   flex justify-center flex-1 mb-1 border-b-2 border-b-slate-200">
+    <div class="w-[15%] h-fit py-1  flex justify-center items-center  ">
+        <!-- icon -->
+        <div (click)="openbio()" class="hover:cursor-pointer w-[50px] my-1 h-[50px] box-border p-2 flex justify-center items-center rounded-full bg-slate-200" >
+            <img class="w-[50px] h-[50px] " src="../../../assets/5592656011535694869.svg" alt="" srcset="">
+        </div>
+    
+    </div>
+    
+    <!-- text area -->
+    <div (click)="openchat(i)" class="hover:cursor-pointer w-[80%] ml-2 mt-1 h-fit flex flex-col overflow-x-hidden justify-start items-start  truncate  ">
+        <div class="w-full h-fit flex justify-between items-center">
+    
+            <h1 class="text-slate-800 font-semibold ">{{name}}</h1>
+            <h4 class="text-sm font-extralight">15:30</h4>
+        </div>
+        <p class="w-[95%]  truncate  text-slate-600 font-light">Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet deserunt ab id debitis quas voluptas ex iste optio nesciunt pariatur.</p>
+    </div>
+    </div>
+</div>
+<div *ngIf="tab===2" class="sidenavcontainer   h-screen  " > 
+    <div  *ngFor="let chat of names" class="w-full  font-normal items-center  flex justify-start flex-1 mb-1 border-b-2 border-b-slate-200">
+        <div class="w-[15%] h-fit py-1  flex justify-center items-center  ">
+            <!-- icon -->
+            <div class="w-[50px] my-1 h-[50px] box-border p-2 flex justify-center items-center rounded-full bg-slate-200" >
+                <img class="w-[50px] h-[50px] " src="../../../assets/5592656011535694869.svg" alt="" srcset="">
+            </div>
+        
+        </div>
+        
+        <!-- text area -->
+        <div class="w-[80%] h-full ml-2 mt-1  flex  overflow-x-hidden justify-start  items-center ">
+            <div (click)="openchat()" class="text-slate-700 font-semibold text-lg  w-full h-full flex justify-start items-center   "><h1>{{chat}}</h1></div>
+            <svg (click)="openmodal()" xmlns="http://www.w3.org/2000/svg" class="ml-auto h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="rgb(96 165 250)" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            <!-- <p class=" whitespace-nowrap text-slate-600 font-thin">Lorem ipsum dolor sit amet s </p> -->
+        </div>
+        </div>
+
+</div>
+</div>
+
+
+
+
+</div>

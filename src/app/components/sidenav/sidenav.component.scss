@@ -1,0 +1,19 @@
+.sidenav{
+  @apply  hidden lg:flex w-[25%] fixed top-0  h-screen left-0 bg-slate-200 flex-col justify-start items-center bg-gradient-to-b pt-[50px] from-blue-500 to-blue-400;
+}
+
+
+.activetab{
+    @apply bg-white text-blue-500 rounded-t-lg
+} 
+
+.tabs{
+    @apply w-[96%] h-fit  mt-1 text-white flex flex-row justify-center items-center py-2 pb-0 
+}
+
+.chat-contacts{
+    @apply w-[96%] bg-white h-screen overflow-y-hidden flex flex-col justify-start items-center
+}
+.sidenavcontainer{
+    @apply mt-2 w-full px-2 h-screen overflow-y-scroll scrollbar-thin scrollbar-thumb-gray-900 scrollbar-track-gray-100
+}

@@ -1,0 +1,8 @@
+/* You can add global styles to this file, and also import other style files */
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+.chat{
+    @apply pt-[60px] lg:pb-0 lg:w-[75%] lg:right-[0%] lg:left-[25%] lg:hidden pb-[60px] w-full h-screen sm:w-[90%] sm:left-[5%]  sm:right-[5%]  bg-slate-50 md:w-[60%]  md:left-[20%] md:right-[20%]  fixed z-10 overflow-y-scroll px-1 overflow-x-hidden  box-border flex flex-col justify-start;
+ }

@@ -1,0 +1,22 @@
+
+<div class="chat ">
+<div  *ngFor="let name of names" class="w-full   flex justify-start flex-1 mb-1 border-b-2 border-b-slate-200">
+<div class="w-[15%] h-fit py-1  flex justify-center items-center  ">
+    <!-- icon -->
+    <div (click)="openbio()" class="hover:cursor-pointer w-[50px] my-1 h-[50px] box-border p-2 flex justify-center items-center rounded-full bg-slate-200" >
+        <img class="w-[50px] h-[50px] " src="../../../assets/5592656011535694869.svg" alt="" srcset="">
+    </div>
+
+</div>
+
+<!-- text area -->
+<div (click)="openchat()" class="hover:cursor-pointer w-[80%] ml-2 mt-1 h-fit flex flex-col overflow-x-hidden justify-start items-start  truncate  ">
+    <div class="w-full h-fit flex justify-between items-center">
+
+        <h1 class="text-slate-800 font-semibold ">{{name}}</h1>
+        <h4 class="text-sm font-extralight">15:30</h4>
+    </div>
+    <p class="w-[95%]  truncate  text-slate-600 font-light">Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet deserunt ab id debitis quas voluptas ex iste optio nesciunt pariatur.</p>
+</div>
+</div>
+</div>

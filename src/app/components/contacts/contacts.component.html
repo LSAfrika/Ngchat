@@ -1,0 +1,25 @@
+
+
+<div class="chat ">
+  
+    <div  *ngFor="let name of ui.names; let i=index" class="w-full  flex justify-start flex-1 mb-1 border-b-2 border-b-slate-200">
+        <div class="w-[15%] h-fit py-1  flex justify-center items-center  ">
+            <!-- icon -->
+            <div class="w-[50px] my-1 h-[50px] box-border p-2 flex justify-center items-center rounded-full bg-slate-200" >
+                <img class="w-[50px] h-[50px] " src="../../../assets/5592656011535694869.svg" alt="" srcset="">
+            </div>
+        
+        </div>
+        
+        <!-- text area -->
+        <div class="w-[80%] h-[100%] ml-2 mt-1  flex  overflow-x-hidden justify-start  items-center ">
+            <div (click)="openchat(i)" class="text-slate-700 font-normal hover:cursor-pointer   w-full h-full flex justify-start items-center   "><h1>{{name}}</h1></div>
+            <svg (click)="ui.open_modal()" xmlns="http://www.w3.org/2000/svg" class="ml-auto h-6 w-6 hover:cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="rgb(96 165 250)" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            <!-- <p class=" whitespace-nowrap text-slate-600 font-thin">Lorem ipsum dolor sit amet s </p> -->
+        </div>
+        </div>
+
+
+</div>
