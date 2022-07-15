@@ -1,6 +1,6 @@
-<div *ngIf="ui.islogedin" [ngClass]="{'darkmode':ui.darkmode}" class="w-full h-screen overflow-y-scroll    scrollbar-thin box-border flex  md:px-auto overflow-x-hidden bg-slate-200 ">
+<div *ngIf="!ui.islogedin" [ngClass]="{'darkmode':ui.darkmode}" class="w-full h-screen overflow-y-scroll    scrollbar-thin box-border flex  md:px-auto overflow-x-hidden bg-slate-200 ">
 <app-nav></app-nav>
-
+<!-- <div >{{api.initialresponse()|async}}-hello</div> -->
 <div class="hidden lg:flex w-[75%] left-[25%] fixed h-screen mt-[50px] rounded-tl-lg     flex-col justify-start items-center">
     <!-- <div class="h-[200px] w-fit flex justify-start items-center bg-white mt-[100px] rounded-full flex-row">
 
@@ -26,14 +26,14 @@
 <app-chat *ngIf="ui.tab===1"></app-chat>
 <app-contacts *ngIf="ui.tab===2"></app-contacts>
 <app-settings *ngIf="ui.tab===3"></app-settings>
-<!-- *" -->
+
 <app-chatpage *ngIf="ui.openchatpage" ></app-chatpage>
-<!--  belongs to app chat page -->
-<app-profile *ngIf="ui.openmodal"></app-profile>
+
+<app-profile *ngIf="ui.openmodal"></app-profile> 
 
 <app-tabs></app-tabs>
 
 
 
 </div>
-<app-login></app-login>
+<!-- <app-login></app-login> -->

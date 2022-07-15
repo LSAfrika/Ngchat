@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ApiService } from './services/api.service';
 import { UiService } from './services/ui.service';
 
 @Component({
@@ -9,7 +10,10 @@ import { UiService } from './services/ui.service';
 export class AppComponent {
   title = 'ngchat';
 
-  constructor(public ui:UiService){
+  constructor(public ui:UiService,public api:ApiService){
+    this.api.initialresponse().subscribe(res=>console.log('server response: ',res))
 
   }
+
+
 }

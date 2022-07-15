@@ -15,7 +15,7 @@ import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { RegisterFormComponent } from './components/register-form/register-form.component';
-
+import{HttpClientModule}from '@angular/common/http'
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,7 +34,8 @@ import { RegisterFormComponent } from './components/register-form/register-form.
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
