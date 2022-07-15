@@ -10,7 +10,7 @@ export class UiService {
   openmodal=false
   openchatpage=false
   chatpageanimation=''
-  darkmode=true
+  darkmode=false
   shrinknav=''
   names =['henry','chege','wilson','jane','camil','mary','john','david','rafael','raphael','kim','henry',]
   selecteduser:number=0
