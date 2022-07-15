@@ -1,4 +1,4 @@
-<div [ngClass]="{'darkmode':ui.darkmode}" class="w-full h-screen overflow-y-scroll    scrollbar-thin box-border flex  md:px-auto overflow-x-hidden bg-slate-200 ">
+<div *ngIf="ui.islogedin" [ngClass]="{'darkmode':ui.darkmode}" class="w-full h-screen overflow-y-scroll    scrollbar-thin box-border flex  md:px-auto overflow-x-hidden bg-slate-200 ">
 <app-nav></app-nav>
 
 <div class="hidden lg:flex w-[75%] left-[25%] fixed h-screen mt-[50px] rounded-tl-lg     flex-col justify-start items-center">
@@ -34,4 +34,6 @@
 <app-tabs></app-tabs>
 
 
+
 </div>
+<app-login></app-login>

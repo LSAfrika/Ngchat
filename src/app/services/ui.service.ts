@@ -7,11 +7,13 @@ export class UiService {
 
   tab=1
   ispersonalprofile=false
+  islogedin = false
   openmodal=false
   openchatpage=false
   chatpageanimation=''
   darkmode=false
   shrinknav=''
+  form=''
   names =['henry','chege','wilson','jane','camil','mary','john','david','rafael','raphael','kim','henry',]
   selecteduser:number=0
   constructor() { }
@@ -49,6 +51,20 @@ this.openmodal=true
     return this.names[this.selecteduser]
   }
 
+  loginform(){
+    this.form='login'
+  }
+  registerform(){
+    this.form='register'
+  }
+
+  backtologin(s:string){
+    this.form=s
+
+    setTimeout(() => {
+      this.form=''
+    }, 1000);
+  }
 
   activatedarkmode(){
     this.darkmode=!this.darkmode

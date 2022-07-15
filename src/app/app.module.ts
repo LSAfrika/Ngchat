@@ -12,6 +12,9 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { ChatpageComponent } from './components/chatpage/chatpage.component';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { HomeComponent } from './components/home/home.component';
+import { LoginComponent } from './components/login/login.component';
+import { LoginFormComponent } from './components/login-form/login-form.component';
+import { RegisterFormComponent } from './components/register-form/register-form.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +27,10 @@ import { HomeComponent } from './components/home/home.component';
     ProfileComponent,
     ChatpageComponent,
     SidenavComponent,
-    HomeComponent
+    HomeComponent,
+    LoginComponent,
+    LoginFormComponent,
+    RegisterFormComponent
   ],
   imports: [
     BrowserModule,
