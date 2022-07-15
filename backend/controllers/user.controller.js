@@ -2,7 +2,7 @@ const express = require('express')
 const usermodel = require('../models/user.model')
 const bcrypt = require('bcrypt')
 const JWT = require('jsonwebtoken')
-
+require('dotenv').config()
 const router = express.Router()
 
 router.post('/register',async(req,res)=>{
@@ -82,7 +82,7 @@ router.post('/login',async (req,res)=>{
          console.log(Date.now())
          
          // create env key
-       const sigintoken=  JWT.sign(payload,'process.env.JWT_KEY')
+       const sigintoken=  JWT.sign(payload,process.env.HASHKEY)
           res.status(200).send({sigintoken})
 
         
