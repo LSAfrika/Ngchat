@@ -1,6 +1,7 @@
 const express = require('express')
 const usermodel = require('../models/user.model')
 const bcrypt = require('bcrypt')
+const JWT = require('jsonwebtoken')
 
 const router = express.Router()
 
@@ -50,6 +51,46 @@ router.post('/register',async(req,res)=>{
         
         
     }
+    
+})
+
+router.post('/login',async (req,res)=>{
+
+    try {
+        const {email,password}=req.body
+        // console.log(email,password);
+        const finduser = await usermodel.findOne({email:email})
+        if(!finduser){
+          return  res.status(404).send({message: 'please check email and password'})
+        }
+         console.log(finduser)
+         const passwordcompare= await bcrypt.compare(password, finduser.password)
+
+         if(passwordcompare!==true){
+
+            return res.status(500).send({message:'please check email and password'})
+         }
+
+         const payload ={
+             id:finduser._id,
+             email:finduser.email,
+             username:finduser.username,
+             exp: Date.now()  + (60 * 60*1000)
+         }
+        
+         console.log(payload.exp,'-',);
+         console.log(Date.now())
+         
+         // create env key
+       const sigintoken=  JWT.sign(payload,'process.env.JWT_KEY')
+          res.status(200).send({sigintoken})
+
+        
+    } catch (error) {
+        res.send(error.message)
+        
+    }
+
     
 })
 
