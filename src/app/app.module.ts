@@ -16,6 +16,7 @@ import { LoginComponent } from './components/login/login.component';
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { RegisterFormComponent } from './components/register-form/register-form.component';
 import{HttpClientModule}from '@angular/common/http'
+import { FormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,12 +31,12 @@ import{HttpClientModule}from '@angular/common/http'
     HomeComponent,
     LoginComponent,
     LoginFormComponent,
-    RegisterFormComponent
+     RegisterFormComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

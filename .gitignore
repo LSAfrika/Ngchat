@@ -21,7 +21,7 @@ yarn-error.log
 *.launch
 .settings/
 *.sublime-workspace
-
+/backend/ngchat-auth-firebase-adminsdk-2q3j1-423518be38.json
 # Visual Studio Code
 .vscode/*
 !.vscode/settings.json
