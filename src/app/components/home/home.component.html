@@ -1,1 +1,36 @@
-<p>home works!</p>
+ <app-nav></app-nav>
+    
+ <div >{{api.initialresponse()|async}}-hello</div> 
+<div class="hidden lg:flex w-[75%] left-[25%] fixed h-screen mt-[50px] rounded-tl-lg     flex-col justify-start items-center">
+<div class="h-[200px] w-fit flex justify-start items-center bg-white mt-[100px] rounded-full flex-row"> 
+
+        <div class="w-[200px] rounded-full border-white border-[10px]   h-[200px] bg-blue-400 flex justify-center items-center">
+            <div class="font-bold text-6xl text-white">Ng</div>
+        </div>
+
+        <div class="h-[200px] w-[300px] bg-white text-blue-400 rounded-r-lg text-8xl flex justify-center items-center font-bold ">
+<div>Chat</div>
+
+        </div>
+    </div> 
+  
+ <svg xmlns="http://www.w3.org/2000/svg" class="h-[300px] w-[300px] mt-[100px] dark:bg-slate-600 bg-white rounded-full p-4 rotate-[15deg]" viewBox="0 0 20 20" fill="rgb(59 130 246)">
+        <path d="M2 5a2 2 0 012-2h7a2 2 0 012 2v4a2 2 0 01-2 2H9l-3 3v-3H4a2 2 0 01-2-2V5z" />
+        <path d="M15 7v2a4 4 0 01-4 4H9.828l-1.766 1.767c.28.149.599.233.938.233h2l3 3v-3h2a2 2 0 002-2V9a2 2 0 00-2-2h-1z" />
+      </svg>
+
+    <h1 class=" font-medium text-5xl mt-4 text-blue-500 ">welcome to Ng Chat</h1>
+</div>
+<app-sidenav> </app-sidenav>
+
+<app-chat *ngIf="ui.tab===1"></app-chat>
+<app-contacts *ngIf="ui.tab===2"></app-contacts>
+<app-settings *ngIf="ui.tab===3"></app-settings>
+
+<app-chatpage *ngIf="ui.openchatpage" ></app-chatpage>
+
+<app-profile *ngIf="ui.openmodal"></app-profile> 
+
+<app-tabs></app-tabs>  
+
+<!-- <p>home is working</p> -->
