@@ -9,6 +9,7 @@
 .env
 # Node
 /node_modules
+Knode_modules
 /backend/node_modules
 npm-debug.log
 yarn-error.log
