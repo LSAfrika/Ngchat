@@ -100,10 +100,23 @@ router.post('/socialogin',async (req,res)=>{
         const {firebasetoken}=req.body
         // console.log(email,password);
       const firebaseuser=await JWT.decode(firebasetoken)
+// console.log('')
+      const {user_id ,email,name,picture,iss}=firebaseuser
+      console.log('received firebase user:\n',user_id ,email,name,picture,iss);
 
-      
-      console.log('received firebase user:\n',firebaseuser);
-      res.send({user:firebaseuser})
+      const finduserbyemail = await usermodel.findOne({email:email})
+    //   const finduseruser_id = await usermodel.findOne({firebaseuniqueid:user_id})
+
+      console.log('useremail in db: \n',finduserbyemail);
+    //   console.log('userid in db: \n',finduseruser_id);
+
+      if(finduserbyemail===null ){
+       const newuser= await usermodel.create({email:email,firebaseuniqueid:user_id,profileimg:picture,username:name})
+      return res.send({message:`welcome ${name}`,user:newuser})
+      }
+
+      return res.send({message:`welcome back ${name}`,user:finduserbyemail})
+
         
     } catch (error) {
         res.send(error.message)

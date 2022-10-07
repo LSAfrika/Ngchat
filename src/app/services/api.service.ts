@@ -39,7 +39,7 @@ async googlesignin(){
   try {
     const signinresult= await signInWithPopup(this.auth,this.googleprovider)
     const token= await signinresult.user.getIdToken()
-    console.log('token from sign in:',token);
+    // console.log('token from sign in:',token);
     //.pipe(map(serverresponse=>(console.log('response received from server:\n',serverresponse))))
     this.usersignin(token).subscribe(res=>{
       console.log(res);
