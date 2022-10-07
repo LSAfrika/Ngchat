@@ -9,7 +9,9 @@
 .env
 # Node
 /node_modules
-Knode_modules
+/home/sub/ngchatfrontend/node_modules/
+/home/sub/ngchatfrontend/backend/node_modules/
+node_modules
 /backend/node_modules
 npm-debug.log
 yarn-error.log

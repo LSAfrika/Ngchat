@@ -94,6 +94,25 @@ router.post('/login',async (req,res)=>{
     
 })
 
+router.post('/socialogin',async (req,res)=>{
+
+    try {
+        const {firebasetoken}=req.body
+        // console.log(email,password);
+      const firebaseuser=await JWT.decode(firebasetoken)
+
+      
+      console.log('received firebase user:\n',firebaseuser);
+      res.send({user:firebaseuser})
+        
+    } catch (error) {
+        res.send(error.message)
+        
+    }
+
+    
+})
+
 router.get('/users',async(req,res)=>{
 
     const users = await usermodel.find()

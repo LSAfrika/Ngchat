@@ -17,7 +17,14 @@ const userschema = new mongoose.Schema({
     },
     password:{
         type:String,
-        rewuired:true
+    
+    },
+    firebaseuniqueid:{
+        type:String,
+        required:true
+    },
+    profileimg:{
+        type:String
     }
 
 },{timestamps:true}

@@ -1,7 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { initializeApp } from "firebase/app";
-import {getAuth ,signInWithPopup,GoogleAuthProvider,createUserWithEmailAndPassword  } from "firebase/auth"
+import {getAuth ,signInWithPopup,GoogleAuthProvider,createUserWithEmailAndPassword,signOut  } from "firebase/auth"
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 
 @Injectable({
@@ -9,12 +12,12 @@ import { environment } from '../../environments/environment';
 })
 export class ApiService {
 
-  URL='http://localhost:3000/'
+  URL='http://localhost:3000'
     app=
   initializeApp(environment.firebaseConfig)
   auth=getAuth()
   googleprovider=new GoogleAuthProvider()
-  constructor(private http:HttpClient) { 
+  constructor(private http:HttpClient,private router:Router) { 
 console.log('service being initialized');
 
    // this.initializeFB()
@@ -35,12 +38,19 @@ console.log('service being initialized');
 async googlesignin(){
   try {
     const signinresult= await signInWithPopup(this.auth,this.googleprovider)
-    console.log('result form sign in:',signinresult);
-    
-    
+    const token= await signinresult.user.getIdToken()
+    console.log('token from sign in:',token);
+    //.pipe(map(serverresponse=>(console.log('response received from server:\n',serverresponse))))
+    this.usersignin(token).subscribe(res=>{
+      console.log(res);
+      this.router.navigateByUrl('/home')
+      
+    },err=>{console.log('log in error:\n',err.message);
+    })
   } catch (error:any) {
     
     console.log(error.message);
+    console.log('FULL SIGNIN ERROR',error);
     
     
   }
@@ -59,6 +69,20 @@ async registerwithemail(email:string,password:string){
   
 
 }
+async appsignout(){
+  const res= await this.auth.signOut()
+
+  console.log('google signout successful');
+  
+}
+
+
+usersignin(token:string):Observable<any>{
+
+  return this.http.post<any>(this.URL+'/user/socialogin',{firebasetoken:token})
+
+}
+
 
  
 }
