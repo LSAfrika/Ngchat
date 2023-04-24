@@ -17,10 +17,12 @@ export class ChatComponent implements OnInit {
   }
 
   openchat(val:string){
-    this.ui.open_chat()
     this.ui.usernameval=val
+    this.ui.open_chat()
   }
-  openbio(){
+  openbio(val:string){
+    this.ui.usernameval=val
+
     this.ui.open_modal()
   }
 

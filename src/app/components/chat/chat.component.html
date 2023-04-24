@@ -3,7 +3,7 @@
 <div  *ngFor="let name of names;let i=index" class="w-full   flex justify-start flex-1 mb-1 border-b-2 border-b-slate-200">
 <div class="w-[15%] h-fit py-1  flex justify-center items-center  ">
     <!-- icon -->
-    <div (click)="openbio()" class="hover:cursor-pointer w-[50px] my-1 h-[50px] box-border p-2 flex justify-center items-center rounded-full bg-slate-200" >
+    <div (click)="openbio(name)" class="hover:cursor-pointer w-[50px] my-1 h-[50px] box-border p-2 flex justify-center items-center rounded-full bg-slate-200" >
         <img class="w-[50px] h-[50px] " src="../../../assets/5592656011535694869.svg" alt="" srcset="">
     </div>
 

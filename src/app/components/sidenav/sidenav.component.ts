@@ -29,7 +29,9 @@ export class SidenavComponent implements OnInit {
 
   }
 
-  openbio(){
+  openbio(val:string){
+    this.ui.usernameval=val
+
     this.ui.open_modal()
   }
 
