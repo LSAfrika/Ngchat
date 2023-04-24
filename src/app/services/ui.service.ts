@@ -14,7 +14,8 @@ export class UiService {
   darkmode=false
   shrinknav=''
   form=''
-  names =['henry','chege','wilson','jane','camil','mary','john','david','rafael','raphael','kim','henry',]
+  usernameval=''
+  names =['henry','chege','wilson','jane','camil','mary','john','david','rafael','raphael','kim','henry']
   selecteduser:number=0
   constructor() { }
 
@@ -47,7 +48,9 @@ this.openmodal=true
 
   }
 
-  username():string{
+   username(){
+    
+    
     return this.names[this.selecteduser]
   }
 

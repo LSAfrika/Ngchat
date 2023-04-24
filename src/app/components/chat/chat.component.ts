@@ -7,7 +7,7 @@ import { UiService } from 'src/app/services/ui.service';
   styleUrls: ['./chat.component.scss']
 })
 export class ChatComponent implements OnInit {
-
+ 
   constructor(public ui:UiService) { }
 
   names:string[]=[]
@@ -16,11 +16,14 @@ export class ChatComponent implements OnInit {
     this.names= this.ui.names
   }
 
-  openchat(){
+  openchat(val:string){
     this.ui.open_chat()
+    this.ui.usernameval=val
   }
   openbio(){
     this.ui.open_modal()
   }
+
+  
 
 }

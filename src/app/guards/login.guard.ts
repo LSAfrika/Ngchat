@@ -12,8 +12,8 @@ constructor(private router:Router){}
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    this.router.navigateByUrl('/')
-      return false;
+   // this.router.navigateByUrl('/')
+      return true;
   }
   // canDeactivate(
   //   component: unknown,
