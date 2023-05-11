@@ -1,0 +1,21 @@
+.desktop{
+  @apply hidden w-full min-h-[calc(100vh-50px)]
+    max-w-[1300px]
+     shadow-md shadow-black/60
+     relative
+      lg:flex justify-start items-center mx-auto bg-slate-200
+      ;
+  position: relative;
+}
+
+
+
+
+app-chatpage{
+  flex-grow: 1;
+}
+.mobile{
+  @apply flex justify-center w-full px-5 bg-teal-400 max-w-[800px] lg:hidden
+
+
+}

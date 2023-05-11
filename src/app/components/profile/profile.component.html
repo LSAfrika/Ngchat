@@ -1,37 +1,37 @@
-<div class="flex justify-center items-center fixed w-full h-screen top-0 z-50 bg-black/40  "  [ngClass]="{'darkmode':ui.darkmode}">
+<div class="fixed top-0 z-50 flex items-center justify-center w-full h-screen bg-black/40 backdrop-blur "  [ngClass]="{'darkmode':ui.darkmode}">
     <div class="w-[90%] h-[80%] sm:w-[70%] md:w-[50%] lg:w-[30%] backdrop-blur-lg rounded-md bg-slate-50 flex flex-col items-center justify-start  relative">
-      <div class="w-full  h-fit p-2 rounded-md pr-0 pt-0">
-  
-        <svg (click)="ui.close_modal()" xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 ml-auto  " viewBox="0 0 20 20" fill="rgb(37 99 235)">
+      <div class="w-full p-2 pt-0 pr-0 rounded-md h-fit">
+
+        <svg (click)="ui.close_modal()" xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 ml-auto " viewBox="0 0 20 20" fill="rgb(37 99 235)">
           <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
         </svg>
       </div>
-  
+
       <div class="w-[100px] h-[100px] rounded-full bg-slate-300"></div>
-      
-      
-        <h2 class="font-semibold text-xl text-slate-500">{{ui.usernameval}}</h2> 
-  
-  
-      
-      
-  
-      <h2 class="font-normal text-xl mb-5 text-slate-500">last seen: <span class="font-thin text-lg">3h ago</span></h2> 
+
+
+        <h2 class="text-xl font-semibold text-slate-500">{{ui.usernameval}}</h2>
+
+
+
+
+
+      <h2 class="mb-5 text-xl font-normal text-slate-500">last seen: <span class="text-lg font-thin">3h ago</span></h2>
       <div class="border-b-2 border-b-blue-200 w-[80%] py-1 mb-2"></div>
-      <h2 class="font-normal text-xl text-slate-700">email: <span class="font-thin text-lg">example@example.com</span></h2> 
-      
+      <h2 class="text-xl font-normal text-slate-700">email: <span class="text-lg font-thin">example@example.com</span></h2>
+
       <div class="border-b-2 border-b-blue-200 w-[80%] py-1 mb-2"></div>
-      <h2 class="font-normal text-xl text-slate-600">contacts: <span class="font-thin text-lg">+254-713767648</span></h2>
+      <h2 class="text-xl font-normal text-slate-600">contacts: <span class="text-lg font-thin">+254-713767648</span></h2>
       <div class="border-b-2 border-b-blue-200 w-[80%] py-1 mb-2"></div>
-  
+
       <div class="w-[80%] p-2  flex flex-col justify-start pt-5 ">
-        <h1 class="text-lg font-semibold mb-2 text-blue-500">status</h1>
-        <p class="italic font-thin text-sm text-slate-800">Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis molestias eos laborum ut, quis ratione incidunt error corporis facilis voluptatem.</p>
+        <h1 class="mb-2 text-lg font-semibold text-blue-500">status</h1>
+        <p class="text-sm italic font-thin text-slate-800">Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis molestias eos laborum ut, quis ratione incidunt error corporis facilis voluptatem.</p>
       </div>
-  
-  
+
+
     <!--  MOVR -->
-    <svg *ngIf="ui.ispersonalprofile" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 ml-auto" fill="none" viewBox="0 0 24 24" stroke="rgb(30 41 59)" stroke-width="2">
+    <svg *ngIf="ui.ispersonalprofile" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 ml-auto" fill="none" viewBox="0 0 24 24" stroke="rgb(30 41 59)" stroke-width="2">
       <path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
     </svg>
     </div>

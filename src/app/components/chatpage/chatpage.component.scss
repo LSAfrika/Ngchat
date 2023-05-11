@@ -1,3 +1,29 @@
+.chatpages{
+  @apply
+  flex justify-center
+  items-center
+
+w-full
+relative
+  h-screen
+
+  z-50
+   bg-slate-100
+  overflow-y-scroll
+
+  scrollbar-thin ;
+
+  // background-image: url('../../../assets/whatsapp\ bg.png');
+  // background-size: cover;
+  // background-repeat: no-repeat;
+  // w-[calc(100%-400px)]
+
+}
+.chatbody{
+  @apply w-full max-w-[800px] h-screen bg-slate-100
+}
+
+
 .animatein{
     animation: in .25s forwards  ;
 }
@@ -15,7 +41,7 @@
     100%{
         top:0%
     }
-    
+
 }
 
 @keyframes out {
@@ -25,5 +51,5 @@
     100%{
         top:-100%
     }
-    
+
 }

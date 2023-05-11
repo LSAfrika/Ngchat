@@ -1,25 +1,27 @@
-<div  [ngClass]="ui.chatpageanimation"   class=" flex justify-center items-center fixed w-full h-screen top-0  z-50 bg-slate-200 overflow-y-scroll scrollbar scrollbar-thin lg:w-[75%]  lg:left-[25%]  ">
-    <div class="w-full h-[50px] absolute top-0 z-40 bg-blue-500 px-2 py-2 flex justify-start items-center">
-        <svg (click)="closechat()"  xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 lg:hidden" fill="" viewBox="0 0 24 24" stroke="rgb(255 255 255)" stroke-width="3">
+<div    class="chatpages">
+     <div class="w-full h-[50px] absolute  top-0 z-40 bg-blue-500 px-3 py-3 flex justify-start items-center ">
+        <svg (click)="closechat()"  xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 lg:hidden" fill="" viewBox="0 0 24 24" stroke="rgb(255 255 255)" stroke-width="3">
             <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
           </svg>
 
-          <div class="h-8 ml-2 w-8 rounded-full bg-slate-300"></div>
-          <h6 class="ml-2 text-2xl font-medium text-white">{{ui.usernameval}}</h6>
+          <div class="w-8 h-8 ml-2 rounded-full bg-slate-300"></div>
+          <h6 class="mb-1 ml-2 text-lg font-medium text-white">{{ui.usernameval}} </h6>
 
-          <svg (click)="ui.open_modal()" xmlns="http://www.w3.org/2000/svg" class="ml-auto h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="rgb(255 255 255)" stroke-width="2">
+          <svg (click)="ui.open_modal()" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 ml-auto" fill="none" viewBox="0 0 24 24" stroke="rgb(255 255 255)" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
     </div>
+<div class="chatbody">
 
+</div>
 
-    <div class="w-full absolute bottom-0 py-2 px-4 flex justify-center items-center">
+    <div class="absolute bottom-0 flex items-center justify-center w-full px-4 py-2">
         <input class="w-[80%] lg:w-[60%]  h-fit rounded-full outline-none py-3 px-3  " >
-      
-        <div class="w-fit bg-blue-500 flex justify-center items-center ml-2 rounded-full p-2 box-border">
+
+        <div class="box-border flex items-center justify-center p-2 ml-2 bg-blue-500 rounded-full w-fit">
 
             <img class="w-8 h-8" src="../../../assets/send fill.svg" alt="" srcset="">
         </div>
     </div>
-    
+
   </div>

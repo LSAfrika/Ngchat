@@ -16,6 +16,7 @@ export class SidenavComponent implements OnInit {
   ngOnInit(): void {
     this.tab=this.ui.tab
     this.names= this.ui.names
+    this.ui.usernameval=this.names[0]
   }
 
   chats(){
@@ -27,6 +28,9 @@ export class SidenavComponent implements OnInit {
     this.ui.tab=2
     this.tab=this.ui.tab
 
+  }
+  switchchat(name:string){
+    this.ui.usernameval=name
   }
 
   openbio(val:string){

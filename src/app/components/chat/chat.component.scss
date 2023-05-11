@@ -1,0 +1,13 @@
+.chat{
+  @apply pt-[60px]  scrollbar-thin  pb-[60px] w-full h-screen
+   bg-slate-50
+
+   max-w-[800px]
+
+   mx-2
+    z-10 overflow-y-scroll px-1 overflow-x-hidden  box-border flex flex-col justify-start
+   scrollbar-track-transparent scrollbar-thumb-blue-700
+   ;
+
+
+}
