@@ -7,7 +7,7 @@ import { UiService } from 'src/app/services/ui.service';
   styleUrls: ['./contacts.component.scss']
 })
 export class ContactsComponent implements OnInit {
- 
+
 
   constructor(public ui:UiService) { }
 
@@ -20,5 +20,18 @@ export class ContactsComponent implements OnInit {
     }
     this.ui.open_chat()
   }
+
+
+  closelist(){
+    this.ui.userlist=2
+
+    console.log('ui modal',this.ui.userlist);
+    setTimeout(() => {
+    this.ui.userlist=0
+
+    }, 1500);
+
+  }
+
 
 }

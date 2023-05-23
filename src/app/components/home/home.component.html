@@ -1,42 +1,13 @@
  <app-nav></app-nav>
 
- <!-- <div >{{api.initialresponse()|async}}-hello</div> -->
-<div class="hidden lg:flex w-[75%] left-[25%] fixed h-[calc(100vh - 100px)] mt-[50px] rounded-tl-lg bg-slate-200    flex-col justify-start items-center">
-<!-- <div class="h-[200px] w-fit flex justify-start items-center bg-white mt-[100px] rounded-full flex-row">
-
-        <div class="w-[200px] rounded-full border-white border-[10px]   h-[200px] bg-blue-400 flex justify-center items-center">
-            <div class="text-6xl font-bold text-white">Ng</div>
-        </div>
-
-        <div class="h-[200px] w-[300px] bg-white text-blue-400 rounded-r-lg text-8xl flex justify-center items-center font-bold ">
-<div>Chat</div>
-
-        </div>
-    </div>  -->
-
- <svg xmlns="http://www.w3.org/2000/svg"  class="h-[600px] w-[600px] opacity-40 mt-[100px] dark:bg-slate-600 bg-slate-200 rounded-full p-4 " viewBox="0 0 20 20" fill="rgb(59 130 246)">
-        <path d="M2 5a2 2 0 012-2h7a2 2 0 012 2v4a2 2 0 01-2 2H9l-3 3v-3H4a2 2 0 01-2-2V5z" />
-        <path d="M15 7v2a4 4 0 01-4 4H9.828l-1.766 1.767c.28.149.599.233.938.233h2l3 3v-3h2a2 2 0 002-2V9a2 2 0 00-2-2h-1z" />
-      </svg>
-
-    <!-- <h1 class="mt-4 text-5xl font-medium text-blue-500 ">welcome to Ng Chat</h1> -->
-</div>
-<div class="mobile">
-<app-chat *ngIf="ui.tab===1"></app-chat>
-<app-contacts *ngIf="ui.tab===2"></app-contacts>
-<app-settings *ngIf="ui.tab===3"></app-settings>
-</div>
-<!-- *ngIf="ui.openchatpage" -->
-
-<div class="desktop">
-
-  <app-sidenav> </app-sidenav>
-    <app-chatpage></app-chatpage>
+<div class="home">
+<app-messages></app-messages>
 
 </div>
 
-<app-profile *ngIf="ui.openmodal"></app-profile>
+<div (click)="openlist()" class="fab">
+  <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24" style="fill: rgba(37 99 235);"><path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm5 11h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"></path></svg>
+</div>
 
-<app-tabs></app-tabs>
 
-<!-- <p>home is working</p> -->
+<app-contacts></app-contacts>

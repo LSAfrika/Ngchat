@@ -6,6 +6,7 @@ import { Injectable } from '@angular/core';
 export class UiService {
 
   tab=1
+  userlist=0
   ispersonalprofile=false
   islogedin = false
   openmodal=false
@@ -28,7 +29,7 @@ this.openmodal=true
 
   open_chat(){
  this.openchatpage=true
-    
+
     this.shrinknav='lg:w-[25%]'
      if(this.darkmode){
     this.chatpageanimation='animatein darkmode'
@@ -41,7 +42,7 @@ this.openmodal=true
     this.shrinknav=''
 
     setTimeout(() => {
-      
+
       this.openchatpage=false
     }, 1000);
     this.chatpageanimation='animateout'
@@ -49,8 +50,8 @@ this.openmodal=true
   }
 
    username(){
-    
-    
+
+
     return this.names[this.selecteduser]
   }
 

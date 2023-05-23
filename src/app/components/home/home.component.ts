@@ -14,4 +14,10 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  openlist(){
+    this.ui.userlist=1
+    console.log('ui modal',this.ui.userlist);
+
+  }
+
 }

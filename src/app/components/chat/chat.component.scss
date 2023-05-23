@@ -1,13 +1,19 @@
-.chat{
-  @apply pt-[60px]  scrollbar-thin  pb-[60px] w-full h-screen
-   bg-slate-50
-
-   max-w-[800px]
-
-   mx-2
-    z-10 overflow-y-scroll px-1 overflow-x-hidden  box-border flex flex-col justify-start
-   scrollbar-track-transparent scrollbar-thumb-blue-700
-   ;
+.chatcontainer{
+  @apply   scrollbar-thin  pb-[60px]  min-h-screen    bg-teal-500
+    z-10 overflow-y-scroll    box-border flex flex-col justify-start px-2
+    overflow-x-hidden
+  ;
 
 
 }
+.chat{
+@apply w-full bg-pink-600 min-h-[60px] flex justify-start items-center my-1 p-2
+}
+.avatar{
+  @apply w-[40px] h-[40px] rounded-full bg-orange-500
+}
+.messagebody{
+  @apply flex-1
+}
+
+

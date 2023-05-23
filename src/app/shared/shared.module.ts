@@ -1,3 +1,4 @@
+import { MessagesComponent } from './../components/messages/messages.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavComponent } from '../components/nav/nav.component';
@@ -7,7 +8,7 @@ import { ContactsComponent } from '../components/contacts/contacts.component';
 import { SettingsComponent } from '../components/settings/settings.component';
 import { ChatpageComponent } from '../components/chatpage/chatpage.component';
 import { ProfileComponent } from '../components/profile/profile.component';
-import { TabsComponent } from '../components/tabs/tabs.component';
+
 
 
 
@@ -20,7 +21,8 @@ import { TabsComponent } from '../components/tabs/tabs.component';
     SettingsComponent,
     ChatpageComponent,
     ProfileComponent,
-    TabsComponent
+    MessagesComponent,
+
   ],
   imports: [
     CommonModule
@@ -33,7 +35,8 @@ import { TabsComponent } from '../components/tabs/tabs.component';
     SettingsComponent,
     ChatpageComponent,
     ProfileComponent,
-    TabsComponent
+
+    MessagesComponent
   ]
 })
 export class SharedModule { }
