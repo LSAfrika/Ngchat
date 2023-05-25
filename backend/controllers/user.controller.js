@@ -1,11 +1,11 @@
-const express = require('express')
+
 const usermodel = require('../models/user.model')
 const bcrypt = require('bcrypt')
 const JWT = require('jsonwebtoken')
 require('dotenv').config()
-const router = express.Router()
 
-router.post('/register',async(req,res)=>{
+
+exports.register=async(req,res)=>{
 
     try {
         const {email,phone,username,password,repassword}=req.body
@@ -52,9 +52,9 @@ router.post('/register',async(req,res)=>{
 
     }
 
-})
+}
 
-router.post('/login',async (req,res)=>{
+exports.login=async (req,res)=>{
 
     try {
         const {email,password}=req.body
@@ -92,9 +92,9 @@ router.post('/login',async (req,res)=>{
     }
 
 
-})
+}
 
-router.post('/socialogin',async (req,res)=>{
+exports.sociallogin=async (req,res)=>{
 
     try {
         const {firebasetoken}=req.body
@@ -150,15 +150,14 @@ router.post('/socialogin',async (req,res)=>{
     }
 
 
-})
+}
 
-router.get('/users',async(req,res)=>{
+exports.user=async(req,res)=>{
 
     const users = await usermodel.find()
     res.send({message:'register route working',users})
-})
+}
 
-module.exports =router
 
 
 

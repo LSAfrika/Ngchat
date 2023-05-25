@@ -14,7 +14,7 @@ app.get('/',async(req,res)=>{
     res.send({message:'root route working'})
 })
 
-app.use('/user',require('./controllers/user.controller'))
+app.use('/user',require('./routes/user.routes'))
 
 
 
@@ -22,7 +22,7 @@ app.use('/user',require('./controllers/user.controller'))
 mongoose.connect(LocalDBconnection,{useNewUrlParser:true,useunifiedtopology:true}).
 then(()=>{
     console.log('connected succesfully')
- 
+
     const server=app.listen(3000,()=>{
         console.log('app listening on port ',server.address().port);
     })
