@@ -21,7 +21,7 @@ constructor(private router:Router,private ui:UiService){}
 
      const userbio= atob(token)
      this.ui.authuser=JSON.parse(userbio)
-    console.log('current logedin user',this.ui.authuser);
+    // console.log('current logedin user',this.ui.authuser);
 
 
     return true;}
