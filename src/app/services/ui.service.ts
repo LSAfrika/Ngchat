@@ -8,6 +8,7 @@ export class UiService {
   tab=1
   userlist=0
   ispersonalprofile=false
+  authuser:any
   islogedin = false
   openmodal=false
   openchatpage=false

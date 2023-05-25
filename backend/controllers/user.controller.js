@@ -102,30 +102,49 @@ router.post('/socialogin',async (req,res)=>{
       const firebaseuser=await JWT.decode(firebasetoken)
 // console.log('')
       const {user_id ,email,name,picture,iss}=firebaseuser
-      console.log('received firebase user:\n',user_id ,email,name,picture,iss);
+      // console.log('received firebase user:\n',user_id ,email,name,picture,iss);
 
       const finduserbyemail = await usermodel.findOne({email:email})
     //   const finduseruser_id = await usermodel.findOne({firebaseuniqueid:user_id})
 
-      console.log('useremail in db: \n',finduserbyemail);
+      // console.log('useremail in db: \n',finduserbyemail);
     //   console.log('userid in db: \n',finduseruser_id);
 
       if(finduserbyemail===null ){
        const newuser= await usermodel.create({email:email,firebaseuniqueid:user_id,profileimg:picture,username:name})
-    const token=await JWT.sign({...newuser},process.env.HASHKEY,{
-       expiresIn: '1w' ,issuer:'localhost:3000'
+
+       const payload={
+        username:newuser.username,
+        email:newuser.email,
+        profileimg:newuser.profileimg,
+        createdAt:newuser.createdAt,
+        _id:newuser._id
+      }
+
+
+    const token=await JWT.sign(payload,process.env.HASHKEY,{
+       expiresIn: '1w' ,issuer:'http://localhost:3000'
     })
 
        return res.send({message:`welcome ${name}`,token:token})
       }
+      const payload={
+        username:finduserbyemail.username,
+        email:finduserbyemail.email,
+        profileimg:finduserbyemail.profileimg,
+        createdAt:finduserbyemail.createdAt,
+        _id:finduserbyemail._id
+      }
 
-      const token=await JWT.sign({...finduserbyemail},process.env.HASHKEY,{
+      const token=await JWT.sign(payload,process.env.HASHKEY,{
         expiresIn: '1w' ,issuer:'localhost:3000'
      })
       return res.send({message:`welcome back ${name}`,token:token})
 
 
     } catch (error) {
+
+      console.log('error sign in',error);
         res.send(error.message)
 
     }

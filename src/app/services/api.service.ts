@@ -1,3 +1,4 @@
+import { UiService } from 'src/app/services/ui.service';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
@@ -18,7 +19,7 @@ export class ApiService {
   initializeApp(environment.firebaseConfig)
   auth=getAuth()
   googleprovider=new GoogleAuthProvider()
-  constructor(private http:HttpClient,private router:Router) {
+  constructor(private http:HttpClient,private router:Router,private ui:UiService) {
 console.log('service being initialized');
 
    // this.initializeFB()
@@ -45,9 +46,11 @@ async googlesignin(){
     this.usersignin(token).pipe(takeUntil(this.destroy$)).subscribe((res:any)=>{
       console.log(res);
       localStorage.setItem('token',res.token)
+
+
       this.router.navigateByUrl('/home')
 
-    },err=>{console.log('log in error:\n',err.message);
+    },err=>{console.log('log in error:\n',err);
     })
   } catch (error:any) {
 

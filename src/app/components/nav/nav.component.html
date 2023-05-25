@@ -11,7 +11,9 @@
 
   </div>
   <div class="profile ">
-    <div class="w-8 h-8 rounded-full bg-cyan-500 "></div>
+    <div [routerLink]="['/profile',ui.authuser._id]" class="w-8 h-8 overflow-hidden rounded-full ">
+      <img class="w-full h-[100%] bg-cover" src="{{ui.authuser?.profileimg}}" alt="" srcset="">
+    </div>
     <!-- <div class="font-light text-[18px] text-white ml-2 hidden sm:block ">Hello <strong>wilson</strong></div> -->
 </div>
 </div>
