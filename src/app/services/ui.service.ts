@@ -16,7 +16,7 @@ export class UiService {
   shrinknav=''
   form=''
   usernameval=''
-  names =['henry','chege','wilson','jane','camil','mary','john','david','rafael','raphael','kim','henry']
+  names =[{name:'henry'},{name:'chege'},{name:'wilson'},{name:'jane'},{name:'camil'},{name:'mary'},{name:'john'},{name:'david'},{name:'rafael'},{name:'raphael'},{name:'kim'},{name:'henry'}]
   selecteduser:number=0
   constructor() { }
 

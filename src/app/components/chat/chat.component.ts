@@ -7,10 +7,10 @@ import { UiService } from 'src/app/services/ui.service';
   styleUrls: ['./chat.component.scss']
 })
 export class ChatComponent implements OnInit {
- 
+
   constructor(public ui:UiService) { }
 
-  names:string[]=[]
+  names=[]
 
   ngOnInit(): void {
     this.names= this.ui.names
@@ -26,6 +26,6 @@ export class ChatComponent implements OnInit {
     this.ui.open_modal()
   }
 
-  
+
 
 }

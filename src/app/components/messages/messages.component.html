@@ -6,18 +6,22 @@
 
 
   <div  class="container" *ngIf="names.length>0 " >
-      <!-- [routerLink]="['directmessage',userchat.chatingwith._id]"  -->
-      <div  class="chatlist" *ngFor="let name of names;let i =index ">
-      <div class="avatar">
+      <!-- [routerLink]="['directmessage',userchat.chatingwith._id]" [routerLink]="['/directmessage',name]"  -->
+      <div  routerLinkActive="router-link-active"   class="chatlist" *ngFor="let name of names;let i =index ">
+      <div  [routerLink]="['/profile',name]" class="avatar">
         <!-- <img [src]="userchat.chatingwith.imgurl" alt="" srcset=""> -->
       </div>
-      <div class="messagesection">
+      <div  [routerLink]="['/directmessage',name]"  class=" messagesection">
         <div class="name" >
-          <div>{{name}}</div>
+          <div>{{name.name}}</div>
           <!-- <div class="newmessages" *ngIf="userchat.unreadcounter>0">{{userchat.unreadcounter}} </div>
           <svg (click)="deletemodal(userchat.chatingwith.username,userchat.chatid,i)" (mouseenter)="disablenavigation()"(mouseleave)="enablenavigation()" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgb(20 184 166)"><path d="M12 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zM6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"></path></svg>
        -->
+       <div>12/12/23</div>
         </div>
+<div class="w-[100%] truncate text-slate-800 text-sm ">
+  Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam, praesentium!
+</div>
         <!-- <div class="lastmessage" [ngClass]="{bold: userchat.unreadcounter>0}">{{userchat.lastmessage}}</div>
         <div *ngIf="userchat.timestamp+fulldayinmilliseconds>currentdate" class="lastmessage time">{{userchat.timestamp| date:'shortTime'}} {{userchat.timestamp| date:'EEEE'}}</div>
         <div *ngIf=" currentdate>userchat.timestamp+fulldayinmilliseconds"  class="lastmessage time">{{userchat.timestamp| date:'shortTime'}}, {{userchat.timestamp | date: 'mediumDate' }}</div> -->

@@ -15,7 +15,7 @@ import { Router } from '@angular/router';
 export class MessagesComponent implements OnInit {
 
   Destroy$=new Subject<boolean>()
-names:string[]=[]
+names=[]
   constructor(private ui:UiService) {
 
     this.names= this.ui.names

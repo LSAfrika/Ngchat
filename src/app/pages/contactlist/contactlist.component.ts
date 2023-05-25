@@ -2,13 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { UiService } from 'src/app/services/ui.service';
 
 @Component({
-  selector: 'app-contacts',
-  templateUrl: './contacts.component.html',
-  styleUrls: ['./contacts.component.scss']
+  selector: 'app-contactlist',
+  templateUrl: './contactlist.component.html',
+  styleUrls: ['./contactlist.component.scss']
 })
-export class ContactsComponent implements OnInit {
+export class ContactlistComponent implements OnInit {
 
-
+term=''
   constructor(public ui:UiService) { }
 
   ngOnInit(): void {
@@ -32,6 +32,5 @@ export class ContactsComponent implements OnInit {
     }, 1500);
 
   }
-
 
 }

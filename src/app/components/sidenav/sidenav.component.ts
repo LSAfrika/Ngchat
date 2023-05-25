@@ -12,7 +12,7 @@ export class SidenavComponent implements OnInit {
 
   tab=1
   chatss=[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
-  names:string[]=[]
+  names=[]
   ngOnInit(): void {
     this.tab=this.ui.tab
     this.names= this.ui.names

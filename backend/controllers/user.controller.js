@@ -10,7 +10,7 @@ router.post('/register',async(req,res)=>{
     try {
         const {email,phone,username,password,repassword}=req.body
 
-      
+
 
         const finduser = await usermodel.findOne({email:email})
         if(finduser){
@@ -24,7 +24,7 @@ router.post('/register',async(req,res)=>{
 
         console.log('hash password: ',hash);
        const newuser = new usermodel({
-       
+
         email,
         phone,username,
         password:hash
@@ -42,16 +42,16 @@ router.post('/register',async(req,res)=>{
 
     res.status(200).send({message:'user created successfully',...userresponse})
 
-  
+
 
        // next()
     } catch (error) {
 
         return res.status(500).send({errormessage:error.message,servermessage:'an error occured'})
-        
-        
+
+
     }
-    
+
 })
 
 router.post('/login',async (req,res)=>{
@@ -77,21 +77,21 @@ router.post('/login',async (req,res)=>{
              username:finduser.username,
              exp: Date.now()  + (60 * 60*1000)
          }
-        
+
          console.log(payload.exp,'-',);
          console.log(Date.now())
-         
+
          // create env key
        const sigintoken=  JWT.sign(payload,process.env.HASHKEY)
           res.status(200).send({sigintoken})
 
-        
+
     } catch (error) {
         res.send(error.message)
-        
+
     }
 
-    
+
 })
 
 router.post('/socialogin',async (req,res)=>{
@@ -112,18 +112,25 @@ router.post('/socialogin',async (req,res)=>{
 
       if(finduserbyemail===null ){
        const newuser= await usermodel.create({email:email,firebaseuniqueid:user_id,profileimg:picture,username:name})
-      return res.send({message:`welcome ${name}`,user:newuser})
+    const token=await JWT.sign({...newuser},process.env.HASHKEY,{
+       expiresIn: '1w' ,issuer:'localhost:3000'
+    })
+
+       return res.send({message:`welcome ${name}`,token:token})
       }
 
-      return res.send({message:`welcome back ${name}`,user:finduserbyemail})
+      const token=await JWT.sign({...finduserbyemail},process.env.HASHKEY,{
+        expiresIn: '1w' ,issuer:'localhost:3000'
+     })
+      return res.send({message:`welcome back ${name}`,token:token})
 
-        
+
     } catch (error) {
         res.send(error.message)
-        
+
     }
 
-    
+
 })
 
 router.get('/users',async(req,res)=>{

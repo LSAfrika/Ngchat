@@ -1,11 +1,11 @@
 
 
-<div class="ui"  [ngClass]="{'chat':ui.userlist==0, 'openlist':ui.userlist==1,'closelist':ui.userlist==2}">
+<div class="ui"  >
   <div class="searchbar">
 
-    <input placeholder="search..." type="text">
+    <input placeholder="search..." type="text" [(ngModel)]="term">
     <!-- <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" style="fill: rgba(29 78 216 );"><path d="M19.023 16.977a35.13 35.13 0 0 1-1.367-1.384c-.372-.378-.596-.653-.596-.653l-2.8-1.337A6.962 6.962 0 0 0 16 9c0-3.859-3.14-7-7-7S2 5.141 2 9s3.14 7 7 7c1.763 0 3.37-.66 4.603-1.739l1.337 2.8s.275.224.653.596c.387.363.896.854 1.384 1.367l1.358 1.392.604.646 2.121-2.121-.646-.604c-.379-.372-.885-.866-1.391-1.36zM9 14c-2.757 0-5-2.243-5-5s2.243-5 5-5 5 2.243 5 5-2.243 5-5 5z"></path></svg> -->
-    <svg (click)="closelist()"   style="width: 30px; height:30px;margin-left: auto;" fill="rgb(255 255 255)" stroke="rgb(29 78 216 )"
+    <svg (click)="closelist()"  routerLink="/home"  style="width: 30px; height:30px;margin-left: auto;" fill="rgb(255 255 255)" stroke="rgb(29 78 216 )"
     viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
       d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
@@ -13,7 +13,7 @@
   </div>
 
 
-    <div  *ngFor="let name of ui.names; let i=index" class="flex justify-start flex-1 w-full mb-1 border-b-2 border-b-slate-200">
+    <div [routerLink]="['/directmessage',name.name]"  *ngFor="let name of ui.names | filter:term; let i=index" class="flex justify-start flex-1 w-full mb-1 border-b-2 border-b-slate-200">
         <div class="w-[15%] h-fit py-1  flex justify-center items-center  ">
             <!-- icon -->
             <div class="w-[50px] my-1 h-[50px] box-border p-2 flex justify-center items-center rounded-full bg-slate-200" >
@@ -24,7 +24,7 @@
 
         <!-- text area -->
         <div class="w-[80%] h-[100%] ml-2 mt-1  flex  overflow-x-hidden justify-start  items-center ">
-            <div (click)="openchat(i)" class="flex items-center justify-start w-full h-full font-normal text-slate-700 hover:cursor-pointer "><h1>{{name}}</h1></div>
+            <div (click)="openchat(i)" class="flex items-center justify-start w-full h-full font-normal text-slate-700 hover:cursor-pointer "><h1>{{name.name}}</h1></div>
             <svg (click)="ui.open_modal()" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 ml-auto hover:cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="rgb(96 165 250)" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
