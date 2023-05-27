@@ -40,6 +40,8 @@ constructor(public ui: UiService, private router: Router,
     ) {
 
   this.userid = this.route.snapshot.params['id']
+
+  this.io.setsocketinstance()
   // console.log('unread messages: ',this.msgservice.unreadcounter);
 
   // console.log('chat owner ',this.ui.chatowner.value );

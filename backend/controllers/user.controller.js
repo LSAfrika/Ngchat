@@ -1,5 +1,5 @@
 
-const usermodel = require('../models/user.model')
+const {usermodel} = require('../models/user.model')
 const bcrypt = require('bcrypt')
 const JWT = require('jsonwebtoken')
 require('dotenv').config()
@@ -144,7 +144,7 @@ exports.sociallogin=async (req,res)=>{
 
     } catch (error) {
 
-      console.log('error sign in',error);
+      console.log('error sign social in:\n',error);
         res.send(error.message)
 
     }

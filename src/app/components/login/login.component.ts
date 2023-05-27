@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
 import { UiService } from 'src/app/services/ui.service';
@@ -9,7 +10,10 @@ import { UiService } from 'src/app/services/ui.service';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(public ui:UiService,public api:ApiService) { }
+  constructor(public ui:UiService,public api:ApiService,private router:Router) {
+
+    // if(!!localStorage.getItem('token'))router.navigateByUrl('/home')
+  }
 
   ngOnInit(): void {
   }

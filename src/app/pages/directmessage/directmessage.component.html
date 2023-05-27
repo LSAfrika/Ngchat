@@ -1,6 +1,6 @@
 <!-- <app-nav></app-nav> -->
 <nav class="nav">
-  <div class="flex items-center justify-start gap-3 text-white bio">
+  <div [routerLink]="['/profile',userid]" class="flex items-center justify-start gap-3 text-white bio">
 <div class="w-10 h-10 overflow-hidden bg-teal-500 rounded-full"></div>
 <div>{{userid}}</div>
 

@@ -16,7 +16,7 @@ export class IOService {
 
   ngchatbackend = environment.API;
   // socket=io(this.ngchatbackend,{query:{uid:''}})
-  socket:any
+  socket:any=undefined
   public message$: BehaviorSubject<Message> = new BehaviorSubject(undefined);
   public messagenotifications$: BehaviorSubject<Object> = new BehaviorSubject(undefined);
   public messagenotificationscounter$ = new BehaviorSubject(undefined);
@@ -27,29 +27,45 @@ export class IOService {
   socketsetup = false;
   messageguard:any
 
+connected=false
 
   // socket=io(this.ngchatbackend)
   constructor(private ui: UiService,private messageservice:MessagesService,private notification:NotificationsService) {
 
-//     if(this.ui.logedinuser !== undefined)
-//     {this.socket= io(this.ngchatbackend, {query: {uid: this.ui.logedinuser._id}});
-// this.gloabalnotificationsound().subscribe(()=>this.notification.notificationsound())
+// this.setsocketinstance()
 
-//   }
-
-    // console.log('socket', this.socket);
 // this.setuid()
 
   }
 
-  // setsocketinstanceonlogin(){
-  //   this.socket= io(this.ngchatbackend, {query: {uid: this.ui.logedinuser._id}})
+  setsocketinstance(){
 
-  //   console.log('socket on login:',this.socket);
+// console.log('socket connection call');
+
+    if(this.connected)return
+
+    console.log('initial socket connection',this.ui.authuser);
+
+    if(this.ui.authuser !== undefined)
+    {
+      this.socket= io(this.ngchatbackend, {query: {uid: this.ui.authuser._id}});
+// this.gloabalnotificationsound().subscribe(()=>this.notification.notificationsound())
+this.connected=true
+console.log('socket', this.socket);
+  }
 
 
-  // }
+  }
 
+
+  disconnectinstance(){
+    if(this.socket !=undefined) {
+      this.socket.disconnect()
+
+      console.log('live socket disconnected');
+
+    }
+  }
   // setuid(){
 
 

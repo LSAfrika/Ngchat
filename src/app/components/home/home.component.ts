@@ -1,3 +1,4 @@
+import { IOService } from './../../services/io.service';
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
 import { UiService } from 'src/app/services/ui.service';
@@ -9,7 +10,10 @@ import { UiService } from 'src/app/services/ui.service';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(public api:ApiService,public ui:UiService) { }
+  constructor(public api:ApiService,public ui:UiService,private io:IOService) {
+
+     this.io.setsocketinstance()
+  }
 
   ngOnInit(): void {
   }

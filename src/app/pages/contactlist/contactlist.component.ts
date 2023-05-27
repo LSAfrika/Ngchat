@@ -1,3 +1,4 @@
+import { IOService } from './../../services/io.service';
 import { Component, OnInit } from '@angular/core';
 import { UiService } from 'src/app/services/ui.service';
 
@@ -9,7 +10,10 @@ import { UiService } from 'src/app/services/ui.service';
 export class ContactlistComponent implements OnInit {
 
 term=''
-  constructor(public ui:UiService) { }
+  constructor(public ui:UiService,private io:IOService) {
+  this.io.setsocketinstance()
+
+  }
 
   ngOnInit(): void {
   }

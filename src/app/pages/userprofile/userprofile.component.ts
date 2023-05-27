@@ -1,3 +1,4 @@
+import { IOService } from './../../services/io.service';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common'
@@ -13,11 +14,14 @@ export class UserprofileComponent implements OnInit {
   constructor(
 
     private location: Location,
-    private activeroute:ActivatedRoute
+    private activeroute:ActivatedRoute,
+    private io:IOService
 
   ) {
 
     this.uid=this.activeroute.snapshot.params['id']
+  this.io.setsocketinstance()
+
    }
 
   ngOnInit(): void {
