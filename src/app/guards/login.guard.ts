@@ -30,7 +30,7 @@ constructor(private router:Router,private ui:UiService,private io:IOService){}
     return true;}
 this.io.connected=false
 this.io.disconnectinstance()
-this.router.navigateByUrl('')
+this.router.navigateByUrl('/login')
 return false
 
   }

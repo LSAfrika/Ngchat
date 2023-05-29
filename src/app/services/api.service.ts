@@ -46,9 +46,10 @@ async googlesignin(){
     this.usersignin(token).pipe(takeUntil(this.destroy$)).subscribe((res:any)=>{
       console.log(res);
       localStorage.setItem('token',res.token)
+      localStorage.setItem('refreshtoken',res.refreshtoken)
 
 
-      this.router.navigateByUrl('/home')
+      this.router.navigateByUrl('/')
 
     },err=>{console.log('log in error:\n',err);
     })

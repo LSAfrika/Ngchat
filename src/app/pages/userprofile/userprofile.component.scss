@@ -6,10 +6,13 @@
   @apply w-full sm:max-w-[600px] flex-col  flex justify-start items-center h-screen bg-white shadow-sm shadow-black/40 mx-auto gap-5 px-2
 }
 .back{
-  @apply min-w-full pt-3
+  @apply min-w-full py-3  flex justify-between items-center
+}
+.logout{
+  @apply flex justify-center items-center px-2  border-0 cursor-pointer border-blue-700 rounded-full text-blue-600 font-semibold
 }
 .avatar{
-  @apply min-w-[100px] min-h-[100px] max-h-[100px] max-w-[100px] bg-cyan-400 rounded-full
+  @apply w-fit h-fit max-h-[100px] max-w-[100px] bg-white rounded-full overflow-hidden flex justify-center items-center
 }
 
 .name,.lastseen{
@@ -19,5 +22,5 @@
   @apply text-2xl text-blue-600
 }
 .status{
-  @apply text-xl font-light text-slate-700 italic text-center px-4 bg-slate-100 p-2 box-border rounded-md
+  @apply text-xl font-light text-slate-700 px-4 bg-slate-100 p-2 box-border rounded-md w-[70%] text-center
 }

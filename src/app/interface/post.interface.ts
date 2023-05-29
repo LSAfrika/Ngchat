@@ -16,4 +16,5 @@ export interface User{
   createdAt: string
   followingcounter:number
   followerscounter:number
+  status:string
 }

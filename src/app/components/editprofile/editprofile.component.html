@@ -1,0 +1,27 @@
+<div class="main">
+
+  <div class="editform">
+    <div class="close w-full ">
+
+      <svg   (click)="closeeditprofile()"  style="width: 30px; height:30px;margin-left: auto;" fill="rgb(255 255 255)" stroke="rgb(29 78 216 )"
+      viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+        d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+    </svg>
+    </div>
+    <div class="profileimg">
+
+      <img class="bg-cover  w-full h-full"  [src]="ui.authuser?.profileimg" alt="profile">
+    </div>
+
+    <input (change)="fileupload($event)" class="hidden" #picinput type="file" name="profilepicture" id="">
+    <button (click)="picinput.click()" class="btn">profile picture</button>
+    <input placeholder="username"  [(ngModel)]="username" type="text">
+    <label class="text-blue-600" for="status">Status</label>
+  <span class="status" role="textbox" contenteditable  #messendtosend >{{status}}</span>
+
+    <button (click)="update()" class="btn">save</button>
+  </div>
+
+
+</div>

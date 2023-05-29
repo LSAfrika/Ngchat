@@ -9,9 +9,10 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { LoginComponent } from './components/login/login.component';
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { RegisterFormComponent } from './components/register-form/register-form.component';
-import{HttpClientModule}from '@angular/common/http'
+import{HttpClientModule, HTTP_INTERCEPTORS}from '@angular/common/http'
 import { FormsModule } from '@angular/forms';
 import {BrowserAnimationsModule} from'@angular/platform-browser/animations'
+import { AuthInterceptor } from './services/auth.interceptor';
 // import { SharedModule } from './shared/shared.module';
 @NgModule({
   declarations: [
@@ -29,7 +30,10 @@ import {BrowserAnimationsModule} from'@angular/platform-browser/animations'
 Ng2SearchPipeModule
     // SharedModule
   ],
-  providers: [],
+  providers: [
+    {provide:HTTP_INTERCEPTORS, useClass:AuthInterceptor,multi:true}
+
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,0 +1,21 @@
+.main{
+ @apply min-w-full min-h-screen fixed bg-black/40 p-2 z-50 top-0 flex flex-col justify-center items-center
+}
+
+.editform{
+  @apply w-full max-w-[400] text-white h-fit gap-5 rounded-md flex-col flex pb-5 justify-start items-center bg-white shadow-md shadow-black/50
+}
+.profileimg{
+  @apply min-w-[100px] max-w-[100px] min-h-[100px] max-h-[100px] rounded-full bg-white overflow-hidden
+}
+
+input{
+  @apply w-[80%] italic focus:not-italic  border-b-[2px] border-blue-600 px-2 bg-slate-100 outline-blue-600 text-blue-700 py-1
+}
+.status{
+  @apply w-[80%] min-h-[30px] h-fit border-b-[2px] border-blue-600 overflow-hidden bg-slate-100 focus:rounded-sm focus:outline-blue-600 text-blue-700 p-2 max-h-[150px]
+}
+
+.btn{
+  @apply min-w-[150px] bg-blue-600 text-lg font-light px-5 py-2 rounded-full
+}
