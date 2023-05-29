@@ -111,7 +111,7 @@ exports.sociallogin=async (req,res)=>{
     //   console.log('userid in db: \n',finduseruser_id);
 
       if(finduserbyemail===null ){
-       const newuser= await usermodel.create({email:email,firebaseuniqueid:user_id,profileimg:picture,username:name})
+       const newuser= await usermodel.create({email:email,firebaseuniqueid:user_id,username:name})
 
        const payload={
         username:newuser.username,
@@ -126,20 +126,30 @@ exports.sociallogin=async (req,res)=>{
        expiresIn: '1w' ,issuer:'http://localhost:3000'
     })
 
-       return res.send({message:`welcome ${name}`,token:token})
+    const refreshtoken=JWT.sign({  _id:payload._id},process.env.REFRESHTOKEN,{
+      expiresIn:'1m'
+    })
+
+       return res.send({message:`welcome ${name}`,token,refreshtoken})
       }
+
       const payload={
         username:finduserbyemail.username,
         email:finduserbyemail.email,
         profileimg:finduserbyemail.profileimg,
         createdAt:finduserbyemail.createdAt,
+        status:finduserbyemail.status,
         _id:finduserbyemail._id
       }
 
       const token=await JWT.sign(payload,process.env.HASHKEY,{
-        expiresIn: '1w' ,issuer:'localhost:3000'
+        expiresIn: '7d' ,issuer:'localhost:3000'
      })
-      return res.send({message:`welcome back ${name}`,token:token})
+
+     const refreshtoken=JWT.sign({  _id:payload._id},process.env.REFRESHTOKEN,{
+      expiresIn:'30d'
+    })
+      return res.send({message:`welcome back ${name}`,token,refreshtoken})
 
 
     } catch (error) {
@@ -152,12 +162,145 @@ exports.sociallogin=async (req,res)=>{
 
 }
 
-exports.user=async(req,res)=>{
+exports.getusers=async(req,res)=>{
 
     const users = await usermodel.find()
     res.send({message:'register route working',users})
 }
+exports.getuser=async(req,res)=>{
 
+  const {_id}=req.params
+  console.log(_id);
+  const user = await usermodel.findById(_id)
+  res.send({message:'register route working',user})
+}
+
+exports.updateuser=async(req,res)=>{
+
+  try {
+   const {userid,username,status}=req.body
+
+   console.log('user id',userid);
+   console.log('username',username)
+   console.log('status',status)
+  //  console.log('files',req.files.profilepic.mimetype)
+
+   const updateuser= await usermodel.findById(userid)
+   console.log('user to update',updateuser);
+
+   //  return
+   if(updateuser==null) return res.status(404).send({message:'no user found'})
+
+   if(req.files){
+
+
+      if(status !=undefined && status!='')updateuser.status=status
+      if(username !=undefined && username!='')updateuser.username=username
+
+      let picfile=req.files.profilepic
+// console.log('update image',picfile);
+      extension=req.files.profilepic.mimetype.split('/')[1]
+      // if(picfile.length === undefined) {
+          // let trimmedfilename=picfile.name.replace(/ /g,'')
+          let filename= userid+'.'+extension
+
+          console.log(filename);
+          let uploadPath = `public/user/` +filename;
+          let viewpath='http://localhost:3000/'+`user/${filename}`
+          // filespatharraytosave.push(viewpath)
+
+          picfile.mv(uploadPath, function(err) {
+              if (err) {
+                return res.status(500).send(err);
+              }
+
+                   console.log('updated profile path: ',viewpath);
+                  //  res.send('File successfully uploaded ' );
+
+
+
+
+                  });
+
+      // console.log('single file save: \n',filespatharraytosave);
+      updateuser.profileimg=viewpath
+      console.log('user to save', updateuser);
+
+await updateuser.save()
+
+console.log('updated profile',updateuser);
+const payload={
+  _id:updateuser._id,
+  email:updateuser.email,
+  profileimg:updateuser.profileimg,
+  username:updateuser.username,
+  lastseen:updateuser.lastseen
+}
+
+const token = JWT.sign(payload,process.env.HASHKEY,{
+  expiresIn:'1w'
+})
+// console.log('REFRESH: ',process.env.REFRESH_TOKEN);
+
+const refreshtoken=JWT.sign({  _id:payload._id},process.env.REFRESHTOKEN,{
+  expiresIn:'3d'
+})
+
+
+// console.log('token: ',token,'refresh: ',refreshtoken);
+
+      return    res.send({
+        updateuser,
+          token,
+          refreshtoken,
+          message:'user updated successfully'})
+
+
+
+      }else{
+
+          if(username !=undefined && username!='')updateuser.username=username
+      if(status !=undefined && status!='')updateuser.status=status
+
+          console.log(updateuser.username);
+
+  await updateuser.save()
+
+  const payload={
+    _id:updateuser._id,
+    email:updateuser.email,
+    profileimg:updateuser.profileimg,
+    username:updateuser.username,
+    lastseen:updateuser.lastseen
+  }
+
+  const token = JWT.sign(payload,process.env.HASHKEY,{
+    expiresIn:'1w'
+  })
+  // console.log('REFRESH: ',process.env.REFRESH_TOKEN);
+
+  const refreshtoken=JWT.sign({  _id:payload._id},process.env.REFRESHTOKEN,{
+    expiresIn:'3d'
+  })
+
+
+              res.send({
+                updateuser,
+              token,
+              refreshtoken,
+              message:'user updated successfully'})
+      }
+
+
+
+  } catch (error) {
+
+      console.log(error);
+      res.send({errormessage:error.message})
+
+  }
+
+}
 
 
 

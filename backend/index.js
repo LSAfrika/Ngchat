@@ -3,6 +3,7 @@ const app=express()
 const socketserve = require("http").createServer(app);
 const cors=require('cors')
 const mongoose = require('mongoose')
+const expressuploader=require('express-fileupload')
 
 const LocalDBconnection =`mongodb://localhost:27017/ngchat`
 const PORT=process.env.PORT || 3000
@@ -10,6 +11,9 @@ const PORT=process.env.PORT || 3000
 app.use(cors('*'))
 app.use(express.json())
 app.use(express.urlencoded({extended:true}));
+app.use(express.static(__dirname + "/public"));
+app.use(expressuploader())
+
 app.get('/',async(req,res)=>{
 
     res.send({message:'root route working'})
