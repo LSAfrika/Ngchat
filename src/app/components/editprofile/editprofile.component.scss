@@ -14,8 +14,24 @@ input{
 }
 .status{
   @apply w-[80%] min-h-[30px] h-fit border-b-[2px] border-blue-600 overflow-hidden bg-slate-100 focus:rounded-sm focus:outline-blue-600 text-blue-700 p-2 max-h-[150px]
+
 }
 
 .btn{
   @apply min-w-[150px] bg-blue-600 text-lg font-light px-5 py-2 rounded-full
+}
+
+
+.inactive{
+  @apply bg-pink-700 cursor-not-allowed text-white/50
+}
+
+.updating{
+  animation: updating 2s ease-in-out infinite;
+}
+
+@keyframes updating{
+  0%{opacity: 1;}
+  50%{opacity: 0;}
+100%{opacity: 1;}
 }

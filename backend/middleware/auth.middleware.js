@@ -36,10 +36,11 @@ exports.refreshtoken=async(req,res)=>{
                   username:finduserinndb.username,
                   profileimg:finduserinndb.profileimg,
                   email:finduserinndb.email,
+                  status:finduserinndb.status
 
               }
               const token=await jwt.sign(refreshpayload,process.env.HASHKEY,{
-                  expiresIn:'2m'
+                  expiresIn:'7d'
               })
 
             return  res.send({message:"new token",token})

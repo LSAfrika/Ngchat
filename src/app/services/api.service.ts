@@ -14,9 +14,10 @@ import { environment } from '../../environments/environment';
 export class ApiService {
 
   destroy$=new Subject()
-  URL='http://localhost:3000'
-    app=
-  initializeApp(environment.firebaseConfig)
+  URL=environment.API
+  UPDATEPROFILE=environment.API+'user/updateuser'
+
+    app=  initializeApp(environment.firebaseConfig)
   auth=getAuth()
   googleprovider=new GoogleAuthProvider()
   constructor(private http:HttpClient,private router:Router,private ui:UiService) {
@@ -87,6 +88,12 @@ usersignin(token:string):Observable<any>{
 
   return this.http.post<any>(this.URL+'/user/socialogin',{firebasetoken:token})
 
+}
+
+
+updateuserprofile(data:FormData){
+
+  return this.http.patch(this.UPDATEPROFILE,data)
 }
 
 

@@ -1,7 +1,7 @@
 <div class="main">
 
   <div class="editform">
-    <div class="close w-full ">
+    <div class="w-full close ">
 
       <svg   (click)="closeeditprofile()"  style="width: 30px; height:30px;margin-left: auto;" fill="rgb(255 255 255)" stroke="rgb(29 78 216 )"
       viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -11,16 +11,16 @@
     </div>
     <div class="profileimg">
 
-      <img class="bg-cover  w-full h-full"  [src]="ui.authuser?.profileimg" alt="profile">
+      <img class="w-full h-full bg-cover"  [src]="ui.authuser?.profileimg" alt="profile">
     </div>
 
     <input (change)="fileupload($event)" class="hidden" #picinput type="file" name="profilepicture" id="">
     <button (click)="picinput.click()" class="btn">profile picture</button>
-    <input placeholder="username"  [(ngModel)]="username" type="text">
+    <input placeholder="username" (keyup)="usernameevent($event)"   [(ngModel)]="username" type="text">
     <label class="text-blue-600" for="status">Status</label>
-  <span class="status" role="textbox" contenteditable  #messendtosend >{{status}}</span>
+  <span (keyup)="statusevent($event)" class="status" role="textbox" contenteditable  #messendtosend >{{status}}</span>
 
-    <button (click)="update()" class="btn">save</button>
+    <button (click)="update()" class="btn" [ngClass]="{'inactive':inactive==true,'updating':updating==true}" >{{savestate}}</button>
   </div>
 
 

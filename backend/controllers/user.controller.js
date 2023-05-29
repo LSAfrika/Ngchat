@@ -234,7 +234,8 @@ const payload={
   email:updateuser.email,
   profileimg:updateuser.profileimg,
   username:updateuser.username,
-  lastseen:updateuser.lastseen
+  lastseen:updateuser.lastseen,
+  status:updateuser.status
 }
 
 const token = JWT.sign(payload,process.env.HASHKEY,{
@@ -271,7 +272,8 @@ const refreshtoken=JWT.sign({  _id:payload._id},process.env.REFRESHTOKEN,{
     email:updateuser.email,
     profileimg:updateuser.profileimg,
     username:updateuser.username,
-    lastseen:updateuser.lastseen
+    lastseen:updateuser.lastseen,
+    status:updateuser.status
   }
 
   const token = JWT.sign(payload,process.env.HASHKEY,{
