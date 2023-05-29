@@ -3,7 +3,7 @@
 }
 
 .editform{
-  @apply w-full max-w-[400] text-white h-fit gap-5 rounded-md flex-col flex pb-5 justify-start items-center bg-white shadow-md shadow-black/50
+  @apply w-full max-w-[400px] text-white h-fit gap-5 rounded-md flex-col flex pb-5 justify-start items-center bg-white shadow-md shadow-black/50
 }
 .profileimg{
   @apply min-w-[100px] max-w-[100px] min-h-[100px] max-h-[100px] rounded-full bg-white overflow-hidden
@@ -13,7 +13,13 @@ input{
   @apply w-[80%] italic focus:not-italic  border-b-[2px] border-blue-600 px-2 bg-slate-100 outline-blue-600 text-blue-700 py-1
 }
 .status{
-  @apply w-[80%] min-h-[30px] h-fit border-b-[2px] border-blue-600 overflow-hidden bg-slate-100 focus:rounded-sm focus:outline-blue-600 text-blue-700 p-2 max-h-[150px]
+  @apply w-[80%] min-h-[30px]
+   h-fit border-b-[2px]
+ border-blue-600 overflow-hidden
+ bg-slate-100 focus:rounded-sm focus:outline-blue-600 text-blue-700 p-2 max-h-[150px];
+//  white-space: bre;
+
+
 
 }
 

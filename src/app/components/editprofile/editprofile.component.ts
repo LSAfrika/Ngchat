@@ -66,16 +66,25 @@ this.inactive=false
     if(this.inactive)return
     this.status = this.messagetosend.nativeElement.innerHTML;
 
-    if(this.status.includes('&nbsp;')){
-     const array= this.status.split('&nbsp;')
+    if(this.status.includes('&amp;nbsp;')){
+     const array= this.status.split('&amp;nbsp;')
      console.log(array);
 
+     const rejoinarray=array.join()
+     console.log('rejoined array',rejoinarray);
+
     }
+
+    if(this.status.includes('&nbsp;')){
+      const array= this.status.split('&nbsp;')
+      console.log(array);
+
+     }
     this.status= this.status.replace('&nbsp;','')||this.status
   //  console.log('trimmed status',status);
 
   console.log('current status',this.status);
-  // return
+  //  return
     this.updateprofileforn.append('status',this.status)
     this.updateprofileforn.append('username',this.username)
 
