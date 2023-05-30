@@ -25,7 +25,14 @@ term=''
     this.ui.open_chat()
   }
 
+openaddcontactmodal(){
+  this.ui.contactmodal.next(true)
+}
 
+closecontactmodal(){
+  this.ui.contactmodal.next(false)
+
+}
   closelist(){
     this.ui.userlist=2
 

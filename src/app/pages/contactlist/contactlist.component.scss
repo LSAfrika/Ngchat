@@ -1,5 +1,5 @@
 .ui{
-  @apply absolute top-0    z-[60] w-full bg-slate-200 max-h-screen overflow-y-scroll pt-[55px]
+  @apply absolute top-0    z-[60] w-full bg-slate-200 max-h-screen overflow-y-scroll pt-[55px] pb-[50px]
   }
 
 
@@ -18,7 +18,26 @@
   }
 
 
+  .contactlist{
+    @apply flex justify-start flex-1 w-full mb-1 border-b-2 border-b-white
+  }
 
+
+
+  .addcontact{
+    @apply z-[70] fixed top-0 min-w-full min-h-screen bg-black/50  flex justify-center items-center
+  }
+
+  .contactform{
+    @apply w-[80%] h-fit pb-10 max-w-[400px] bg-white rounded-md flex justify-start pt-5 items-center flex-col ;
+    position:relative  !important;
+// label{
+//   @apply text-blue-800
+// }
+    input{
+      @apply border-2 border-blue-500 px-2 py-1 rounded-md text-blue-700 mb-5
+    }
+  }
   // .openlist{
   //   animation: openpanel  .5s ease-in forwards;
 

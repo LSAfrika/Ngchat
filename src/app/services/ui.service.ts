@@ -8,6 +8,7 @@ export class UiService {
 
 
   editmodal=new BehaviorSubject(false)
+  contactmodal =new BehaviorSubject(false)
   tab=1
   userlist=0
   ispersonalprofile=false
