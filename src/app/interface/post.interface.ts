@@ -12,9 +12,9 @@ export interface Post {
 export interface User{
   _id: string;
   username: string;
-  imgurl: string;
-  createdAt: string
-  followingcounter:number
-  followerscounter:number
+  profileimg: string;
   status:string
+  online:boolean
+  createdAt?: string
+  lastseen?:string
 }

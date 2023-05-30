@@ -17,6 +17,7 @@ export class ApiService {
   URL=environment.API
   UPDATEPROFILE=environment.API+'user/updateuser'
 
+
     app=  initializeApp(environment.firebaseConfig)
   auth=getAuth()
   googleprovider=new GoogleAuthProvider()
@@ -95,6 +96,8 @@ updateuserprofile(data:FormData){
 
   return this.http.patch(this.UPDATEPROFILE,data)
 }
+
+
 
 
 

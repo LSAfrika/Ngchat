@@ -1,11 +1,13 @@
-import { Usermessages } from './../../interface/messages.interface';
+import { UserService } from './../../services/user.service';
+import { User } from './../../interface/post.interface';
+import { Usermessages, } from './../../interface/messages.interface';
 import { MessagesService } from './../../services/messages.service';
 // import { PostService } from './../../services/Post.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { UiService } from '../../services/ui.service';
 import { IOService } from '../../services/io.service';
-import { BehaviorSubject, Subject } from 'rxjs';
+import { BehaviorSubject, Subject, Observable } from 'rxjs';
 import { takeUntil, tap, switchMap, map } from 'rxjs/operators';
 import { Location } from '@angular/common'
 
@@ -29,19 +31,25 @@ userid = '';
 message = '';
 chatid=''
 destroy$ = new Subject<boolean>();
+user:Observable<User>
 @ViewChild('chatview') private myScrollContainer: ElementRef;
 
 
 constructor(public ui: UiService, private router: Router,
             private io: IOService, private route: ActivatedRoute,
+            private userservice:UserService,
             // private postservice: PostService,
             private location: Location,
             public msgservice: MessagesService
     ) {
 
   this.userid = this.route.snapshot.params['id']
-
+if(this.ui.authuser._id==this.userid) this.back()
   this.io.setsocketinstance()
+  this.userservice.fetchuser(this.userid).subscribe(console.log)
+  this.user=this.userservice.fetchuser(this.userid).pipe(map((res:any)=> {  return res.user as User}))
+
+
   // console.log('unread messages: ',this.msgservice.unreadcounter);
 
   // console.log('chat owner ',this.ui.chatowner.value );

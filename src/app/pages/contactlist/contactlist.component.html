@@ -3,7 +3,7 @@
 <div class="ui"  >
   <div class="searchbar">
 
-    <input placeholder="search..." type="text" [(ngModel)]="term">
+    <input (keyup)="searchvalue($event)" placeholder="search..." type="text" [(ngModel)]="username">
     <!-- <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" style="fill: rgba(29 78 216 );"><path d="M19.023 16.977a35.13 35.13 0 0 1-1.367-1.384c-.372-.378-.596-.653-.596-.653l-2.8-1.337A6.962 6.962 0 0 0 16 9c0-3.859-3.14-7-7-7S2 5.141 2 9s3.14 7 7 7c1.763 0 3.37-.66 4.603-1.739l1.337 2.8s.275.224.653.596c.387.363.896.854 1.384 1.367l1.358 1.392.604.646 2.121-2.121-.646-.604c-.379-.372-.885-.866-1.391-1.36zM9 14c-2.757 0-5-2.243-5-5s2.243-5 5-5 5 2.243 5 5-2.243 5-5 5z"></path></svg> -->
     <svg (click)="closelist()"  routerLink="/"  style="width: 30px; height:30px;margin-left: auto;" fill="rgb(255 255 255)" stroke="rgb(29 78 216 )"
     viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -13,33 +13,44 @@
   </div>
 
 
-    <div [routerLink]="['/directmessage',name.name]"  *ngFor="let name of ui.names | filter:term; let i=index"
-    class="contactlist">
-        <div class="w-[15%] h-fit py-1  flex justify-center items-center  ">
-            <!-- icon -->
-            <div class="w-[50px] my-1 h-[50px] box-border p-2 flex justify-center items-center rounded-full bg-slate-200" >
-                <img class="w-[50px] h-[50px] " src="../../../assets/5592656011535694869.svg" alt="" srcset="">
-            </div>
+  <ng-container *ngIf="users|async as contacts">
 
-        </div>
+    <!-- <div *ngFor="let contact of contacts | filter:username">
+      {{contact.username}}
+    </div> -->
 
-        <!-- text area -->
-        <div class="w-[80%] h-[50px]  ml-2 mt-1  flex  overflow-x-hidden justify-center  items-center ">
-            <div (click)="openchat(i)" class="flex items-center justify-start w-full h-full text-lg font-semibold text-blue-700 hover:cursor-pointer "><h1>{{name.name}}</h1></div>
-            <!-- <svg (click)="ui.open_modal()" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 ml-auto hover:cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="rgb(96 165 250)" stroke-width="2">
+    <div [routerLink]="['/directmessage',contact._id]"  *ngFor="let contact of contacts let i=index"
+   class="contactlist">
+       <div class="w-[15%] h-fit py-1  flex justify-center items-center  ">
+
+           <div class="w-[60px] my-1 bg-cover overflow-hidden  h-[60px] box-border p-2 flex justify-center items-center rounded-full bg-slate-200" >
+
+
+               <img class="w-full h-full rounded-full " src="{{contact.profileimg}}" alt="" srcset="">
+           </div>
+
+       </div>
+
+
+       <div class="w-[80%] h-[50px]  ml-2 mt-1  flex  overflow-x-hidden justify-center  items-center ">
+           <div (click)="openchat(i)" class="flex items-center justify-start w-full h-full text-lg font-semibold text-blue-700 hover:cursor-pointer "><h1>{{contact.username}}</h1></div>
+
+       </div>
+       </div>
+  </ng-container>
+
+
+
+          <!-- <svg (click)="ui.open_modal()" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 ml-auto hover:cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="rgb(96 165 250)" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg> -->
             <!-- <p class="font-thin whitespace-nowrap text-slate-600">Lorem ipsum dolor sit amet s </p> -->
-        </div>
-        </div>
 
-        <div class="w-full  fixed bottom-0 min-h-[50px] flex justify-center items-center">
-
-          <button (click)="openaddcontactmodal()" class="min-w-[150px] bg-blue-600 text-white px-4 py-2 rounded-full "> add contact</button>
-        </div>
 </div>
 
-<div *ngIf="ui.contactmodal|async" class="addcontact">
+<button></button>
+
+<!-- <div *ngIf="ui.contactmodal|async" class="addcontact">
 
   <div class="contactform">
 
@@ -49,10 +60,9 @@
       d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
   </svg>
     <div class=" text-white font-semibold bg-blue-600 rounded-r-full rounded-l-lg mb-10 p-2 px-5 mr-auto">add contact</div>
-    <!-- <label for="username">username</label> -->
+
     <input type="text" placeholder="username">
 
-    <!-- <label for="username">email</label> -->
     <input type="text" placeholder="email">
 
     <button class="min-w-[150px] bg-blue-600 text-white px-4 py-2 rounded-full "> add contact</button>
@@ -61,4 +71,4 @@
   </div>
 
 
-</div>
+</div> -->

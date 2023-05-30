@@ -1,18 +1,27 @@
 <!-- <app-nav></app-nav> -->
+<ng-container *ngIf="user|async as _user">
+
 <nav class="nav">
   <div [routerLink]="['/profile',userid]" class="flex items-center justify-start gap-3 text-white bio">
 <div class="w-10 h-10 overflow-hidden bg-teal-500 rounded-full"></div>
-<div>{{userid}}</div>
+<div class="username">
+  <div class="text-base w-full text-left">{{_user.username}}</div>
+
+  <div class="text-xs text-left w-full" *ngIf="_user.online==true">online</div>
+  <div class="text-xs text-left w-full" *ngIf="_user.online==false">_user.lastseen | date :'shortDate'</div>
+</div>
 
   </div>
 
-  <svg (click)="back()" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(255 255 255)"><path d="M21 11H6.414l5.293-5.293-1.414-1.414L2.586 12l7.707 7.707 1.414-1.414L6.414 13H21z"></path></svg>
+  <svg (click)="back()" class="ml-auto" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(255 255 255)"><path d="M21 11H6.414l5.293-5.293-1.414-1.414L2.586 12l7.707 7.707 1.414-1.414L6.414 13H21z"></path></svg>
 </nav>
 
 <div class="main">
 
-  <div class="messagecontainer "  #chatview>
 
+
+  <div class="messagecontainer "  #chatview>
+      <div>{{_user|json}}</div>
   <!-- <div class="backpanel">
     <div (click)="backtoprofile()" *ngIf="ui.postowner|async as currentuser">{{currentuser.username}}</div>
     <svg (click)="closemessage()" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="margin-left:auto;fill:rgb(20 184 166);width:25px ;height:25px;"><path d="M21 11H6.414l5.293-5.293-1.414-1.414L2.586 12l7.707 7.707 1.414-1.414L6.414 13H21z"></path></svg>
@@ -40,3 +49,4 @@
   </div>
 </div>
 
+</ng-container>
