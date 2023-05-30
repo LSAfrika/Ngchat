@@ -10,6 +10,7 @@ import { Subscription } from 'rxjs';
 })
 export class EditprofileComponent implements OnInit {
 
+
   username=''
   savestate='save'
   initialusername=''
@@ -28,6 +29,7 @@ export class EditprofileComponent implements OnInit {
     this.username=this.ui.authuser.username
     this.status=this.ui.authuser.status
     this.updateprofileforn= new FormData()
+
   }
 
   ngOnInit(): void {
@@ -49,8 +51,16 @@ this.inactive=false
   }
 
   statusevent(event){
- console.log(event.target);
+//  console.log(event.target.value);
 this.inactive=false
+
+if(this.status.length>100) {
+  const status=this.status.slice(0,100)
+  console.log(status);
+
+  this.status=status
+
+}
 // console.log('form inactive',this.inactive);
 
   }
@@ -64,23 +74,10 @@ this.inactive=false
   update(){
 
     if(this.inactive)return
-    this.status = this.messagetosend.nativeElement.innerHTML;
+    // this.status = this.messagetosend.nativeElement.innerHTML;
 
-    if(this.status.includes('&amp;nbsp;')){
-     const array= this.status.split('&amp;nbsp;')
-     console.log(array);
 
-     const rejoinarray=array.join()
-     console.log('rejoined array',rejoinarray);
-
-    }
-
-    if(this.status.includes('&nbsp;')){
-      const array= this.status.split('&nbsp;')
-      console.log(array);
-
-     }
-    this.status= this.status.replace('&nbsp;','')||this.status
+    // this.status= this.status.replace('&nbsp;','')||this.status
   //  console.log('trimmed status',status);
 
   console.log('current status',this.status);

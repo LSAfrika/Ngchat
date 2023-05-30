@@ -21,6 +21,10 @@
 .name{
   @apply text-2xl text-blue-600
 }
+
 .status{
-  @apply text-xl font-light text-slate-700 px-4 bg-slate-100 p-2 box-border rounded-md w-[80%] text-center
+  @apply text-xl font-light text-slate-700 px-4 bg-slate-100 p-2 box-border rounded-md w-full text-center
+}
+.charcounter{
+  @apply w-[80%]  bg-teal-600
 }
