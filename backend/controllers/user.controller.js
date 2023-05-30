@@ -164,8 +164,28 @@ exports.sociallogin=async (req,res)=>{
 
 exports.getusers=async(req,res)=>{
 
-    const users = await usermodel.find()
-    res.send({message:'register route working',users})
+  try {
+    const{userid}=req.body
+    const search=req.query.search ? {$or:[
+      {username:{$regex:req.query.search,$options:'i'}},
+      {email:{$regex:req.query.search,$options:'i'}}
+
+    ]}:{}
+//todo filter logedin user .find({_id:{$ne:userid}})
+    const users = await await usermodel.find(search).select('username profileimg status lastseen')
+      return res.send({users})
+
+    // if(search!=undefined&&search.length==0){
+    //   console.log('search term length',search.length);
+
+    //   const users = await usermodel.find().select('username profileimg status lastseen')
+    //  return res.send({users})
+    // }
+
+  } catch (error) {
+
+  }
+
 }
 exports.getuser=async(req,res)=>{
 

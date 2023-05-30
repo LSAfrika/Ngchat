@@ -7,7 +7,7 @@ router.post('/register',register)
 
 router.post('/login',login)
 router.post('/socialogin',sociallogin)
-router.get('/users',getusers)
+router.get('/allusers',authentication,getusers)
 router.post('/refresh',refreshtoken)
 router.get('/singleuser/:_id',getuser)
 router.patch('/updateuser/',authentication,updateuser)
