@@ -2,8 +2,9 @@ import { switchMap,map, debounceTime, distinctUntilChanged } from 'rxjs/operator
 import { UserService } from './../../services/user.service';
 import { ApiService } from './../../services/api.service';
 import { IOService } from './../../services/io.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { UiService } from 'src/app/services/ui.service';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-contactlist',
@@ -13,18 +14,23 @@ import { UiService } from 'src/app/services/ui.service';
 export class ContactlistComponent implements OnInit {
 
 username=''
+allcontacts=0
+@ViewChild('contactslist') private myScrollContainer: ElementRef;
 
+count=this.user.fetchcount().pipe(map((res:any)=>res.totalusers as number))
 users=this.user.searchvalue.pipe(
   debounceTime(500),
   distinctUntilChanged(),
-  switchMap((searchword:string)=>
-    this.user.fetchusers(searchword)
+  switchMap((queryvalue)=>
+    this.user.fetchusers(queryvalue.searchtext,queryvalue.pagination)
   ),
-  map((res:any)=>  res.users)
+  map((res:any)=>  {this.allcontacts=res.users.length; return res.users})
 
   )
   constructor(public ui:UiService,private io:IOService,private user:UserService) {
   this.io.setsocketinstance()
+
+  this.user.searchvalue.subscribe(console.log)
 
   }
 
@@ -32,11 +38,11 @@ users=this.user.searchvalue.pipe(
   }
 
   ngOnDestroy(){
-    this.user.searchvalue.next('')
+    this.user.searchvalue.next({searchtext:'',pagination:this.user.searchvalue.value.pagination})
   }
 
   searchvalue(event){
-    this.user.searchvalue.next(event.target.value)
+    this.user.searchvalue.next({searchtext:event.target.value,pagination:1})
     console.log(this.user.searchvalue.value);
 
   }
@@ -66,5 +72,23 @@ closecontactmodal(){
     }, 1500);
 
   }
+  fetchmoreusers(){
+    this.user.searchvalue.next({searchtext:this.user.searchvalue.value.searchtext,pagination:this.user.searchvalue.value.pagination+1})
+    this.scrollToBottom()
+  }
 
+  identify(index, item){
+    return item._id;
+ }
+
+ scrollToBottom(): void {
+  try {
+      this.myScrollContainer.nativeElement.scrollToBottom = this.myScrollContainer.nativeElement.scrollHeight;
+      console.log('scroll being called value:',this.myScrollContainer.nativeElement.scrollHeight);
+
+  } catch (err) {
+    console.log(err.message);
+
+   }
+}
 }

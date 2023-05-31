@@ -22,7 +22,7 @@
 
       <textarea (keyup)="statusevent($event)" class="status" role="textbox" [(ngModel)]="status" contenteditable  #messendtosend ></textarea>
     <!-- </div> -->
-<div class="w-[80%] text-right text-blue-600 font-semibold text-sm">{{status.length}} / 100</div>
+<div class="w-[80%] text-right text-blue-600 font-semibold text-sm">{{status?.length||0}} / 100</div>
     <button (click)="update()" class="btn" [ngClass]="{'inactive':inactive==true,'updating':updating==true}" >{{savestate}}</button>
   </div>
 

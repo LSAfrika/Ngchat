@@ -7,8 +7,6 @@ import { AppComponent } from './app.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 import { LoginComponent } from './components/login/login.component';
-import { LoginFormComponent } from './components/login-form/login-form.component';
-import { RegisterFormComponent } from './components/register-form/register-form.component';
 import{HttpClientModule, HTTP_INTERCEPTORS}from '@angular/common/http'
 import { FormsModule } from '@angular/forms';
 import {BrowserAnimationsModule} from'@angular/platform-browser/animations'
@@ -19,8 +17,7 @@ import { AuthInterceptor } from './services/auth.interceptor';
     AppComponent,
 // MessagesComponent,
     LoginComponent,
-    LoginFormComponent,
-     RegisterFormComponent
+
   ],
   imports: [
     BrowserModule,

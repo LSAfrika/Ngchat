@@ -1,18 +1,22 @@
 .logincontainer{
-  @apply flex justify-center flex-col items-center mt-[20px] gap-6 ;
+  @apply flex justify-center flex-col items-center mt-[20px] gap-6 lg:gap-8;
   .input{
-    @apply bg-blue-700 pl-2 pb-1 border-b-2 border-white/40 text-white outline-none focus:border-white
+    @apply bg-blue-700 pl-2 pb-1 border-b-2 border-white/40 text-white outline-none focus:border-white w-full max-w-[350px]
   }
-  .loginbtnmail{@apply bg-white text-blue-600 min-w-[160px] rounded-md py-1 px-10 font-semibold}
+  .input:nth-child(1){
+    @apply mt-auto
+  }
+  .loginbtnmail{@apply bg-white text-blue-600 min-w-[160px] rounded-md py-1 px-10 font-semibold lg:text-2xl}
 }
 
 .registercontainer{
 
-    @apply flex justify-center flex-col items-center mt-[20px] gap-6 ;
+    @apply flex justify-center flex-col items-center mt-[20px] gap-6  lg:gap-12;
     .input{
-      @apply bg-blue-700 pl-2 pb-1 border-b-2 border-white/40 text-white outline-none focus:border-white
+      @apply bg-blue-700 pl-2 pb-1 border-b-2 border-white/40 text-white outline-none focus:border-white w-full max-w-[350px]
     }
-    .loginbtnmail{@apply bg-white text-blue-600 min-w-[160px] rounded-md py-1 px-10 font-semibold}
+    .loginbtnmail{@apply bg-white text-blue-600 min-w-[160px] rounded-md py-1 px-10 font-semibold lg:text-2xl
+    }
 
 
 }

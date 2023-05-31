@@ -114,6 +114,7 @@ registeruser(){
     if(res.refreshtoken)localStorage.setItem('refreshtoken',res.refreshtoken)
     this.registering=false
     this.registertext='register '
+    alert(res.message)
     this.router.navigateByUrl('/')
     this.register=false
 
