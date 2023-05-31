@@ -14,6 +14,8 @@ searchvalue=new BehaviorSubject('')
   REFRESHURL=environment.API+'user/refresh'
   FETCHUSERS=environment.API+'user/allusers'
   FETCHUSER=environment.API+'user/singleuser/'
+  CREATEUSER=environment.API+'user/register'
+  LOGINUSER=environment.API+'user/login'
 
   constructor(private http:HttpClient) { }
 
@@ -39,4 +41,12 @@ searchvalue=new BehaviorSubject('')
 
     return this.http.get(this.FETCHUSER+`${id}`)
   }
+
+  createuser(userdata){
+ return this.http.post(this.CREATEUSER,userdata)
+  }
+
+  loginuser(userdata){
+    return this.http.post(this.LOGINUSER,userdata)
+     }
 }

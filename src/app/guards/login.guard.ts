@@ -14,8 +14,10 @@ constructor(private router:Router,private ui:UiService,private io:IOService){}
   canActivate() {
    // this.router.navigateByUrl('/')
 
-   if(!!localStorage.getItem('token')) {
+   if(!!localStorage.getItem('token') ) {
 
+    const tokenavailable=localStorage.getItem('token')
+    if(tokenavailable!=undefined) {
     const token=localStorage.getItem('token').split('.')[1]
 
 
@@ -28,6 +30,14 @@ constructor(private router:Router,private ui:UiService,private io:IOService){}
 
 
     return true;}
+    else{
+      this.io.connected=false
+this.io.disconnectinstance()
+this.router.navigateByUrl('/login')
+return false
+
+    }
+  }
 this.io.connected=false
 this.io.disconnectinstance()
 this.router.navigateByUrl('/login')

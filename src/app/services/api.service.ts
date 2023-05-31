@@ -54,6 +54,8 @@ async googlesignin(){
       this.router.navigateByUrl('/')
 
     },err=>{console.log('log in error:\n',err);
+    localStorage.removeItem('token')
+    localStorage.removeItem('refreshtoken')
     })
   } catch (error:any) {
 
@@ -87,7 +89,7 @@ async appsignout(){
 
 usersignin(token:string):Observable<any>{
 
-  return this.http.post<any>(this.URL+'/user/socialogin',{firebasetoken:token})
+  return this.http.post<any>(this.URL+'user/socialogin',{firebasetoken:token})
 
 }
 
