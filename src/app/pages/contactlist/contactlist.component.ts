@@ -1,3 +1,4 @@
+import { userfetch } from './../../interface/userfetch.interface';
 import { switchMap,map, debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { UserService } from './../../services/user.service';
 import { ApiService } from './../../services/api.service';
@@ -17,7 +18,14 @@ username=''
 allcontacts=0
 @ViewChild('contactslist') private myScrollContainer: ElementRef;
 
-count=this.user.fetchcount().pipe(map((res:any)=>res.totalusers as number))
+count=this.user.searchvalue.pipe(switchMap((queryvalue:userfetch)=>{
+
+ return this.user.fetchcount(queryvalue.searchtext)
+}),map((res:any)=>res.totalusers as number)
+
+)
+
+
 users=this.user.searchvalue.pipe(
   debounceTime(500),
   distinctUntilChanged(),

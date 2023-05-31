@@ -8,7 +8,7 @@
   }
 
   .searchbar{
-    @apply absolute top-0 min-h-[50px] bg-white text-blue-700 px-2 flex  justify-start items-center w-full gap-2 z-[70];
+    @apply fixed top-0 min-h-[50px] bg-white text-blue-700 px-2 flex  justify-start items-center w-full gap-2 z-[70];
     input{
       outline: none;
       border: none;

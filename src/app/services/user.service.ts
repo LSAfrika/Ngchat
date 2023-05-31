@@ -14,7 +14,7 @@ searchvalue=new BehaviorSubject<userfetch>({searchtext:'',pagination:1 })
   USERURL=environment.API+'user/singleuser/'
   REFRESHURL=environment.API+'user/refresh'
   FETCHUSERS=environment.API+'user/allusers'
-  FETCHCOUNT=environment.API+'user/COUNT'
+  FETCHCOUNT=environment.API+'user/count?search='
   FETCHUSER=environment.API+'user/singleuser/'
   CREATEUSER=environment.API+'user/register'
   LOGINUSER=environment.API+'user/login'
@@ -43,8 +43,8 @@ searchvalue=new BehaviorSubject<userfetch>({searchtext:'',pagination:1 })
 
     return this.http.get(this.FETCHUSER+`${id}`)
   }
-fetchcount(){
-  return this.http.get(this.FETCHCOUNT)
+fetchcount(searchterm:string){
+  return this.http.get(this.FETCHCOUNT+`${searchterm}`)
 }
   createuser(userdata){
  return this.http.post(this.CREATEUSER,userdata)

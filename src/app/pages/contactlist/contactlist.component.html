@@ -19,9 +19,9 @@
       {{contact.username}}
     </div> -->
 
-    <div [routerLink]="['/directmessage',contact._id]"  *ngFor="let contact of contacts let i=index  trackBy:identify"
+    <div   *ngFor="let contact of contacts let i=index  trackBy:identify"
    class="contactlist" [ngClass]="{'contactspacing':i+1==contacts.length && contacts.length>7}">
-       <div class="w-[15%] h-fit py-1  flex justify-center items-center  ">
+       <div [routerLink]="['/profile',contact._id]" class="w-[15%] h-fit py-1  flex justify-center items-center  ">
 
            <div class="w-[60px] my-1 bg-cover overflow-hidden  h-[60px] box-border p-2 flex justify-center items-center rounded-full bg-slate-200" >
 
@@ -32,8 +32,8 @@
        </div>
 
 
-       <div class="w-[80%] h-[50px]  ml-2 mt-1  flex  overflow-x-hidden justify-center  items-center ">
-           <div (click)="openchat(i)" class="flex items-center justify-start w-full h-full text-lg font-semibold text-blue-700 hover:cursor-pointer "><h1>{{contact.username}}</h1></div>
+       <div [routerLink]="['/directmessage',contact._id]" class="w-[80%] h-[50px]  ml-2 mt-1  flex  overflow-x-hidden justify-center  items-center ">
+           <div  class="flex items-center justify-start w-full h-full text-lg font-semibold text-blue-700 hover:cursor-pointer "><h1>{{contact.username}}</h1></div>
 
        </div>
        </div>
