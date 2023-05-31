@@ -44,7 +44,7 @@
   }
 
   .disabled{
-    @apply cursor-not-allowed
+    @apply cursor-not-allowed bg-red-700
   }
   // .openlist{
   //   animation: openpanel  .5s ease-in forwards;
