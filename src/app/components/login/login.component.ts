@@ -15,12 +15,14 @@ export class LoginComponent implements OnInit {
   login=false
   register=false
   registering=false
+  logingin=false
   passwordmissmatch=false
   passwordlengthmatch=false
   invalidemailmatch=false
   inavlidusernamelength=false
 
   registertext='register'
+  logintext='login'
   inavlidemailnmatchmessage='invalid email format'
   inavlidusernamelengthmessage='username too short'
   passwordmissmatchmessage='password missmatch'
@@ -141,6 +143,8 @@ loginuser(){
 
   if(this.passwordlengthmatch==true ||this.invalidemailmatch==true ) return alert('form has errors')
 
+  this.logintext='loging in...'
+  this.logingin=true
   const loginpayload={
     email:this.email,
     password:this.password
@@ -153,6 +157,9 @@ this.loginusersub=this.user.loginuser(loginpayload).subscribe((res:any)=>{
     localStorage.setItem('refreshtoken',res.refreshtoken)
     alert(res.message)
     this.router.navigateByUrl('/')
+    this.logintext='login'
+  this.logingin=false
+
     this.loginusersub.unsubscribe()
   }
 },error=>{
@@ -160,6 +167,8 @@ this.loginusersub=this.user.loginuser(loginpayload).subscribe((res:any)=>{
   localStorage.removeItem('token')
   localStorage.removeItem('refreshtoken')
 alert(error.error.message)
+this.logintext='login'
+this.logingin=false
   this.loginusersub.unsubscribe()
 
 

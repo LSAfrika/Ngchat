@@ -1,6 +1,6 @@
 <div class="lg:gap-10 fixed top-0 flex-wrap  z-50 w-full h-screen bg-gradient-to-b from-blue-700 to-blue-700 box-border p-2 flex flex-col lg:flex-row lg:justify-center justify-start items-center pt-[20px]">
 
-    <!-- <div class="hidden lg:flex w-[75%] left-[25%] fixed h-screen mt-[50px] rounded-tl-lg     flex-col justify-start items-center"> -->
+    <!-- <div class="hidden lg:flex w-[75%] left-[25%] fixed h-screen mt-[50px] roun ded-tl-lg     flex-col justify-start items-center"> -->
 
 <div class="flex flex-col justify-center items-center  ">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-[150px] w-[150px] lg:w-[400px] lg:h-[400px]   rounded-full p-4 " viewBox="0 0 20 20" fill="rgb(255 255 255)">
@@ -12,7 +12,7 @@
       </div>
         <!-- <button (click)="ui.loginform()" class="flex items-center justify-center px-8 mt-5 font-light text-white bg-transparent border-2 border-white rounded-full w-fit h-fit"><div class="mb-1">login</div></button> -->
         <!-- <div class="w-1/2 font-thin mt-[50px] text-center text-white ">Log in with</div> -->
-        <div *ngIf="register==false;" class="logincontainer   lg:min-w-[400px] lg:min-h-[400px]">
+<div *ngIf="register==false;" class="logincontainer   lg:min-w-[400px] lg:min-h-[400px]">
           <!-- <div>sign in</div> -->
          <!-- <div class="flex flex-col items-center justify-start cursor-pointer">   <img (click)="api.googlesignin()" class="w-[40px] h-[40px]" src="../../../assets/fb.svg" alt="" srcset=""> <span class="font-normal text-white"></span></div> -->
           <input (keyup)="emailvalidator($event)" class="input" [(ngModel)]="email" placeholder="email" type="text">
@@ -21,7 +21,7 @@
           <input class="input" (keyup)="passwordlength($event)" [(ngModel)]="password" placeholder="password" type="password" >
   <span class="w-full text-xs text-white font-semibold text-left" *ngIf="passwordlengthmatch">{{passwordlengthmessage}}</span>
 
-          <button (click)="loginuser()" class="loginbtnmail">login in </button>
+          <button (click)="loginuser()" class="loginbtnmail"><div [ngClass]="{'registerpulse':logingin==true}">{{logintext}}</div> </button>
 
           <div class="sociallogincontainer">
             <div class="or">or</div>
