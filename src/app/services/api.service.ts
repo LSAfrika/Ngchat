@@ -22,7 +22,7 @@ export class ApiService {
   auth=getAuth()
   googleprovider=new GoogleAuthProvider()
   constructor(private http:HttpClient,private router:Router,private ui:UiService) {
-console.log('service being initialized');
+// console.log('service being initialized');
 
    // this.initializeFB()
   }

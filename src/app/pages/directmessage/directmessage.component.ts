@@ -4,17 +4,18 @@ import { Usermessages, } from './../../interface/messages.interface';
 import { MessagesService } from './../../services/messages.service';
 // import { PostService } from './../../services/Post.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { UiService } from '../../services/ui.service';
 import { IOService } from '../../services/io.service';
-import { BehaviorSubject, Subject, Observable } from 'rxjs';
-import { takeUntil, tap, switchMap, map } from 'rxjs/operators';
+import { BehaviorSubject, Subject, Observable, from, of } from 'rxjs';
+import { takeUntil, tap, switchMap, map, skip } from 'rxjs/operators';
 import { Location } from '@angular/common'
 
 @Component({
   selector: 'app-directmessage',
   templateUrl: './directmessage.component.html',
-  styleUrls: ['./directmessage.component.scss']
+  styleUrls: ['./directmessage.component.scss'],
+  changeDetection:ChangeDetectionStrategy.OnPush
 })
 export class DirectmessageComponent implements OnInit {
 
@@ -31,7 +32,7 @@ userid = '';
 message = '';
 chatid=''
 destroy$ = new Subject<boolean>();
-user:Observable<User>
+user:Subject<User>=new Subject()
 @ViewChild('chatview') private myScrollContainer: ElementRef;
 
 
@@ -44,12 +45,48 @@ constructor(public ui: UiService, private router: Router,
     ) {
 
   this.userid = this.route.snapshot.params['id']
-if(this.ui.authuser._id==this.userid) this.back()
+if(this.ui.authuser._id==this.userid) { this.back();return}
   this.io.setsocketinstance()
-  this.userservice.fetchuser(this.userid).subscribe(console.log)
-  this.user=this.userservice.fetchuser(this.userid).pipe(map((res:any)=> {  return res.user as User}))
 
+  this.userservice.fetchuser(this.userid).pipe(takeUntil(this.destroy$)).subscribe()
+ this.userservice.fetchuser(this.userid).pipe(map((res:any)=> {  return res.user as User}),tap(res=>{console.log(res),this.user.next(res)})).subscribe()
 
+  this.io.userofflinenoification().pipe(takeUntil(this.destroy$),
+  tap(
+    (useroffline:any)=>{
+//{message:string,user:User,errormessage?:string}
+      // if(useroffline == undefined){ return console.log('initial emit logout')}
+      console.log('current user log out',useroffline.user);
+const user=useroffline.user
+
+const returneduser={_id:user._id,profileimg:user.profileimg,username:user.username,online:user.online,lastseen:user.lastseen} as User
+       this.user.next(returneduser)
+  //   },(error)=>{
+  // console.log('offline error: ',error.message);
+
+  //
+   }
+
+  ))
+  .subscribe( )
+  this.io.useronlinenoification().pipe(takeUntil(this.destroy$),
+  tap(
+    (useronline:any)=>{
+//{message:string,user:User,errormessage?:string}
+      // if(useronline == undefined){ return console.log('initial emit logout')}
+      console.log('current user log in',useronline.user);
+const user=useronline.user
+
+const returneduser={_id:user._id,profileimg:user.profileimg,username:user.username,online:user.online,lastseen:user.lastseen} as User
+       this.user.next(returneduser)
+  //   },(error)=>{
+  // console.log('offline error: ',error.message);
+
+  //
+   }
+
+  ))
+  .subscribe( )
   // console.log('unread messages: ',this.msgservice.unreadcounter);
 
   // console.log('chat owner ',this.ui.chatowner.value );
@@ -95,7 +132,9 @@ if(this.ui.authuser._id==this.userid) this.back()
 }
   ngOnInit(): void {
   // this.resetunreadcounter()
-
+this.io.getNewMessage().pipe(takeUntil(this.destroy$)).subscribe(
+  res=>console.log('user chat emission: ',res)
+  )
 
   }
 
@@ -104,6 +143,14 @@ if(this.ui.authuser._id==this.userid) this.back()
   }
 
   ngAfterViewInit(){
+    // console.log('afterview init')
+
+    setTimeout(() => {
+      // console.log('afterview init',this.myScrollContainer)
+
+      this.scrollToBottom()
+
+    }, 2000);
 
   }
   ngOnDestroy(): void {
@@ -113,9 +160,7 @@ if(this.ui.authuser._id==this.userid) this.back()
   }
 
 
-  ngAfterViewChecked() {
-    this.scrollToBottom();
-}
+
 
 // resetunreadcounter(){
 //   if(this.msgservice.unreadcounter==0 || this.msgservice.chatid=='')return
@@ -182,7 +227,52 @@ if(this.ui.authuser._id==this.userid) this.back()
     // console.log(this.message);
     if (this.message.trim() == '') { return alert('please input a chat message') }
 
-    // this.io.sendmessage(this.message);
+    const trimmessage1=  this.message.match(/&nbsp;/)
+    const trimmessage2=  this.message.match(/&amp;/)
+    // console.log('trimmed message payload',trimmessage1);
+
+
+    if(this.message.includes('&nbsp;')){
+
+     const messagesplit= this.message.split('&nbsp;')
+     console.log('text includes nbsp: before',messagesplit);
+
+let message=''
+     messagesplit.forEach(word=>{
+    if(word.trim() !=''){
+      // console.log(' word');
+      message=message+' ' +word
+      console.log('new sentence',message);
+
+    }
+
+     })
+      console.log('text includes nbsp:',messagesplit);
+      // console.log('rejoined array',rejoinmessage);
+
+    }
+
+    if(trimmessage1!=null ){
+     const messagetosave=this.message.replace('&nbsp;','')
+    //  console.log('message to save db nbsp',messagetosave);
+     this.message=messagetosave
+    //  message=messagetosave
+    }
+
+    if(trimmessage2!=null ){
+      const messagetosave=this.message.replace('&amp;','')
+      console.log('message to save db amp',messagetosave);
+      this.message=messagetosave
+     //  message=messagetosave
+     }
+
+
+    const sentmessagepayload={
+      message:this.message,
+      from:this.ui.authuser._id,
+      to:this.userid
+    }
+     this.io.sendmessage(sentmessagepayload);
     this.message = this.messagetosend.nativeElement.innerHTML = '';
     this.scrollToBottom();
   }
@@ -192,9 +282,15 @@ if(this.ui.authuser._id==this.userid) this.back()
   scrollToBottom(): void {
     try {
         this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
+        // console.log('scrolling to bottrom');
+
     } catch (err) {
       console.log(err.message);
 
      }
 }
 }
+function to(returneduser: User): Observable<User> {
+  throw new Error('Function not implemented.');
+}
+

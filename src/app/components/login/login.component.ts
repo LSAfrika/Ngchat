@@ -1,3 +1,4 @@
+import { IOService } from './../../services/io.service';
 import { UserService } from './../../services/user.service';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
@@ -36,9 +37,12 @@ export class LoginComponent implements OnInit {
   loginusersub:Subscription
 
   emailRegex = new RegExp('[a-z0-9]+@[a-z]+\.[a-z]{2,3}');
-  constructor(public ui:UiService,public api:ApiService,private router:Router,private user:UserService) {
+  constructor(private io:IOService, public ui:UiService,public api:ApiService,private router:Router,private user:UserService) {
 
     if(!!localStorage.getItem('token'))this.router.navigateByUrl('/')
+    this.io.connected=false
+
+    //  this.io.disconnectinstance()
   }
 
   ngOnInit(): void {
@@ -156,6 +160,7 @@ this.loginusersub=this.user.loginuser(loginpayload).subscribe((res:any)=>{
     localStorage.setItem('token',res.token)
     localStorage.setItem('refreshtoken',res.refreshtoken)
     alert(res.message)
+    // this.io.userlogin()
     this.router.navigateByUrl('/')
     this.logintext='login'
   this.logingin=false

@@ -39,7 +39,7 @@ searchvalue=new BehaviorSubject<userfetch>({searchtext:'',pagination:1 })
 
   fetchuser(id:string){
 
-    console.log(this.FETCHUSER+`${id}`);
+    // console.log(this.FETCHUSER+`${id}`);
 
     return this.http.get(this.FETCHUSER+`${id}`)
   }

@@ -13,8 +13,8 @@ export interface User{
   _id: string;
   username: string;
   profileimg: string;
-  status:string
   online:boolean
+  status?:string
   createdAt?: string
   lastseen?:string
 }

@@ -26,20 +26,21 @@ constructor(private router:Router,private ui:UiService,private io:IOService){}
 
      const userbio= atob(token)
      this.ui.authuser=JSON.parse(userbio)
-      // console.log('current logedin user',this.ui.authuser);
-
+      //  console.log('current logedin user',this.ui.authuser);
+this.io.setsocketinstance()
 
     return true;}
     else{
       this.io.connected=false
-this.io.disconnectinstance()
+
+// this.io.disconnectinstance()
 this.router.navigateByUrl('/login')
 return false
 
     }
   }
 this.io.connected=false
-this.io.disconnectinstance()
+// this.io.disconnectinstance()
 this.router.navigateByUrl('/login')
 return false
 

@@ -1,3 +1,4 @@
+import { User } from './../interface/post.interface';
 import { NotificationsService } from './notifications.service';
 import { MessagesService } from './messages.service';
 import { Injectable } from '@angular/core';
@@ -6,6 +7,7 @@ import { io } from 'socket.io-client';
 import { Message } from '../interface/messages.interface';
 import { UiService } from './ui.service';
 import{environment} from '../../environments/environment'
+import { Router } from '@angular/router';
 
 
 @Injectable({
@@ -17,7 +19,8 @@ export class IOService {
   ngchatbackend = environment.API;
   // socket=io(this.ngchatbackend,{query:{uid:''}})
   socket:any=undefined
-  public message$: BehaviorSubject<Message> = new BehaviorSubject(undefined);
+  public message$: BehaviorSubject<any> = new BehaviorSubject(undefined);
+  public userconnectionstatus$: Subject<any> = new Subject();
   public messagenotifications$: BehaviorSubject<Object> = new BehaviorSubject(undefined);
   public messagenotificationscounter$ = new BehaviorSubject(undefined);
   public notifications$: BehaviorSubject<any> = new BehaviorSubject(undefined);
@@ -30,7 +33,9 @@ export class IOService {
 connected=false
 
   // socket=io(this.ngchatbackend)
-  constructor(private ui: UiService,private messageservice:MessagesService,private notification:NotificationsService) {
+  constructor(private ui: UiService,private messageservice:MessagesService,private notification:NotificationsService,
+    private router:Router
+    ) {
 
 // this.setsocketinstance()
 
@@ -40,18 +45,19 @@ connected=false
 
   setsocketinstance(){
 
-// console.log('socket connection call');
+
 
     if(this.connected)return
 
-    console.log('initial socket connection',this.ui.authuser);
+
 
     if(this.ui.authuser !== undefined)
     {
       this.socket= io(this.ngchatbackend, {query: {uid: this.ui.authuser._id}});
 // this.gloabalnotificationsound().subscribe(()=>this.notification.notificationsound())
 this.connected=true
-console.log('socket', this.socket);
+// console.log('socket', this.socket);
+this.userlogin()
   }
 
 
@@ -60,11 +66,62 @@ console.log('socket', this.socket);
 
   disconnectinstance(){
     if(this.socket !=undefined) {
-      this.socket.disconnect()
-
+      this.socket.close()
+      console.log('socket value after close: ',this.socket)
+      this.socket=undefined
       console.log('live socket disconnected');
 
     }
+
+
+
+
+  }
+
+  userofflinenoification(){
+
+    // if(this.socket ==undefined) return null
+    this.socket.on('logoutresponse', (message:any) =>{
+
+      // console.log('emitted logoff message: ',message);
+
+      this.userconnectionstatus$.next(message);
+    });
+
+    return this.userconnectionstatus$.asObservable();
+
+  }
+
+
+  userlogout(){
+    this.socket.emit('logout',{message:'user has logged out'},(logout)=>{
+      console.log('logout response emission',Response)
+      if(logout.loggedout==true){
+        this.connected=false
+         this.disconnectinstance()
+        localStorage.removeItem('token')
+        this.router.navigateByUrl('/login')
+      }
+    })
+  }
+
+
+
+  useronlinenoification(){
+
+    // if(this.socket ==undefined) return null
+    this.socket.on('loginresponse', (message:any) =>{
+
+      //  console.log('emitted login message: ',message);
+
+      this.userconnectionstatus$.next(message);
+    });
+
+    return this.userconnectionstatus$.asObservable();
+
+  }
+  userlogin(){
+    this.socket.emit('login',{message:'user has logged in'})
   }
   // setuid(){
 
@@ -73,19 +130,21 @@ console.log('socket', this.socket);
   //   return this.socket.emit('userconnect', {  uid: this.ui.logedinuser._id});
   //  }
 
-   sendmessage(message:string){
+   sendmessage(messageobj){
     // console.log('from', this.ui.logedinuser);
     // console.log('to', this.ui.chatowner.value);
 
-    console.log('message payload',message);
-    const trimmedmessage=  message.match(/&nbsp;/)
+    // console.log('message payload',messageobj);
+    this.socket.emit('message-sent',messageobj)
+    return
+    const trimmedmessage=  messageobj.message.match(/&nbsp;/)
     console.log('trimmed message payload',trimmedmessage);
 
 
     if(trimmedmessage!=null ){
-      const messagetosave=message.replace('&nbsp;','')
-      console.log('message to save db',messagetosave);
-      message=messagetosave
+    //  const messagetosave=message.replace('&nbsp;','')
+     // console.log('message to save db',messagetosave);
+    //  message=messagetosave
     }
 
 
@@ -95,7 +154,7 @@ console.log('socket', this.socket);
     //  to: this.ui.chatowner.value._id,
     //  chatid: `${this.ui.logedinuser._id}:${this.ui.chatowner.value._id}`,
      viewed: false,
-      message
+      // message
     };
 
     console.log('message to be sent ',messagepayload);
@@ -108,26 +167,26 @@ console.log('socket', this.socket);
     });
    }
 
-   commentnotifcation(postid,userid,actiontype){
+  //  commentnotifcation(postid,userid,actiontype){
 
-   const Notificationpayload={
-      postid,
-      userid,
-      action:actiontype
+  //  const Notificationpayload={
+  //     postid,
+  //     userid,
+  //     action:actiontype
 
-    }
-    this.socket.emit('emitnotification',Notificationpayload)
-   }
+  //   }
+  //   this.socket.emit('emitnotification',Notificationpayload)
+  //  }
 
     getNewMessage () {
 
       // console.log('received online message being hit');
-    this.socket.on('online-message', (message) =>{
-console.log('socket get new message: ',message);
+    this.socket.on('message-received', (message) =>{
+ console.log('socket get new message: ',message);
 
       this.message$.next(message);
     });
-// console.log('currentmessage online chat: ',this.message$.value);
+    // console.log('currentmessage online chat: ',this.message$.value);
 
     return this.message$.asObservable();
   }
