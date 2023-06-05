@@ -7,7 +7,7 @@
   <div class="text-base w-full text-left">{{_user.username}}</div>
 
   <div class="text-xs text-left w-full" *ngIf="_user.online==true">online</div>
-  <div class="text-xs text-left w-full" *ngIf="_user.online==false">last seen: {{_user.lastseen | date :'shortTime'}},{{_user.lastseen | date :'mediumDate'}}</div>
+  <div class="text-xs text-left w-full" *ngIf="_user.online==false"> {{_user.lastseen | date :'shortTime'}},{{_user.lastseen | date :'mediumDate'}}</div>
 </div>
 
   </div>

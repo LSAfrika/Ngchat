@@ -182,7 +182,7 @@ this.userlogin()
 
       // console.log('received online message being hit');
     this.socket.on('message-received', (message) =>{
- console.log('socket get new message: ',message);
+//  console.log('socket get new message: ',message);
 
       this.message$.next(message);
     });

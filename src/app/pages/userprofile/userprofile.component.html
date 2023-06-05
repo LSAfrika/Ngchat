@@ -19,8 +19,9 @@
       <img class="w-full h-full bg-cover" src="{{user?.profileimg}}" alt="profile image" srcset="">
     </div>
     <div class="name"> {{user.username}}</div>
-    <div class="text-blue-600">Last seen</div>
-<div class="lastseen">{{user.lastseen |date:"shortTime" }},{{user.lastseen|date:"mediumDate"}}</div>
+    <!-- <div class="text-blue-600">Last seen</div> -->
+<div *ngIf="user.online==false" class="lastseen">{{user.lastseen |date:"shortTime" }},{{user.lastseen|date:"mediumDate"}}</div>
+<div *ngIf="user.online==true" class="lastseen online">online</div>
   <p class="status">{{user.status}}</p>
 
 <button *ngIf="uid !== ui.authuser._id" [routerLink]="['/directmessage',uid]" class="min-w-[150px] rounded-full cursor-pointer bg-blue-600 flex justify-center items-center gap-2 text-white py-2">

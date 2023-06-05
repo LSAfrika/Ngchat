@@ -38,7 +38,7 @@ users=this.user.searchvalue.pipe(
   constructor(public ui:UiService,private io:IOService,private user:UserService) {
   this.io.setsocketinstance()
 
-  this.user.searchvalue.subscribe(console.log)
+  // this.user.searchvalue.subscribe(console.log)
 
   }
 
@@ -51,7 +51,7 @@ users=this.user.searchvalue.pipe(
 
   searchvalue(event){
     this.user.searchvalue.next({searchtext:event.target.value,pagination:1})
-    console.log(this.user.searchvalue.value);
+    // console.log(this.user.searchvalue.value);
 
   }
 
