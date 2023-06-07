@@ -1,10 +1,12 @@
+import { MessagesService } from './../../services/messages.service';
 import { UiService } from './../../services/ui.service';
 
-import { takeUntil, tap } from 'rxjs/operators';
+import { map, takeUntil, tap } from 'rxjs/operators';
 import { Subject, Observable, combineLatest } from 'rxjs';
 
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { chatlist } from 'src/app/interface/messages.interface';
 
 
 @Component({
@@ -15,8 +17,10 @@ import { Router } from '@angular/router';
 export class MessagesComponent implements OnInit {
 
   Destroy$=new Subject<boolean>()
+  userchats:Observable<chatlist[]>=this.messageservice.fetchchatlist().pipe(map((res:any)=>res.chats as chatlist[]))
+
 names=[]
-  constructor(private ui:UiService) {
+  constructor(private ui:UiService,private messageservice:MessagesService) {
 
     this.names= this.ui.names
 

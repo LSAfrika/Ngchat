@@ -1,6 +1,6 @@
 import { UserService } from './../../services/user.service';
 import { User } from './../../interface/post.interface';
-import { Usermessages, } from './../../interface/messages.interface';
+import { Usermessages,Message } from './../../interface/messages.interface';
 import { MessagesService } from './../../services/messages.service';
 // import { PostService } from './../../services/Post.service';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -267,10 +267,11 @@ let message=''
      }
 
 
-    const sentmessagepayload={
+    const sentmessagepayload:Message={
       message:this.message,
       from:this.ui.authuser._id,
-      to:this.userid
+      to:this.userid,
+      viewed:false
     }
      this.io.sendmessage(sentmessagepayload);
     this.message = this.messagetosend.nativeElement.innerHTML = '';

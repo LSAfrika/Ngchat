@@ -17,6 +17,7 @@ unreadcounter=0
   indexdelete=0
 
   ROOTMESSAGEURL=environment.API+'messages/'
+  ROOTCHATSURL=environment.API+'chat/allchats'
 
   constructor(private http:HttpClient) { }
 
@@ -30,7 +31,7 @@ unreadcounter=0
 
 
   fetchchatlist(){
-    return this.http.get(this.ROOTMESSAGEURL+"getuserchats/")
+    return this.http.get(this.ROOTCHATSURL)
   }
 
   fetchsunreadmessages(){

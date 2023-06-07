@@ -4,21 +4,23 @@
 
 <div class="holder">
 
+<ng-container *ngIf="userchats|async as chats">
 
-  <!-- <div  class="container" *ngIf="names.length>0 " >
+  <!-- {{chats|json}} -->
+  <div  class="container" *ngIf="chats.length>0 else nochats " >
 
-      <div     class="chatlist" *ngFor="let name of names;let i =index ">
-      <div  [routerLink]="['/profile',name.name]" class="avatar">
-
+      <div     class="chatlist" *ngFor="let chat of chats;let i =index ">
+      <div  [routerLink]="['/profile',chat.chatparticipants[0]._id]" class="avatar">
+<img style="width: 100%;height:100%;background-size: cover;" src="{{chat.chatparticipants[0].profileimg}}" alt="" srcset="">
       </div>
-      <div  [routerLink]="['/directmessage',name.name]"  class=" messagesection">
+      <div  [routerLink]="['/directmessage',chat.chatparticipants[0]._id]"  class=" messagesection">
         <div class="name" >
-          <div>{{name.name}}</div>
+          <div>{{chat.chatparticipants[0].username}}</div>
 
-       <div>12/12/23</div>
+       <div>{{chat.chatupdate | date:'shortTime'}}</div>
         </div>
 <div class="w-[100%] truncate text-slate-800 text-sm ">
-  Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam, praesentium!
+{{chat.lastmessage}}
 </div>
 
       </div>
@@ -28,7 +30,13 @@
     <div class="min-h-[80px] bg-teal-500 w-full"></div>
 
 
-    </div> -->
+    </div>
+    <ng-template #nochats >
+      <div>start new chats </div>
+    </ng-template>
+  </ng-container>
+
+
 </div>
 
 
