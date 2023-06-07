@@ -1,4 +1,6 @@
-import { BehaviorSubject } from 'rxjs';
+import { tap } from 'rxjs/operators';
+import { Message } from './../interface/messages.interface';
+import { BehaviorSubject, map, Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import{environment} from '../../environments/environment'
@@ -9,6 +11,7 @@ import{environment} from '../../environments/environment'
 export class MessagesService {
 
   messagepagination=-1
+  chatthread$ :BehaviorSubject<Message[]>=new BehaviorSubject(undefined)
 
 chatid=''
   userchatlist$=new BehaviorSubject<any>([])
@@ -17,26 +20,35 @@ unreadcounter=0
   indexdelete=0
 
   ROOTMESSAGEURL=environment.API+'messages/'
-  ROOTCHATSURL=environment.API+'chat/allchats'
+  ROOTCHATSURL=environment.API+'chat/'
 
   constructor(private http:HttpClient) { }
 
 
 
+  fetchthread(userid){
+
+  this.fetchchat(userid).pipe(
+    map((res:any)=>res.chats as Message[]),
+    tap(res=>this.chatthread$.next(res))
+    ).subscribe()
+  }
+
 
   fetchchat(user:string){
 
-    return this.http.get(this.ROOTMESSAGEURL+'getusermessage/'+`${user}/`+'?pagination='+this.messagepagination)
+    return this.http.get(this.ROOTCHATSURL+'singlechat/'+`${user}/`+'?pagination='+this.messagepagination)
   }
 
 
   fetchchatlist(){
-    return this.http.get(this.ROOTCHATSURL)
+    return this.http.get(this.ROOTCHATSURL+'allchats')
   }
 
   fetchsunreadmessages(){
 return this.http.get(this.ROOTMESSAGEURL+'unreadmessagescounter/')
   }
+
 
   deletechat(chatid){
 

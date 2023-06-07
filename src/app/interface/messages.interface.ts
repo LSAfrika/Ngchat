@@ -3,9 +3,9 @@ messages:[Message]
 }
 
 export interface Message{
-
   message:string,
-   from:string,
+  from:string,
+  _id?:string
    to?:string
    deletechat?:[string]
    viewed?:boolean,

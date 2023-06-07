@@ -18,6 +18,7 @@ export class IOService {
 
   ngchatbackend = environment.API;
   // socket=io(this.ngchatbackend,{query:{uid:''}})
+  sent=false
   socket:any=undefined
   public message$: BehaviorSubject<any> = new BehaviorSubject(undefined);
   public userconnectionstatus$: Subject<any> = new Subject();
@@ -133,38 +134,22 @@ this.userlogin()
    sendmessage(messageobj){
     // console.log('from', this.ui.logedinuser);
     // console.log('to', this.ui.chatowner.value);
-
+let resp
     // console.log('message payload',messageobj);
-    this.socket.emit('message-sent',messageobj)
-    return
-    const trimmedmessage=  messageobj.message.match(/&nbsp;/)
-    console.log('trimmed message payload',trimmedmessage);
+    this.socket.emit('message-sent',messageobj,(response)=>{
+      // console.log(response);
+      if(response) {
+        console.log('message sent ',response);
+
+         this.messageservice.chatthread$.next([...this.messageservice.chatthread$.value,response.sent])
+         this.ui.scrolltobottom$.next(this.ui.scrolltobottom$.value+1)
+      }
+
+     })
 
 
-    if(trimmedmessage!=null ){
-    //  const messagetosave=message.replace('&nbsp;','')
-     // console.log('message to save db',messagetosave);
-    //  message=messagetosave
-    }
 
 
-
-    const messagepayload = {
-    //  from: this.ui.logedinuser._id,
-    //  to: this.ui.chatowner.value._id,
-    //  chatid: `${this.ui.logedinuser._id}:${this.ui.chatowner.value._id}`,
-     viewed: false,
-      // message
-    };
-
-    console.log('message to be sent ',messagepayload);
-
-    this.socket.emit('message-sent', messagepayload,(response)=>{
-
-      if(response.sent==true)  this.messageservice.userchat$.next([...this.messageservice.userchat$.value,messagepayload])
-      console.log('callback from message sent',response);
-
-    });
    }
 
   //  commentnotifcation(postid,userid,actiontype){

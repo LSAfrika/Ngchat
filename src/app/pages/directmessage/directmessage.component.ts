@@ -27,7 +27,9 @@ export class DirectmessageComponent implements OnInit {
   numberOfLineBreaks = 0;
 items = [1, 1, 1, 1, 1];
 
+
 textareaheight = 2;
+loadingchat=false
 userid = '';
 message = '';
 chatid=''
@@ -48,45 +50,12 @@ constructor(public ui: UiService, private router: Router,
 if(this.ui.authuser._id==this.userid) { this.back();return}
   this.io.setsocketinstance()
 
-  this.userservice.fetchuser(this.userid).pipe(takeUntil(this.destroy$)).subscribe()
- this.userservice.fetchuser(this.userid).pipe(map((res:any)=> {  return res.user as User}),tap(res=>{console.log(res),this.user.next(res)})).subscribe()
+  // this.userservice.fetchuser(this.userid).pipe(takeUntil(this.destroy$)).subscribe()
+this.fetchuser()
+ this.userofflinenotification()
+ this.useronlinenotification()
 
-  this.io.userofflinenoification().pipe(takeUntil(this.destroy$),
-  tap(
-    (useroffline:any)=>{
-//{message:string,user:User,errormessage?:string}
-      // if(useroffline == undefined){ return console.log('initial emit logout')}
-      console.log('current user log out',useroffline.user);
-const user=useroffline.user
-
-const returneduser={_id:user._id,profileimg:user.profileimg,username:user.username,online:user.online,lastseen:user.lastseen} as User
-       this.user.next(returneduser)
-  //   },(error)=>{
-  // console.log('offline error: ',error.message);
-
-  //
-   }
-
-  ))
-  .subscribe( )
-  this.io.useronlinenoification().pipe(takeUntil(this.destroy$),
-  tap(
-    (useronline:any)=>{
-//{message:string,user:User,errormessage?:string}
-      // if(useronline == undefined){ return console.log('initial emit logout')}
-      console.log('current user log in',useronline.user);
-const user=useronline.user
-
-const returneduser={_id:user._id,profileimg:user.profileimg,username:user.username,online:user.online,lastseen:user.lastseen} as User
-       this.user.next(returneduser)
-  //   },(error)=>{
-  // console.log('offline error: ',error.message);
-
-  //
-   }
-
-  ))
-  .subscribe( )
+ this.msgservice.fetchthread(this.userid)
   // console.log('unread messages: ',this.msgservice.unreadcounter);
 
   // console.log('chat owner ',this.ui.chatowner.value );
@@ -126,8 +95,59 @@ const returneduser={_id:user._id,profileimg:user.profileimg,username:user.userna
   //   this.msgservice.userchat$.next(newmessagesareray);
   // })).subscribe();
 
+// this.chatthread$.subscribe(console.log)
 
 
+}
+
+
+
+fetchuser(){
+ this.userservice.fetchuser(this.userid).pipe(map((res:any)=> {  return res.user as User}),tap(res=>{console.log(res),this.user.next(res)})).subscribe()
+
+
+}
+userofflinenotification(){
+  this.io.userofflinenoification().pipe(takeUntil(this.destroy$),
+  tap(
+    (useroffline:any)=>{
+//{message:string,user:User,errormessage?:string}
+      // if(useroffline == undefined){ return console.log('initial emit logout')}
+      console.log('current user log out',useroffline.user);
+const user=useroffline.user
+
+const returneduser={_id:user._id,profileimg:user.profileimg,username:user.username,online:user.online,lastseen:user.lastseen} as User
+       this.user.next(returneduser)
+  //   },(error)=>{
+  // console.log('offline error: ',error.message);
+
+  //
+   }
+
+  ))
+  .subscribe( )
+
+}
+useronlinenotification(){
+
+  this.io.useronlinenoification().pipe(takeUntil(this.destroy$),
+  tap(
+    (useronline:any)=>{
+//{message:string,user:User,errormessage?:string}
+      // if(useronline == undefined){ return console.log('initial emit logout')}
+      console.log('current user log in',useronline.user);
+const user=useronline.user
+
+const returneduser={_id:user._id,profileimg:user.profileimg,username:user.username,online:user.online,lastseen:user.lastseen} as User
+       this.user.next(returneduser)
+  //   },(error)=>{
+  // console.log('offline error: ',error.message);
+
+  //
+   }
+
+  ))
+  .subscribe( )
 
 }
   ngOnInit(): void {
@@ -146,15 +166,16 @@ this.io.getNewMessage().pipe(takeUntil(this.destroy$)).subscribe(
     // console.log('afterview init')
 
     setTimeout(() => {
-      // console.log('afterview init',this.myScrollContainer)
+      console.log('afterview init',this.myScrollContainer)
 
-      this.scrollToBottom()
+      this.scrollToBottom()//
+      // this.updateview()
 
-    }, 2000);
+    }, 1000);
 
   }
   ngOnDestroy(): void {
-
+this.msgservice.chatthread$= new BehaviorSubject(undefined)
     this.destroy$.next(true);
     this.destroy$.unsubscribe();
   }
@@ -273,17 +294,25 @@ let message=''
       to:this.userid,
       viewed:false
     }
-     this.io.sendmessage(sentmessagepayload);
+    this.io.sendmessage(sentmessagepayload);
+   console.log(this.io.sent);
+
     this.message = this.messagetosend.nativeElement.innerHTML = '';
-    this.scrollToBottom();
+
   }
 
+  updateview(){
+    this.ui.scrolltobottom$.pipe(takeUntil(this.destroy$)).subscribe(res=>{
+      console.log(res);
+      this.scrollToBottom()
 
+     })
+  }
 
   scrollToBottom(): void {
     try {
         this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
-        // console.log('scrolling to bottrom');
+         console.log('scrolling to bottrom');
 
     } catch (err) {
       console.log(err.message);
