@@ -153,8 +153,17 @@ const returneduser={_id:user._id,profileimg:user.profileimg,username:user.userna
   ngOnInit(): void {
   // this.resetunreadcounter()
 this.io.getNewMessage().pipe(takeUntil(this.destroy$)).subscribe(
-  res=>console.log('user chat emission: ',res)
-  )
+  (res:Message)=>{console.log('user chat emission: ',res)
+  if(res !=undefined){
+
+    this.msgservice.chatthread$.next([...this.msgservice.chatthread$.value,res])
+  setTimeout(() => {
+
+    this.scrollToBottom()
+  }, 100);
+  }
+
+})
 
   }
 
