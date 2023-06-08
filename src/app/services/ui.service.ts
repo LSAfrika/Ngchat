@@ -7,6 +7,7 @@ import { Injectable } from '@angular/core';
 export class UiService {
 
 
+  samechatid=''
   editmodal=new BehaviorSubject(false)
   contactmodal =new BehaviorSubject(false)
   scrolltobottom$:BehaviorSubject<number>=new BehaviorSubject(0)

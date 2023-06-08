@@ -33,10 +33,11 @@ loadingchat=false
 userid = '';
 message = '';
 chatid=''
+localmessages:Message[]=[]
 destroy$ = new Subject<boolean>();
 user:Subject<User>=new Subject()
 @ViewChild('chatview') private myScrollContainer: ElementRef;
-
+elementchecked=true
 
 constructor(public ui: UiService, private router: Router,
             private io: IOService, private route: ActivatedRoute,
@@ -51,10 +52,14 @@ if(this.ui.authuser._id==this.userid) { this.back();return}
   this.io.setsocketinstance()
 
   // this.userservice.fetchuser(this.userid).pipe(takeUntil(this.destroy$)).subscribe()
+  // this.msgservice.chatthread$.pipe(takeUntil(this.destroy$)).subscribe((res)=>{
+  //   //console.log(res);
+  //   // this.localmessages=[...res]
+  //   })
 this.fetchuser()
  this.userofflinenotification()
  this.useronlinenotification()
-
+ this.updateview()
  this.msgservice.fetchthread(this.userid)
   // console.log('unread messages: ',this.msgservice.unreadcounter);
 
@@ -153,15 +158,22 @@ const returneduser={_id:user._id,profileimg:user.profileimg,username:user.userna
   ngOnInit(): void {
   // this.resetunreadcounter()
 this.io.getNewMessage().pipe(takeUntil(this.destroy$)).subscribe(
-  (res:Message)=>{console.log('user chat emission: ',res)
-  if(res !=undefined){
+  (res:Message)=>{
+    // console.log('user chat emission: ',res)
+    // console.log(' chat emission id: ',res)
+    // console.log('previous chat emission id: ',this.ui.samechatid)
+
+  if(res ==undefined) return
+  if(res._id== this.ui.samechatid) return
 
     this.msgservice.chatthread$.next([...this.msgservice.chatthread$.value,res])
-  setTimeout(() => {
 
-    this.scrollToBottom()
+  setTimeout(() => {
+    this.ui.samechatid=res._id
+
+     this.scrollToBottom()
   }, 100);
-  }
+
 
 })
 
@@ -173,14 +185,28 @@ this.io.getNewMessage().pipe(takeUntil(this.destroy$)).subscribe(
 
   ngAfterViewInit(){
     // console.log('afterview init')
-
+    console.log('afterview init',this.myScrollContainer)
+    // this.scrollToBottom()//
     setTimeout(() => {
-      console.log('afterview init',this.myScrollContainer)
 
-      this.scrollToBottom()//
+      this.scrollToBottom()
       // this.updateview()
 
     }, 1000);
+
+  }
+
+  ngAfterViewChecked(){
+
+    // if(this.elementchecked){
+
+    //   console.log('checking');
+    //   console.log('afterview init',this.myScrollContainer)
+
+    //   this.elementchecked=false
+    // }
+    // console.log('checking');
+
 
   }
   ngOnDestroy(): void {
@@ -312,8 +338,8 @@ let message=''
 
   updateview(){
     this.ui.scrolltobottom$.pipe(takeUntil(this.destroy$)).subscribe(res=>{
-      console.log(res);
-      this.scrollToBottom()
+       console.log(res);//
+     this.scrollToBottom()
 
      })
   }

@@ -142,7 +142,11 @@ let resp
         console.log('message sent ',response);
 
          this.messageservice.chatthread$.next([...this.messageservice.chatthread$.value,response.sent])
-         this.ui.scrolltobottom$.next(this.ui.scrolltobottom$.value+1)
+
+         setTimeout(() => {
+
+           this.ui.scrolltobottom$.next(this.ui.scrolltobottom$.value+1)
+         }, 100);
       }
 
      })
