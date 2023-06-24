@@ -19,32 +19,34 @@
 
 
 
-  <div class=" messagecontainer  "  #chatview>
+  <div class=" messagecontainer  " >
 
-  <ng-container *ngIf="msgservice.chatthread$|async as chatmessages">
+  <div class="scorillablecontainer"  *ngIf="msgservice.chatthread$|async as chatmessages">
     <!--  [ngClass]="{friend: message.from === this.userid }" -->
     <!-- <pre>{{chatmessages |json}}</pre> -->
-    <div class="singlemessagecontainer" *ngFor="let chatmessage of chatmessages;let i=index">
-      <!-- <pre>{{localmessages |json}}</pre> -->
+    <!-- <pre>{{DirectChat |json}} </pre> -->
+    <div class="singlemessagecontainer" *ngFor="let message of chatmessages;">
       <!-- friendmessagebubble: message.from === this.userid , -->
       <!--  [ngClass]="{friendmessagebubble: chatmessage?.from === this.userid, friend: chatmessage?.from !== this.userid}" -->
       <div class="messagebubble"
-      [ngClass]="{friendmessagebubble: chatmessage?.from === this.userid, friend: chatmessage?.from !== this.userid}"
+      [ngClass]="{friendmessagebubble: message.from === this.userid, friend: message.from !== this.userid}"
       >
 
 
-       <span >{{chatmessage.message}}</span>
+       <span >{{message.message}}</span>
        <!-- <span >{{i}}</span> -->
        <!-- <span *ngIf=""> {{message.message}} </span> -->
       </div>
+      <!-- {{message}} -->
     </div>
-    <!-- {{message}} -->
+
+  </div>
+
   <div class="sender">
   <span role="textbox" contenteditable  #messendtosend ></span>
     <svg (click)="sendmessage()" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
      style="fill: rgba(37 99 235);transform:rotate(-15deg) ;width: 30px;height: 30px;"><path d="m21.426 11.095-17-8A1 1 0 0 0 3.03 4.242l1.212 4.849L12 12l-7.758 2.909-1.212 4.849a.998.998 0 0 0 1.396 1.147l17-8a1 1 0 0 0 0-1.81z"></path></svg>
   </div>
-  </ng-container>
   </div>
 </div>
 

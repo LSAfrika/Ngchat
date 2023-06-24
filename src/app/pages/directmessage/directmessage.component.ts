@@ -33,7 +33,7 @@ loadingchat=false
 userid = '';
 message = '';
 chatid=''
-localmessages:Message[]=[]
+DirectChat:Message[]=[]
 destroy$ = new Subject<boolean>();
 user:Subject<User>=new Subject()
 @ViewChild('chatview') private myScrollContainer: ElementRef;
@@ -51,16 +51,14 @@ constructor(public ui: UiService, private router: Router,
 if(this.ui.authuser._id==this.userid) { this.back();return}
   this.io.setsocketinstance()
 
-  // this.userservice.fetchuser(this.userid).pipe(takeUntil(this.destroy$)).subscribe()
-  // this.msgservice.chatthread$.pipe(takeUntil(this.destroy$)).subscribe((res)=>{
-  //   //console.log(res);
-  //   // this.localmessages=[...res]
-  //   })
+
 this.fetchuser()
  this.userofflinenotification()
  this.useronlinenotification()
  this.updateview()
- this.msgservice.fetchthread(this.userid)
+this.fetchcurrentchat()
+
+
   // console.log('unread messages: ',this.msgservice.unreadcounter);
 
   // console.log('chat owner ',this.ui.chatowner.value );
@@ -107,13 +105,23 @@ this.fetchuser()
 
 
 
+fetchcurrentchat(){
+  this.msgservice.fetchthread(this.userid).pipe(tap(res=>this.msgservice.chatthread$.next(res)),takeUntil(this.destroy$)).subscribe(
+    ()=>{
+
+   console.log('thread',this.DirectChat);
+
+    }
+   )
+
+}
 fetchuser(){
  this.userservice.fetchuser(this.userid).pipe(map((res:any)=> {  return res.user as User}),tap(res=>{console.log(res),this.user.next(res)})).subscribe()
 
 
 }
 userofflinenotification(){
-  this.io.userofflinenoification().pipe(takeUntil(this.destroy$),
+  this.io.userofflinenoification().pipe(
   tap(
     (useroffline:any)=>{
 //{message:string,user:User,errormessage?:string}
@@ -129,7 +137,7 @@ const returneduser={_id:user._id,profileimg:user.profileimg,username:user.userna
   //
    }
 
-  ))
+  ),takeUntil(this.destroy$))
   .subscribe( )
 
 }
@@ -187,25 +195,27 @@ this.io.getNewMessage().pipe(takeUntil(this.destroy$)).subscribe(
     // console.log('afterview init')
     console.log('afterview init',this.myScrollContainer)
     // this.scrollToBottom()//
-    setTimeout(() => {
+    // setTimeout(() => {
 
-      this.scrollToBottom()
-      // this.updateview()
+    //   this.scrollToBottom()
+    //   // this.updateview()
 
-    }, 1000);
+    // }, 1000);
 
   }
 
   ngAfterViewChecked(){
 
-    // if(this.elementchecked){
+    // console.log('view is checking');
 
-    //   console.log('checking');
-    //   console.log('afterview init',this.myScrollContainer)
+    if(this.elementchecked){
 
-    //   this.elementchecked=false
-    // }
-    // console.log('checking');
+      console.log('checking');
+      console.log('afterview checked init',this.myScrollContainer)
+      this.scrollToBottom()
+      this.elementchecked=false
+    }
+    //  console.log('checking');
 
 
   }
