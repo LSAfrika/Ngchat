@@ -20,7 +20,7 @@ app-genericmodal{
   @apply min-w-[50px] min-h-[50px] max-w-[50px] max-h-[50px] rounded-full bg-cover  bg-white overflow-hidden
 }
 .messagesection{
-  @apply flex flex-col justify-start items-start w-full truncate  pl-1 relative bg-lime-400
+  @apply flex flex-col justify-start items-start w-full truncate  pl-1 relative
 }
 .message{
   @apply w-[100%] truncate text-slate-800 text-sm  relative

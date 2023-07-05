@@ -105,12 +105,12 @@ this.readcounterreset()
 
 readcounterreset(){
   console.log('current unread count:\n',this.ui.unreadcounter);
-  // if(this.ui.unreadcounter>0){
+  if(this.ui.unreadcounter>0){
     this.msgservice.unreadcounterreset(this.chatparticipantid).pipe(takeUntil(this.destroy$)).subscribe(
       res=>console.log(res),
       error=>console.log(error)
       )
-  // }
+  }
 
 }
 
