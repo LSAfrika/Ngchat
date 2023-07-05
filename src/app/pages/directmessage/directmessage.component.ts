@@ -30,7 +30,7 @@ items = [1, 1, 1, 1, 1];
 
 textareaheight = 2;
 loadingchat=false
-userid = '';
+chatparticipantid = '';
 message = '';
 chatid=''
 DirectChat:Message[]=[]
@@ -47,8 +47,8 @@ constructor(public ui: UiService, private router: Router,
             public msgservice: MessagesService
     ) {
 
-  this.userid = this.route.snapshot.params['id']
-if(this.ui.authuser._id==this.userid) { this.back();return}
+  this.chatparticipantid = this.route.snapshot.params['id']
+if(this.ui.authuser._id==this.chatparticipantid) { this.back();return}
   this.io.setsocketinstance()
 
 
@@ -57,7 +57,7 @@ this.fetchuser()
  this.useronlinenotification()
  this.updateview()
 this.fetchcurrentchat()
-
+this.readcounterreset()
 
   // console.log('unread messages: ',this.msgservice.unreadcounter);
 
@@ -66,13 +66,13 @@ this.fetchcurrentchat()
   // if (this.ui.chatowner.value === undefined) { this.fetchchatmessagesinitial(); }
 
 
-  // if (this.ui.chatowner.value !== undefined && this.ui.chatowner.value._id !== this.userid) { this.chatownerchangefetchmessages(); }
+  // if (this.ui.chatowner.value !== undefined && this.ui.chatowner.value._id !== this.chatparticipantid) { this.chatownerchangefetchmessages(); }
 
 //  this.io.getNewMessage().pipe(takeUntil(this.destroy$),
 //  tap(res=>{
 //   console.log('offline socket',res);
 //  if(res===undefined)return
-//  if(res.from!==this.userid)return
+//  if(res.from!==this.chatparticipantid)return
 //  if(res=== this.io.messageguard)return console.log('same message socket emission');
 
 //  this.msgservice.userchat$.next([...this.msgservice.userchat$.value,res])
@@ -103,10 +103,20 @@ this.fetchcurrentchat()
 
 }
 
+readcounterreset(){
+  console.log('current unread count:\n',this.ui.unreadcounter);
+  // if(this.ui.unreadcounter>0){
+    this.msgservice.unreadcounterreset(this.chatparticipantid).pipe(takeUntil(this.destroy$)).subscribe(
+      res=>console.log(res),
+      error=>console.log(error)
+      )
+  // }
+
+}
 
 
 fetchcurrentchat(){
-  this.msgservice.fetchthread(this.userid).pipe(tap(res=>this.msgservice.chatthread$.next(res)),takeUntil(this.destroy$)).subscribe(
+  this.msgservice.fetchthread(this.chatparticipantid).pipe(tap(res=>this.msgservice.chatthread$.next(res)),takeUntil(this.destroy$)).subscribe(
     ()=>{
 
    console.log('thread',this.DirectChat);
@@ -116,7 +126,7 @@ fetchcurrentchat(){
 
 }
 fetchuser(){
- this.userservice.fetchuser(this.userid).pipe(map((res:any)=> {  return res.user as User}),tap(res=>{console.log(res),this.user.next(res)})).subscribe()
+ this.userservice.fetchuser(this.chatparticipantid).pipe(map((res:any)=> {  return res.user as User}),tap(res=>{console.log(res),this.user.next(res)})).subscribe()
 
 
 }
@@ -243,10 +253,10 @@ this.msgservice.chatthread$= new BehaviorSubject(undefined)
 // }
 // chatownerchangefetchmessages(){
 //     this.msgservice.userchat$.next([])
-//     this.postservice.user(this.userid)
+//     this.postservice.user(this.chatparticipantid)
 //         .pipe(takeUntil(this.destroy$),
 //         map((res: any) => {this.ui.chatowner.next(res.user); return res.user._id;}),
-//         switchMap((userid: any) => this.msgservice.fetchchat(userid)),
+//         switchMap((chatparticipantid: any) => this.msgservice.fetchchat(chatparticipantid)),
 //         tap((chat: any) => {;this.msgservice.userchat$.next(chat.chat.reverse());
 //           //  console.log('fetched user chat', this.msgservice.userchat$.value);
 
@@ -257,13 +267,13 @@ this.msgservice.chatthread$= new BehaviorSubject(undefined)
 //   }
 
   // fetchchatmessagesinitial(){
-  //   this.postservice.user(this.userid)
+  //   this.postservice.user(this.chatparticipantid)
   //   .pipe(
   //     takeUntil(this.destroy$),
   //     map((res: any) => {
   //       // console.log('chating with: ',res)
   //       ;this.ui.chatowner.next(res.user); return res.user._id;}),
-  //     switchMap((userid: any) => this.msgservice.fetchchat(userid)),
+  //     switchMap((chatparticipantid: any) => this.msgservice.fetchchat(chatparticipantid)),
   //     tap((chat: any) => {const correctchatflow=[...chat.chat]; this.msgservice.userchat$.next(chat.chat);
 
 
@@ -336,7 +346,7 @@ let message=''
     const sentmessagepayload:Message={
       message:this.message,
       from:this.ui.authuser._id,
-      to:this.userid,
+      to:this.chatparticipantid,
       viewed:false
     }
     this.io.sendmessage(sentmessagepayload);

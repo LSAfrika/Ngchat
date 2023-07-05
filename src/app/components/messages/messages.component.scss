@@ -14,13 +14,19 @@ app-genericmodal{
 }
 
 .chatlist{
-  @apply w-full flex justify-start items-center px-1 box-border  min-h-[60px] rounded-md shadow-black/40 shadow-md  gap-3 mt-2 cursor-pointer
+  @apply w-full flex justify-start items-center px-1 box-border relative  min-h-[60px] rounded-md shadow-black/40 shadow-md  gap-3 mt-2 cursor-pointer
 }
 .avatar{
-  @apply min-w-[50px] min-h-[50px] max-w-[50px] max-h-[50px] rounded-full bg-cover overflow-hidden bg-white overflow-hidden
+  @apply min-w-[50px] min-h-[50px] max-w-[50px] max-h-[50px] rounded-full bg-cover  bg-white overflow-hidden
 }
 .messagesection{
-  @apply flex flex-col justify-start items-start w-full truncate  pl-1
+  @apply flex flex-col justify-start items-start w-full truncate  pl-1 relative bg-lime-400
+}
+.message{
+  @apply w-[100%] truncate text-slate-800 text-sm  relative
+}
+.unreadcounter{
+  @apply bg-blue-500 w-5 rounded-full h-5 ml-auto absolute bottom-3 right-2 flex justify-center items-center text-white p-2 text-xs
 }
 .name{
   @apply text-sm font-semibold text-blue-600  ; width:100%;display:flex;justify-content:space-between

@@ -8,6 +8,7 @@ export class UiService {
 
 
   samechatid=''
+  unreadcounter=0
   editmodal=new BehaviorSubject(false)
   contactmodal =new BehaviorSubject(false)
   scrolltobottom$:BehaviorSubject<number>=new BehaviorSubject(0)

@@ -58,8 +58,8 @@ return this.http.get(this.ROOTMESSAGEURL+'unreadmessagescounter/')
 
   }
 
-  resetunreadcounter(chatid){
- return this.http.patch(this.ROOTMESSAGEURL+'resetcounter/'+`${chatid}`,{})
+  unreadcounterreset(chatid){
+ return this.http.get(this.ROOTCHATSURL+'unreadcounterreset/'+`${chatid}`)
 }
 
 }

@@ -1,7 +1,7 @@
 <!-- <app-nav></app-nav> -->
 <ng-container *ngIf="user|async as _user">
 <nav class="nav">
-  <div [routerLink]="['/profile',userid]" class="flex items-center justify-start gap-3 text-white bio">
+  <div [routerLink]="['/profile',chatparticipantid]" class="flex items-center justify-start gap-3 text-white bio">
 <div class="w-10 h-10 overflow-hidden bg-teal-500 rounded-full"></div>
 <div class="username">
   <div class="text-base w-full text-left">{{_user.username}}</div>
@@ -29,7 +29,7 @@
       <!-- friendmessagebubble: message.from === this.userid , -->
       <!--  [ngClass]="{friendmessagebubble: chatmessage?.from === this.userid, friend: chatmessage?.from !== this.userid}" -->
       <div class="messagebubble"
-      [ngClass]="{friendmessagebubble: message.from === this.userid, friend: message.from !== this.userid}"
+      [ngClass]="{friendmessagebubble: message.from === this.chatparticipantid, friend: message.from !== this.chatparticipantid}"
       >
 
 

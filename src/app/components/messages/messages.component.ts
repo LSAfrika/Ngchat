@@ -65,7 +65,12 @@ return unique;
 
 
   }
+markmessagesasread(count:number){
+  // if(count==0) return this.ui.unreadcounter=0
+  // console.log('current message count',count);
+ return this.ui.unreadcounter=count
 
+}
 
 
 }
