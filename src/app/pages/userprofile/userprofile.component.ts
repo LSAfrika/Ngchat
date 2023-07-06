@@ -36,6 +36,11 @@ export class UserprofileComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  // ngAfterContentChecked(): void{
+  //   console.log('content checked');
+
+  // }
+
   back() {
     this.location.back()
   }

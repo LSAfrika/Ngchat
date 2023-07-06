@@ -4,10 +4,10 @@
   <div [routerLink]="['/profile',chatparticipantid]" class="flex items-center justify-start gap-3 text-white bio">
 <div class="w-10 h-10 overflow-hidden bg-teal-500 rounded-full"></div>
 <div class="username">
-  <div class="text-base w-full text-left">{{_user.username}}</div>
+  <div class="w-full text-base text-left">{{_user.username}}</div>
 
-  <div class="text-xs text-left w-full" *ngIf="_user.online==true">online</div>
-  <div class="text-xs text-left w-full" *ngIf="_user.online==false"> {{_user.lastseen | date :'shortTime'}},{{_user.lastseen | date :'mediumDate'}}</div>
+  <div class="w-full text-xs text-left" *ngIf="_user.online==true">online</div>
+  <div class="w-full text-xs text-left" *ngIf="_user.online==false"> {{_user.lastseen | date :'shortTime'}},{{_user.lastseen | date :'mediumDate'}}</div>
 </div>
 
   </div>
@@ -19,7 +19,7 @@
 
 
 
-  <div class=" messagecontainer  " >
+  <div class=" messagecontainer" #chatview >
 
   <div class="scorillablecontainer"  *ngIf="msgservice.chatthread$|async as chatmessages">
     <!--  [ngClass]="{friend: message.from === this.userid }" -->

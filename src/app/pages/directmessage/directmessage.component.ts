@@ -111,7 +111,7 @@ const returneduser={_id:user._id,profileimg:user.profileimg,username:user.userna
 }
 useronlinenotification(){
 
-  this.io.useronlinenoification().pipe(takeUntil(this.destroy$),
+  this.io.useronlinenoification().pipe(
   tap(
     (useronline:any)=>{
 //{message:string,user:User,errormessage?:string}
@@ -127,12 +127,12 @@ const returneduser={_id:user._id,profileimg:user.profileimg,username:user.userna
   //
    }
 
-  ))
+  ),takeUntil(this.destroy$))
   .subscribe( )
 
 }
   ngOnInit(): void {
-  // this.resetunreadcounter()
+
 this.io.getNewMessage().pipe(takeUntil(this.destroy$)).subscribe(
   (res:Message)=>{
      console.log('user chat emission: ',res)
@@ -160,29 +160,29 @@ this.io.getNewMessage().pipe(takeUntil(this.destroy$)).subscribe(
   }
 
   ngAfterViewInit(){
-    // console.log('afterview init')
-    console.log('afterview init',this.myScrollContainer)
+     console.log('afterview init')
     // this.scrollToBottom()//
-    // setTimeout(() => {
+    setTimeout(() => {
+      console.log('afterview init',this.myScrollContainer)
 
-    //   this.scrollToBottom()
-    //   // this.updateview()
+      this.scrollToBottom()
+      // this.updateview()
 
-    // }, 1000);
+    }, 1000);
 
   }
 
   ngAfterViewChecked(){
 
-    // console.log('view is checking');
+    if(this.myScrollContainer !=undefined) return
+     console.log('view is checking');
 
-    if(this.elementchecked){
 
       console.log('checking');
       console.log('afterview checked init',this.myScrollContainer)
       this.scrollToBottom()
-      this.elementchecked=false
-    }
+
+
     //  console.log('checking');
 
 
