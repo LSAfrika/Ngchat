@@ -59,48 +59,6 @@ this.fetchuser()
 this.fetchcurrentchat()
 this.readcounterreset()
 
-  // console.log('unread messages: ',this.msgservice.unreadcounter);
-
-  // console.log('chat owner ',this.ui.chatowner.value );
-
-  // if (this.ui.chatowner.value === undefined) { this.fetchchatmessagesinitial(); }
-
-
-  // if (this.ui.chatowner.value !== undefined && this.ui.chatowner.value._id !== this.chatparticipantid) { this.chatownerchangefetchmessages(); }
-
-//  this.io.getNewMessage().pipe(takeUntil(this.destroy$),
-//  tap(res=>{
-//   console.log('offline socket',res);
-//  if(res===undefined)return
-//  if(res.from!==this.chatparticipantid)return
-//  if(res=== this.io.messageguard)return console.log('same message socket emission');
-
-//  this.msgservice.userchat$.next([...this.msgservice.userchat$.value,res])
-
-//  this.io.messageguard=res
-//  this.resetunreadcounter()
-
-// }))
-//  .subscribe()
-
-
-
-
-  // this.io.offlinenewmessage().pipe(takeUntil(this.destroy$), tap((res: any) => {
-  //   console.log('offline response:',res);
-  //   if(res===undefined) return
-  //   // console.log('offline vaue on reset',this.msgservice.userchat$.value);
-
-  //   if (this.msgservice.userchat$.value[0]!==undefined&&this.msgservice.userchat$.value.length>0&&this.msgservice.userchat$.value[this.msgservice.userchat$.value.length - 1].message === res.message){ return}
-  //   const newmessagesareray: any = [...this.msgservice.userchat$.value, res];
-  //   // console.log('messages array:', newmessagesareray);
-
-  //   this.msgservice.userchat$.next(newmessagesareray);
-  // })).subscribe();
-
-// this.chatthread$.subscribe(console.log)
-
-
 }
 
 readcounterreset(){
@@ -177,17 +135,17 @@ const returneduser={_id:user._id,profileimg:user.profileimg,username:user.userna
   // this.resetunreadcounter()
 this.io.getNewMessage().pipe(takeUntil(this.destroy$)).subscribe(
   (res:Message)=>{
-    // console.log('user chat emission: ',res)
+     console.log('user chat emission: ',res)
     // console.log(' chat emission id: ',res)
-    // console.log('previous chat emission id: ',this.ui.samechatid)
+
 
   if(res ==undefined) return
-  if(res._id== this.ui.samechatid) return
+  if(res._id== this.ui.samechatid) return console.log('last chat emission')
 
     this.msgservice.chatthread$.next([...this.msgservice.chatthread$.value,res])
+    this.ui.samechatid=res._id
 
   setTimeout(() => {
-    this.ui.samechatid=res._id
 
      this.scrollToBottom()
   }, 100);
@@ -238,61 +196,10 @@ this.msgservice.chatthread$= new BehaviorSubject(undefined)
 
 
 
-// resetunreadcounter(){
-//   if(this.msgservice.unreadcounter==0 || this.msgservice.chatid=='')return
-//   console.log('unread messages: ',this.msgservice.unreadcounter);
-
-//   this.msgservice.resetunreadcounter(this.msgservice.chatid).pipe(takeUntil(this.destroy$)).subscribe((res:any)=>{
-//     if(res.message=='success'){
-// console.log('reset all unread messages');
-
-//     }
-//   })
-
-
-// }
-// chatownerchangefetchmessages(){
-//     this.msgservice.userchat$.next([])
-//     this.postservice.user(this.chatparticipantid)
-//         .pipe(takeUntil(this.destroy$),
-//         map((res: any) => {this.ui.chatowner.next(res.user); return res.user._id;}),
-//         switchMap((chatparticipantid: any) => this.msgservice.fetchchat(chatparticipantid)),
-//         tap((chat: any) => {;this.msgservice.userchat$.next(chat.chat.reverse());
-//           //  console.log('fetched user chat', this.msgservice.userchat$.value);
-
-//           })
-
-//         ).subscribe();
-
-//   }
-
-  // fetchchatmessagesinitial(){
-  //   this.postservice.user(this.chatparticipantid)
-  //   .pipe(
-  //     takeUntil(this.destroy$),
-  //     map((res: any) => {
-  //       // console.log('chating with: ',res)
-  //       ;this.ui.chatowner.next(res.user); return res.user._id;}),
-  //     switchMap((chatparticipantid: any) => this.msgservice.fetchchat(chatparticipantid)),
-  //     tap((chat: any) => {const correctchatflow=[...chat.chat]; this.msgservice.userchat$.next(chat.chat);
-
-
-  //     })).
-  //     subscribe();
-  // }
-
-  // closemessage(){
-  //   this.ui.directmessagepanel.next(2);
-  //   this.router.navigate(['messages']);
-
-
-  // }
 
 
 
-  // backtoprofile(){
-  //   this.router.navigateByUrl(`profile/${this.ui.postowner.value._id}`);
-  // }
+
 
   sendmessage(){
 
