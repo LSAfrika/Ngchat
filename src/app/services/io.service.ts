@@ -23,6 +23,7 @@ export class IOService {
   public message$: BehaviorSubject<any> = new BehaviorSubject(undefined);
   public userconnectionstatus$: Subject<any> = new Subject();
   public messagenotifications$: BehaviorSubject<Object> = new BehaviorSubject(undefined);
+  public chatlistupdate$: BehaviorSubject<Object> = new BehaviorSubject(undefined);
   public messagenotificationscounter$ = new BehaviorSubject(undefined);
   public notifications$: BehaviorSubject<any> = new BehaviorSubject(undefined);
   public messagesnotifications$: BehaviorSubject<any> = new BehaviorSubject(undefined);
@@ -191,6 +192,19 @@ NewMessageNotification () {
 // console.log('currentmessage online chat: ',this.message$.value);
   return this.messagenotifications$.asObservable();
 }
+
+chatlistupdate () {
+
+  // console.log('received online message being hit');
+this.socket.on('chatlist-update', (message) =>{
+ console.log('socket get new message: ',message);
+
+  this.chatlistupdate$.next(message);
+});
+// console.log('currentmessage online chat: ',this.message$.value);
+return this.chatlistupdate$.asObservable();
+}
+
 
 NewMessageNotificationcounter () {
 
