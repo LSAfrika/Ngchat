@@ -22,22 +22,18 @@
   <div class=" messagecontainer" #chatview >
 
   <div class="scorillablecontainer"  *ngIf="msgservice.chatthread$|async as chatmessages">
-    <!--  [ngClass]="{friend: message.from === this.userid }" -->
-    <!-- <pre>{{chatmessages |json}}</pre> -->
-    <!-- <pre>{{DirectChat |json}} </pre> -->
+
     <div class="singlemessagecontainer" *ngFor="let message of chatmessages;">
+      <!-- <div class="singlemessagecontainer" *ngFor="let message of chatmessages;"> -->
       <!-- friendmessagebubble: message.from === this.userid , -->
       <!--  [ngClass]="{friendmessagebubble: chatmessage?.from === this.userid, friend: chatmessage?.from !== this.userid}" -->
       <div class="messagebubble"
       [ngClass]="{friendmessagebubble: message.from === this.chatparticipantid, friend: message.from !== this.chatparticipantid}"
       >
-
-
        <span >{{message.message}}</span>
-       <!-- <span >{{i}}</span> -->
-       <!-- <span *ngIf=""> {{message.message}} </span> -->
+
       </div>
-      <!-- {{message}} -->
+
     </div>
 
   </div>

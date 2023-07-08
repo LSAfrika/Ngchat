@@ -11,16 +11,16 @@
 }
 
 .messagecontainer{
-  @apply w-full md:ml-auto  h-screen md:max-w-[600px] bg-slate-400 pb-[70px] box-border flex flex-col justify-start items-center absolute pt-4  z-[40] overflow-scroll gap-3 px-2 top-0 overflow-y-scroll
+  @apply w-full md:ml-auto  h-screen md:max-w-[600px] bg-slate-100 pb-[70px] box-border flex flex-col justify-start items-center absolute pt-4  z-[40] overflow-scroll gap-3 px-2 top-0 overflow-y-scroll
 scrollbar-none lg:max-w-[800px];
 max-height: calc(100vh - 75px);
 
 }
 .scorillablecontainer{
-  @apply bg-green-400 min-h-fit w-full
+  @apply  min-h-fit w-full
 }
 .messagecontainerclosed{
-// @apply right-[-100%]
+
 @apply right-[-100%]
 }
 .messagecontaineropened{

@@ -2,11 +2,12 @@ import { MessagesService } from './../../services/messages.service';
 import { UiService } from './../../services/ui.service';
 
 import { map, takeUntil, tap } from 'rxjs/operators';
-import { Subject, Observable, combineLatest } from 'rxjs';
+import { Subject, Observable, combineLatest, BehaviorSubject } from 'rxjs';
 
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { chatlist } from 'src/app/interface/messages.interface';
+import { IOService } from 'src/app/services/io.service';
 
 
 @Component({
@@ -17,14 +18,24 @@ import { chatlist } from 'src/app/interface/messages.interface';
 export class MessagesComponent implements OnInit {
 
   Destroy$=new Subject<boolean>()
-  userchats:Observable<chatlist[]>=this.messageservice.fetchchatlist().pipe(map((res:any)=>res.chats as chatlist[]))
+  userchats:BehaviorSubject<chatlist[]>=new BehaviorSubject([])
 
 names=[]
-  constructor(private ui:UiService,private messageservice:MessagesService) {
+  constructor(private ui:UiService,private messageservice:MessagesService,private io:IOService) {
 
     this.names= this.ui.names
 
+    this.io.chatlistupdate().pipe(map((res:any)=> {
+      console.log('initial fetch: ',res);
+if(res ==undefined) return []
+     return res.userschats as chatlist[]}),takeUntil(this.Destroy$)).subscribe(res=>{
+      console.log(res)
+      this.userchats.next(res)
+    })
 
+
+    this.messageservice.fetchchatlist().pipe(map((res:any)=>res.chats as chatlist[]),tap(res=>{console.log(res);this.userchats.next(res)}
+    ),takeUntil(this.Destroy$)).subscribe()
 
 
 

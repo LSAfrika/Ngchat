@@ -197,7 +197,7 @@ chatlistupdate () {
 
   // console.log('received online message being hit');
 this.socket.on('chatlist-update', (message) =>{
- console.log('socket get new message: ',message);
+//  console.log('socket get new message: ',message);
 
   this.chatlistupdate$.next(message);
 });

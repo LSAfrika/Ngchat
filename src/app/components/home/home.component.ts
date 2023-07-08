@@ -23,7 +23,6 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.io.chatlistupdate().pipe(takeUntil(this.destroy$)).subscribe(res=>console.log(res))
     // this.messageservice.fetchchatlist().pipe(map((res:any)=>res.chats as chatlist)).subscribe((res:chatlist)=>console.log('user\'s chat',res))
   }
 
