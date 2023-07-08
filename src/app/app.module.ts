@@ -11,7 +11,7 @@ import{HttpClientModule, HTTP_INTERCEPTORS}from '@angular/common/http'
 import { FormsModule } from '@angular/forms';
 import {BrowserAnimationsModule} from'@angular/platform-browser/animations'
 import { AuthInterceptor } from './services/auth.interceptor';
-// import { SharedModule } from './shared/shared.module';
+ import { SharedModule } from './shared/shared.module';
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,8 +24,8 @@ import { AuthInterceptor } from './services/auth.interceptor';
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,FormsModule,
-Ng2SearchPipeModule
-    // SharedModule
+Ng2SearchPipeModule,
+     SharedModule
   ],
   providers: [
     {provide:HTTP_INTERCEPTORS, useClass:AuthInterceptor,multi:true}

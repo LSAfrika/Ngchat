@@ -9,6 +9,7 @@ import { ChatpageComponent } from '../components/chatpage/chatpage.component';
 
 
 import { RouterModule } from '@angular/router';
+import { LoadingComponent } from '../components/loading/loading.component';
 
 
 
@@ -21,6 +22,7 @@ import { RouterModule } from '@angular/router';
     ChatpageComponent,
 
     MessagesComponent,
+      LoadingComponent,
 
   ],
   imports: [
@@ -34,7 +36,7 @@ import { RouterModule } from '@angular/router';
 
     ChatpageComponent,
 
-
+LoadingComponent,
     MessagesComponent
   ]
 })
