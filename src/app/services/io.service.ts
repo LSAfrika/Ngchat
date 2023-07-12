@@ -134,7 +134,7 @@ this.userlogin()
 
    sendmessage(messageobj){
     // console.log('from', this.ui.logedinuser);
-    // console.log('to', this.ui.chatowner.value);
+     console.log('message to send:', messageobj);
 let resp
     // console.log('message payload',messageobj);
     this.socket.emit('message-sent',messageobj,(response)=>{
@@ -197,7 +197,7 @@ NewMessageNotification () {
 chatlistupdate () {
 
   // console.log('received online message being hit');
-this.socket.on('chatlist-update', (message) =>{
+this.socket.off('chatlist-update').on('chatlist-update', (message) =>{
  // console.log('socket get new message: ',message);
 
   this.chatlistupdate$.next(message);
