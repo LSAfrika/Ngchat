@@ -141,8 +141,9 @@ let resp
       // console.log(response);
       if(response) {
         console.log('message sent ',response);
+console.log('intial value fo first chat sent: ',this.messageservice.chatthread$.value);
 
-         this.messageservice.chatthread$.next([...this.messageservice.chatthread$.value,response.sent])
+this.messageservice.chatthread$.value==undefined ?this.messageservice.chatthread$.next([response.sent]):this.messageservice.chatthread$.next([...this.messageservice.chatthread$.value,response.sent])
 
          setTimeout(() => {
 
@@ -197,9 +198,12 @@ chatlistupdate () {
 
   // console.log('received online message being hit');
 this.socket.on('chatlist-update', (message) =>{
-//  console.log('socket get new message: ',message);
+ // console.log('socket get new message: ',message);
 
   this.chatlistupdate$.next(message);
+  // this.socket.close()
+ // console.log('closed socket:',this.socket);
+
 });
 // console.log('currentmessage online chat: ',this.message$.value);
 return this.chatlistupdate$.asObservable();

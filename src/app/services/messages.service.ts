@@ -11,7 +11,7 @@ import{environment} from '../../environments/environment'
 export class MessagesService {
 
   messagepagination=-1
-  chatthread$ :BehaviorSubject<Message[]>=new BehaviorSubject(undefined)
+  chatthread$ :BehaviorSubject<Message[]>=new BehaviorSubject([])
 
 chatid=''
   userchatlist$=new BehaviorSubject<any>([])

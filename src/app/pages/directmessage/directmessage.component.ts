@@ -188,7 +188,7 @@ this.io.getNewMessage().pipe(takeUntil(this.destroy$)).subscribe(
 
   }
   ngOnDestroy(): void {
-this.msgservice.chatthread$= new BehaviorSubject(undefined)
+this.msgservice.chatthread$= new BehaviorSubject([])
     this.destroy$.next(true);
     this.destroy$.unsubscribe();
   }

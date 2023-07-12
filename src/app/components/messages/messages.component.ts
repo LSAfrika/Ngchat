@@ -28,8 +28,9 @@ names=[]
     this.io.chatlistupdate().pipe(map((res:any)=> {
       console.log('initial fetch: ',res);
 if(res ==undefined) return []
-     return res.userschats as chatlist[]}),takeUntil(this.Destroy$)).subscribe(res=>{
-      console.log(res)
+     return res.userschats as chatlist[]}),
+     takeUntil(this.Destroy$)).subscribe(res=>{
+      // console.log(res)
       this.userchats.next(res)
     })
 
