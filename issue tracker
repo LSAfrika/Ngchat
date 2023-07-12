@@ -1,4 +1,4 @@
 Resolve user chat fetch list order its miss ordering working on it changed model to include unread counter
 
-Add callback to message received to mark message as read
+Add callback to message received to mark message as read DONE
 

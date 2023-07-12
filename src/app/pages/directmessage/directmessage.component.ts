@@ -133,6 +133,8 @@ const returneduser={_id:user._id,profileimg:user.profileimg,username:user.userna
 }
   ngOnInit(): void {
 
+this.io.deliveryreport().subscribe(res=>console.log('delivery notification',res))
+
 this.io.getNewMessage().pipe(takeUntil(this.destroy$)).subscribe(
   (res:Message)=>{
      console.log('user chat emission: ',res)
@@ -145,6 +147,7 @@ this.io.getNewMessage().pipe(takeUntil(this.destroy$)).subscribe(
     this.msgservice.chatthread$.next([...this.msgservice.chatthread$.value,res])
     this.ui.samechatid=res._id
 
+    this.io.messagereceived(res)
   setTimeout(() => {
 
      this.scrollToBottom()

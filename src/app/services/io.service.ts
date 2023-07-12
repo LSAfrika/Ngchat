@@ -2,7 +2,7 @@ import { User } from './../interface/post.interface';
 import { NotificationsService } from './notifications.service';
 import { MessagesService } from './messages.service';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject,Subject } from 'rxjs';
+import { BehaviorSubject, Subject, Observable } from 'rxjs';
 import { io } from 'socket.io-client';
 import { Message } from '../interface/messages.interface';
 import { UiService } from './ui.service';
@@ -23,6 +23,7 @@ export class IOService {
   public message$: BehaviorSubject<any> = new BehaviorSubject(undefined);
   public userconnectionstatus$: Subject<any> = new Subject();
   public messagenotifications$: BehaviorSubject<Object> = new BehaviorSubject(undefined);
+  public deliveryreport$: BehaviorSubject<Object> = new BehaviorSubject({});
   public chatlistupdate$: BehaviorSubject<Object> = new BehaviorSubject(undefined);
   public messagenotificationscounter$ = new BehaviorSubject(undefined);
   public notifications$: BehaviorSubject<any> = new BehaviorSubject(undefined);
@@ -125,12 +126,7 @@ this.userlogin()
   userlogin(){
     this.socket.emit('login',{message:'user has logged in'})
   }
-  // setuid(){
 
-
-  //   // console.log('current logged in user',this.ui.logedinuser)
-  //   return this.socket.emit('userconnect', {  uid: this.ui.logedinuser._id});
-  //  }
 
    sendmessage(messageobj){
     // console.log('from', this.ui.logedinuser);
@@ -158,21 +154,13 @@ this.messageservice.chatthread$.value==undefined ?this.messageservice.chatthread
 
    }
 
-  //  commentnotifcation(postid,userid,actiontype){
 
-  //  const Notificationpayload={
-  //     postid,
-  //     userid,
-  //     action:actiontype
 
-  //   }
-  //   this.socket.emit('emitnotification',Notificationpayload)
-  //  }
 
     getNewMessage () {
 
       // console.log('received online message being hit');
-    this.socket.on('message-received', (message) =>{
+    this.socket.off('message-received').on('message-received', (message) =>{
 //  console.log('socket get new message: ',message);
 
       this.message$.next(message);
@@ -194,6 +182,24 @@ NewMessageNotification () {
   return this.messagenotifications$.asObservable();
 }
 
+messagereceived(messagepayload){
+
+  console.log('received message: ',messagepayload);
+
+  this.socket.emit('messagereceived',messagepayload, (response) =>{
+     console.log('socket get new message: ',response);
+
+      });
+}
+deliveryreport(){
+  this.socket.off('delivered').on('delivered',(res)=>{
+    // console.log('delivery report:\n',res);
+    this.deliveryreport$.next(res)
+
+  })
+
+  return this.deliveryreport$.asObservable();
+}
 chatlistupdate () {
 
   // console.log('received online message being hit');
