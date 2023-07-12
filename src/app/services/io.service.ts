@@ -148,7 +148,7 @@ this.messageservice.chatthread$.value==undefined ?this.messageservice.chatthread
          setTimeout(() => {
 
            this.ui.scrolltobottom$.next(this.ui.scrolltobottom$.value+1)
-         }, 100);
+         }, 50);
       }
 
      })
