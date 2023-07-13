@@ -1,4 +1,11 @@
-Resolve user chat fetch list order its miss ordering working on it changed model to include unread counter
+Resolve user chat fetch list order its miss ordering working on it changed model to include unread counter DONE
 
 Add callback to message received to mark message as read DONE
 
+
+
+======to do=====
+
+on token expiration disconnect user from server
+
+oflline user on chat bring current user on main page resolve to link to user

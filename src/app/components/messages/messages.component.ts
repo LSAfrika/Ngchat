@@ -10,6 +10,7 @@ import { chatlist } from 'src/app/interface/messages.interface';
 import { IOService } from 'src/app/services/io.service';
 
 
+
 @Component({
   selector: 'app-messages',
   templateUrl: './messages.component.html',
@@ -28,14 +29,14 @@ names=[]
     this.io.chatlistupdate().pipe(map((res:any)=> {
       console.log('initial fetch: ',res);
 if(res ==undefined) return []
-     return res.userschats as chatlist[]}),
+     return res.userschatslist as chatlist[]}),
      takeUntil(this.Destroy$)).subscribe(res=>{
       // console.log(res)
       this.userchats.next(res)
     })
 
 
-    this.messageservice.fetchchatlist().pipe(map((res:any)=>res.chats as chatlist[]),tap(res=>{console.log(res);this.userchats.next(res)}
+    this.messageservice.fetchchatlist().pipe(map((res:any)=>{ return res as chatlist[]}),tap(res=>{console.log(res);this.userchats.next(res)}
     ),takeUntil(this.Destroy$)).subscribe()
 
 

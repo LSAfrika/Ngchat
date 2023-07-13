@@ -17,8 +17,9 @@ export interface chatlist{
   _id:string
   chatupdate:number
   chatparticipants:[participant]
+  unreadcounter:[{userid:string,count:number}]
   lastmessage:string
-  unreadcounter:number
+
 
 
 }
