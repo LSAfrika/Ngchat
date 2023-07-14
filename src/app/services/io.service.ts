@@ -187,7 +187,7 @@ messagereceived(messagepayload){
   console.log('received message: ',messagepayload);
 
   this.socket.emit('messagereceived',messagepayload, (response) =>{
-     console.log('socket get new message: ',response);
+     console.log('receved message confirmation: ',response);
 
       });
 }

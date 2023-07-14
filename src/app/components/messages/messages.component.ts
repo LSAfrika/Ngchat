@@ -24,7 +24,7 @@ export class MessagesComponent implements OnInit {
 names=[]
   constructor(private ui:UiService,private messageservice:MessagesService,private io:IOService) {
 
-    this.names= this.ui.names
+    // this.names= this.ui.names
 
     this.io.chatlistupdate().pipe(map((res:any)=> {
       console.log('initial fetch: ',res);

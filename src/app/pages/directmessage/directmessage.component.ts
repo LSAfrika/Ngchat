@@ -147,7 +147,15 @@ this.io.getNewMessage().pipe(takeUntil(this.destroy$)).subscribe(
     this.msgservice.chatthread$.next([...this.msgservice.chatthread$.value,res])
     this.ui.samechatid=res._id
 
-    this.io.messagereceived(res)
+const callbackpayload={
+  ...res,
+  to:this.ui.authuser._id
+}
+console.log('loggedin user',this.ui.authuser._id);
+console.log('callback payload',callbackpayload);
+
+      this.io.messagereceived(callbackpayload)
+
   setTimeout(() => {
 
      this.scrollToBottom()

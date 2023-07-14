@@ -24,7 +24,7 @@ export class UiService {
   shrinknav=''
   form=''
   usernameval=''
-  names =[{name:'henry'},{name:'chege'},{name:'wilson'},{name:'jane'},{name:'camil'},{name:'mary'},{name:'john'},{name:'david'},{name:'rafael'},{name:'raphael'},{name:'kim'},{name:'henry'}]
+ // names =[{name:'henry'},{name:'chege'},{name:'wilson'},{name:'jane'},{name:'camil'},{name:'mary'},{name:'john'},{name:'david'},{name:'rafael'},{name:'raphael'},{name:'kim'},{name:'henry'}]
   selecteduser:number=0
   constructor() { }
 
@@ -57,11 +57,11 @@ this.openmodal=true
 
   }
 
-   username(){
+  //  username(){
 
 
-    return this.names[this.selecteduser]
-  }
+  //   return this.names[this.selecteduser]
+  // }
 
   loginform(){
     this.form='login'

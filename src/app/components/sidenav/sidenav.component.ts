@@ -15,7 +15,7 @@ export class SidenavComponent implements OnInit {
   names=[]
   ngOnInit(): void {
     this.tab=this.ui.tab
-    this.names= this.ui.names
+    // this.names= this.ui.names
     this.ui.usernameval=this.names[0]
   }
 

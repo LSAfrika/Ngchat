@@ -13,7 +13,7 @@ export class ChatComponent implements OnInit {
   names=[]
 
   ngOnInit(): void {
-    this.names= this.ui.names
+    // this.names= this.ui.names
   }
 
   openchat(val:string){
