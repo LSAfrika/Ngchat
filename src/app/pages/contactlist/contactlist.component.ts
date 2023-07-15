@@ -17,7 +17,7 @@ export class ContactlistComponent implements OnInit {
 username=''
 allcontacts=0
 destroy$:Subject<boolean>=new Subject()
-personalcontacts=true
+personalcontacts=false
 @ViewChild('contactslist') private myScrollContainer: ElementRef;
 
 count=this.user.searchvalue.pipe(switchMap((queryvalue:userfetch)=>{

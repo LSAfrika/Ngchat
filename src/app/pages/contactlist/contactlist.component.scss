@@ -15,6 +15,10 @@
 
       @apply p-2 border-b-2 border-b-blue-600 bg-slate-300 rounded-full flex-1 pl-4
     }
+
+    .favs{
+      @apply font-semibold text-2xl pl-4
+    }
   }
 .contactsdivider{
   @apply w-full min-h-[30px]  p-1 flex justify-center items-center text-blue-700 ;
