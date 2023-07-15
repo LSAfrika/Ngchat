@@ -3,7 +3,7 @@ import { Post } from './../interface/post.interface';
 import { environment } from './../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { userfetch } from './../interface/userfetch.interface';
+import { userfetch } from '../interface/user.interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +14,7 @@ searchvalue=new BehaviorSubject<userfetch>({searchtext:'',pagination:1 })
   USERURL=environment.API+'user/singleuser/'
   REFRESHURL=environment.API+'user/refresh'
   FETCHUSERS=environment.API+'user/allusers'
+  FETCHFAVORITEUSERS=environment.API+'user/personalusers'
   FETCHCOUNT=environment.API+'user/count?search='
   FETCHUSER=environment.API+'user/singleuser/'
   CREATEUSER=environment.API+'user/register'
@@ -32,10 +33,15 @@ searchvalue=new BehaviorSubject<userfetch>({searchtext:'',pagination:1 })
     return this.http.post(this.REFRESHURL,{},{ headers: new HttpHeaders().set('Authorization', `Bearer ${token}`).set('refreshtoken',`bearer ${refreshtoken}`) })
   }
 
-  fetchusers(searchterm:string,pagination){
+  fetchallusers(searchterm:string,pagination){
 
     return this.http.get(this.FETCHUSERS+`?search=${searchterm}&pagination=${pagination}`)
   }
+
+  fetchfavoritecontactlist(){
+    return this.http.get(this.FETCHFAVORITEUSERS)
+  }
+
 
   fetchuser(id:string){
 

@@ -1,11 +1,11 @@
-import { userfetch } from './../../interface/userfetch.interface';
-import { switchMap,map, debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { personalcontacts, userfetch } from '../../interface/user.interfaces';
+import { switchMap, map, debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators';
 import { UserService } from './../../services/user.service';
 import { ApiService } from './../../services/api.service';
 import { IOService } from './../../services/io.service';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { UiService } from 'src/app/services/ui.service';
-import { of } from 'rxjs';
+import { of, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-contactlist',
@@ -16,6 +16,8 @@ export class ContactlistComponent implements OnInit {
 
 username=''
 allcontacts=0
+destroy$:Subject<boolean>=new Subject()
+personalcontacts=true
 @ViewChild('contactslist') private myScrollContainer: ElementRef;
 
 count=this.user.searchvalue.pipe(switchMap((queryvalue:userfetch)=>{
@@ -25,28 +27,37 @@ count=this.user.searchvalue.pipe(switchMap((queryvalue:userfetch)=>{
 
 )
 
-
+// usercontactlist=this.user.fetchfavoritecontactlist()
 users=this.user.searchvalue.pipe(
   debounceTime(500),
   distinctUntilChanged(),
   switchMap((queryvalue)=>
-    this.user.fetchusers(queryvalue.searchtext,queryvalue.pagination)
+    this.user.fetchallusers(queryvalue.searchtext,queryvalue.pagination)
   ),
   map((res:any)=>  {this.allcontacts=res.users.length; return res.users})
 
   )
   constructor(public ui:UiService,private io:IOService,private user:UserService) {
   this.io.setsocketinstance()
-
+  this.user.fetchfavoritecontactlist().pipe(takeUntil(this.destroy$)).subscribe((res:personalcontacts[])=>{console.log(res),this.ui.personalcontacts.next(res)})
   // this.user.searchvalue.subscribe(console.log)
 
   }
 
   ngOnInit(): void {
+
+
+  }
+
+  togglecontacts(){
+    this.personalcontacts=!this.personalcontacts
   }
 
   ngOnDestroy(){
     this.user.searchvalue.next({searchtext:'',pagination:this.user.searchvalue.value.pagination})
+    this.destroy$.next(true)
+    this.destroy$.complete()
+    this.destroy$.unsubscribe()
   }
 
   searchvalue(event){

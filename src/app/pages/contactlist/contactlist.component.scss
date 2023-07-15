@@ -16,7 +16,17 @@
       @apply p-2 border-b-2 border-b-blue-600 bg-slate-300 rounded-full flex-1 pl-4
     }
   }
+.contactsdivider{
+  @apply w-full min-h-[30px]  p-1 flex justify-center items-center text-blue-700 ;
+  .btncontacts{
+@apply min-w-[45%] text-center text-xs font-semibold py-2
+  }
 
+  .activebtn{
+    @apply bg-blue-700 text-white font-bold rounded-md
+  }
+
+}
 
   .contactlist{
     @apply flex justify-start flex-1 w-full mb-1 border-b-2 border-b-white
@@ -46,22 +56,3 @@
   .disabled{
     @apply cursor-not-allowed bg-red-700
   }
-  // .openlist{
-  //   animation: openpanel  .5s ease-in forwards;
-
-  // }
-
-  // .closelist{
-  //   animation: closepanel .5s ease-out forwards;
-  // }
-
-
-  // @keyframes openpanel{
-  //   0%{@apply right-[-110%]  }
-  //   100%{@apply right-0  }
-  // }
-
-  // @keyframes closepanel{
-  //   0%{@apply right-0  }
-  //   100%{@apply right-[-110%]  }
-  // }
