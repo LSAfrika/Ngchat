@@ -39,7 +39,10 @@ users=this.user.searchvalue.pipe(
   )
   constructor(public ui:UiService,private io:IOService,private user:UserService) {
   this.io.setsocketinstance()
-  this.user.fetchfavoritecontactlist().pipe(takeUntil(this.destroy$)).subscribe((res:personalcontacts[])=>{console.log(res),this.ui.personalcontacts.next(res)})
+
+  console.log('fav contacts initial list',this.ui.personalcontacts.value);
+
+ if(this.ui.personalcontacts.value == undefined) this.user.fetchfavoritecontactlist().pipe(takeUntil(this.destroy$)).subscribe((res:personalcontacts[])=>{console.log(res),this.ui.personalcontacts.next(res)})
   // this.user.searchvalue.subscribe(console.log)
 
   }
