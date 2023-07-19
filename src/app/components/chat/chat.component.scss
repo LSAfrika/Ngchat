@@ -1,5 +1,5 @@
 .chatcontainer{
-  @apply   scrollbar-thin  pb-[60px]  min-h-screen    bg-teal-500
+  @apply   scrollbar-thin  min-w-[400px]  min-h-[calc(100vh-50px)]   bg-blue-500
     z-10 overflow-y-scroll    box-border flex flex-col justify-start px-2
     overflow-x-hidden
   ;

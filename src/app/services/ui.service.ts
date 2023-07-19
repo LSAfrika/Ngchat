@@ -9,6 +9,7 @@ export class UiService {
 
 
   samechatid=''
+  screenbraekpoint:BehaviorSubject<number>=new BehaviorSubject (0)
   unreadcounter=0
   editmodal=new BehaviorSubject(false)
   personalcontacts:BehaviorSubject<personalcontacts[]>=new BehaviorSubject(undefined)

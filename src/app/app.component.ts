@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { ApiService } from './services/api.service';
 import { UiService } from './services/ui.service';
 import { initializeApp } from "firebase/app";
@@ -18,7 +18,47 @@ export class AppComponent {
  // app=initializeApp(environment.firebaseConfig)
   auth=getAuth()
   googleprovider=new GoogleAuthProvider()
+
+  SH=0
+  SW=0
+
+
+  @HostListener('window:resize', ['$event']) onResize() {
+
+    this.SH = window.innerHeight;
+    this.SW = window.innerWidth;
+    //  console.log('port width: ', this.SW,this.SH);
+
+     this.ui.screenbraekpoint.next(window.innerWidth)
+console.log('updated screen width bsubject',this.ui.screenbraekpoint.value);
+
+    if (this.SW >= 900) {
+
+      // console.log('screen value is same \n', this.nav)
+      console.log('screen resized',this.SW)
+
+    }
+    if (this.SW < 1279) {
+
+
+
+    }
+
+
+
+
+
+  }
+
+
+
   constructor(public ui:UiService,public api:ApiService){
+
+    this.SH=window.innerHeight
+this.SW=window.innerWidth
+this.ui.screenbraekpoint.next(window.innerWidth)
+
+console.log('initial screen width bsubject',this.ui.screenbraekpoint.value);
 
 //  this.app = this.api.initializeFBAPP()
 

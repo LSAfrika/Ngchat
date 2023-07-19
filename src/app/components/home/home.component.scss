@@ -1,21 +1,38 @@
-.home{
+.mobile{
   position: relative;
   @apply  w-full h-screen max-h-screen pt-[50px] px-2 overflow-y-scroll
 }
 
 .desktop{
-  @apply hidden w-full min-h-[calc(100vh-50px)]
+  @apply  w-full min-h-[calc(100vh-50px)] mt-[25px]
     max-w-[1300px]
      shadow-md shadow-black/60
+     gap-x-5
+     bg-teal-500
      relative
-      lg:flex justify-start items-center mx-auto bg-slate-200
+      flex justify-start items-center mx-auto flex-row
       ;
   position: relative;
+
+  app-chatpage{
+    @apply flex-grow
+  }
+}
+
+
+.breakpoint{
+  @apply hidden
+}
+
+.nav{
+  @apply fixed
 }
 
 
 
+.ui{
 
+}
 
 // .mobile{
 //   @apply flex justify-center px-5 box-border overflow-x-hidden max-w-[800px] lg:hidden relative w-full;

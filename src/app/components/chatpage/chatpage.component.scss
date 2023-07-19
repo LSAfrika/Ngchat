@@ -2,10 +2,11 @@
   @apply
   flex justify-center
   items-center
+flex-1
 
 w-full
 relative
-  h-screen
+  h-[calc(100vh-50px)]
 
   z-50
    bg-slate-100
@@ -13,14 +14,11 @@ relative
 
   scrollbar-thin ;
 
-  // background-image: url('../../../assets/whatsapp\ bg.png');
-  // background-size: cover;
-  // background-repeat: no-repeat;
-  // w-[calc(100%-400px)]
+
 
 }
 .chatbody{
-  @apply w-full max-w-[800px] h-screen bg-slate-100
+  @apply w-full max-w-[800px]  bg-slate-100
 }
 
 
