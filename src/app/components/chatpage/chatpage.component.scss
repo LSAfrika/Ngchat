@@ -7,11 +7,12 @@ flex-1
 w-full
 relative
   h-[calc(100vh-50px)]
+  rounded-b-md
 
   z-50
    bg-slate-100
   overflow-y-scroll
-
+  shadow-md shadow-black/60
   scrollbar-thin ;
 
 

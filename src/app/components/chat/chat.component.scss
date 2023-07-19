@@ -1,11 +1,17 @@
 .chatcontainer{
-  @apply   scrollbar-thin  min-w-[400px]  min-h-[calc(100vh-50px)]   bg-blue-500
+  @apply   scrollbar-thin  min-w-[400px]  min-h-[calc(100vh-50px)]   bg-slate-100
     z-10 overflow-y-scroll    box-border flex flex-col justify-start px-2
     overflow-x-hidden
+    rounded-md
+    shadow-md shadow-black/60
   ;
 
 
 }
+.chatpages{
+  @apply rounded-md bg-cyan-600
+  }
+
 .chat{
 @apply w-full bg-pink-600 min-h-[60px] flex justify-start items-center my-1 p-2
 }
@@ -15,5 +21,7 @@
 .messagebody{
   @apply flex-1
 }
+
+
 
 
