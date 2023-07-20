@@ -1,9 +1,9 @@
 
 <div class="fixed top-0 min-w-full min-h-screen bg-slate-200">
 
- <app-nav [ngClass]="{nav: ui.screenbraekpoint.value<1000,breakpoint:ui.screenbraekpoint.value>1000}"></app-nav>
+ <app-nav *ngIf="ui.screenbraekpoint.value<1000" ></app-nav>
 
-<div  [ngClass]="{mobile: ui.screenbraekpoint.value<1000,breakpoint:ui.screenbraekpoint.value>1000}">
+<div class="mobile" *ngIf="ui.screenbraekpoint.value<1000" >
 <app-messages></app-messages>
 
 <div (click)="openlist()" routerLink="/contacts" class="fab">
@@ -11,7 +11,7 @@
 </div>
 </div>
 <!-- <app-contacts></app-contacts> -->
-<div class="ui" [ngClass]="{desktop: ui.screenbraekpoint.value>1000,breakpoint:ui.screenbraekpoint.value<1000}">
+<div *ngIf="ui.screenbraekpoint.value>1000" class="ui desktop" >
 
   <app-chat></app-chat>
   <app-chatpage></app-chatpage>

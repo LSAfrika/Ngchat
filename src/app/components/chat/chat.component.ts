@@ -14,6 +14,8 @@ export class ChatComponent implements OnInit {
 
   ngOnInit(): void {
     // this.names= this.ui.names
+    console.log('current user: ',this.ui.authuser);
+
   }
 
   openchat(val:string){
@@ -25,6 +27,11 @@ export class ChatComponent implements OnInit {
 
     this.ui.open_modal()
   }
+
+
+  identify(index, user){
+    return user._id;
+ }
 
 
 
