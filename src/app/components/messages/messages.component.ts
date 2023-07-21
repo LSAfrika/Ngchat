@@ -19,25 +19,16 @@ import { IOService } from 'src/app/services/io.service';
 export class MessagesComponent implements OnInit {
 
   Destroy$=new Subject<boolean>()
-  userchats:BehaviorSubject<chatlist[]>=new BehaviorSubject([])
 
 names=[]
-  constructor(private ui:UiService,private messageservice:MessagesService,private io:IOService) {
+  constructor(public ui:UiService,private messageservice:MessagesService,private io:IOService) {
 
     // this.names= this.ui.names
 
-    this.io.chatlistupdate().pipe(map((res:any)=> {
-      console.log('initial fetch: ',res);
-if(res ==undefined) return []
-     return res.userschatslist as chatlist[]}),
-     takeUntil(this.Destroy$)).subscribe(res=>{
-      // console.log(res)
-      this.userchats.next(res)
-    })
 
 
-    this.messageservice.fetchchatlist().pipe(map((res:any)=>{ return res as chatlist[]}),tap(res=>{console.log(res);this.userchats.next(res)}
-    ),takeUntil(this.Destroy$)).subscribe()
+
+
 
 
 

@@ -62,7 +62,7 @@
 @apply w-full bg-pink-600 min-h-[60px] flex justify-start items-center my-1 p-2
 }
 .avatar{
-  @apply w-[40px] h-[40px] rounded-full bg-orange-500 overflow-hidden
+  @apply w-[50px] h-[43px] rounded-full bg-white overflow-hidden bg-cover
 }
 .messagebody{
   @apply flex-1

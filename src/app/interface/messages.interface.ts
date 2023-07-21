@@ -28,4 +28,6 @@ export interface participant{
   _id:string,
   username:string,
   profileimg:string
+
+  online:boolean
 }

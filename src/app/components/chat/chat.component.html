@@ -10,29 +10,32 @@
 <div class="logout"></div>
 
 </div>
-<div class="chatlistcontainer">
-<!-- todo REMEBER TO ADD TACK BY FUNCTION BACK TO NG FOR ==>  trackBy:identify -->
-  <div *ngFor="let item of [].constructor(21);let i=index " class="user" [ngClass]="{firstcontact: i==0}">
 
-{{i+1}}
+<ng-container *ngIf="ui.userchats |async as chats">
+<div class="chatlistcontainer">
+<!-- todo REMEBER TO ADD TACK BY FUNCTION BACK TO NG FOR ==>  trackBy:identify    item of [].constructor(21); -->
+  <div *ngFor="let chat of chats let i=index " class="user" [ngClass]="{firstcontact: i==0}">
+
+
 
 <div class="avatar">
-  <img style="width:100%;height:100%" src="{{ui.authuser.profileimg}}" alt="">
+  <img style="width:100%;height:100%;background-size: cover;" src="{{chat.chatparticipants[0].profileimg}}" alt="">
 </div>
 <div class="userbio">
 <div class="userinfo">
 
   <div class="name">
-    {{ui.authuser.username}}
+    {{chat.chatparticipants[0].username}}
   </div>
-  <div class="online"></div>
-  <div class="lastseen">{{1689831101 |date:'mediumDate'}}</div>
+  <div *ngIf="chat.chatparticipants[0].online == true" class="online"></div>
+  <div class="lastseen">{{chat.chatupdate|date:'shortTime'}},{{chat.chatupdate|date:'d MMMM '}}</div>
 </div>
-<div class="lastmessage">Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe, aliquam.</div>
+<div class="lastmessage">{{chat.lastmessage}}</div>
 </div>
   </div>
 
 </div>
+</ng-container>
 <div class="fab">
   <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24" style="fill: rgba(37 99 235);"><path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm5 11h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"></path></svg>
 

@@ -7,7 +7,22 @@ export interface userfetch{
 export interface personalcontacts{
   _id:string,
  username: string,
- online: boolean,
- lastseen: number
  profileimg:string
+ status:string,
+ email?:string
+ lastseen?: number
+ online?: boolean,
+}
+
+export interface AuthUser{
+  email:string
+  exp:number
+
+  iat:number
+    iss  :string
+  profileimg:  string
+  status:string
+  username:string
+  _id:string
+
 }

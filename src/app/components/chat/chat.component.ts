@@ -15,6 +15,7 @@ export class ChatComponent implements OnInit {
   ngOnInit(): void {
     // this.names= this.ui.names
     console.log('current user: ',this.ui.authuser);
+    // console.log('current user: ',this.ui.userchat);
 
   }
 

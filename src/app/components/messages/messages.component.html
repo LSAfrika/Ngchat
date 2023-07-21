@@ -4,7 +4,7 @@
 
 <div class="holder">
 
-<ng-container *ngIf="userchats|async as chats">
+<ng-container *ngIf="ui.userchats|async as chats">
 
    <!-- {{chats|json}} -->
   <div  class="container" *ngIf="chats.length>0 else nochats " >

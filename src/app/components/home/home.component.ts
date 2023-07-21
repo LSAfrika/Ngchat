@@ -1,4 +1,4 @@
-import { takeUntil } from 'rxjs/operators';
+import { takeUntil, tap } from 'rxjs/operators';
 import { MessagesService } from './../../services/messages.service';
 import { IOService } from './../../services/io.service';
 import { Component, HostListener, OnInit } from '@angular/core';
@@ -20,11 +20,31 @@ export class HomeComponent implements OnInit {
 
 
 
-  constructor(public api:ApiService,public ui:UiService,private io:IOService) {
-
-     this.io.setsocketinstance()
+  constructor(public api:ApiService,public ui:UiService,private io:IOService,private messageservice:MessagesService ) {
 
 
+this.fetchuserchatlist()
+this.livechatupdate()
+
+  }
+
+
+  fetchuserchatlist(){
+    this.io.setsocketinstance()
+    this.messageservice.fetchchatlist().pipe(map((res:any)=>{ return res as chatlist[]}),tap(res=>{console.log(res);this.ui.userchats.next(res)}
+    ),takeUntil(this.destroy$)).subscribe()
+
+  }
+
+  livechatupdate(){
+    this.io.chatlistupdate().pipe(map((res:any)=> {
+      console.log('initial fetch: ',res);
+if(res ==undefined) return []
+     return res.userschatslist as chatlist[]}),
+     takeUntil(this.destroy$)).subscribe(res=>{
+      // console.log(res)
+      this.ui.userchats.next(res)
+    })
   }
 
   ngOnInit(): void {

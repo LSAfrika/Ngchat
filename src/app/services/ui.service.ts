@@ -1,6 +1,7 @@
 import { BehaviorSubject, Subject } from 'rxjs';
 import { Injectable } from '@angular/core';
-import { personalcontacts } from '../interface/user.interfaces';
+import { AuthUser, personalcontacts } from '../interface/user.interfaces';
+import { chatlist } from '../interface/messages.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -13,12 +14,14 @@ export class UiService {
   unreadcounter=0
   editmodal=new BehaviorSubject(false)
   personalcontacts:BehaviorSubject<personalcontacts[]>=new BehaviorSubject(undefined)
+  userchats:BehaviorSubject<chatlist[]>=new BehaviorSubject([])
+
   contactmodal =new BehaviorSubject(false)
   scrolltobottom$:BehaviorSubject<number>=new BehaviorSubject(0)
   tab=1
   userlist=0
   ispersonalprofile=false
-  authuser:any
+  authuser:AuthUser
   islogedin = false
   openmodal=false
   openchatpage=false

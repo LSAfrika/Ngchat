@@ -30,19 +30,8 @@ export class AppComponent {
     //  console.log('port width: ', this.SW,this.SH);
 
      this.ui.screenbraekpoint.next(window.innerWidth)
-console.log('updated screen width bsubject',this.ui.screenbraekpoint.value);
+// console.log('updated screen width bsubject',this.ui.screenbraekpoint.value);
 
-    if (this.SW >= 900) {
-
-      // console.log('screen value is same \n', this.nav)
-      console.log('screen resized',this.SW)
-
-    }
-    if (this.SW < 1279) {
-
-
-
-    }
 
 
 
