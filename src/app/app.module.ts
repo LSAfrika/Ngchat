@@ -1,3 +1,4 @@
+import { ContactlistModule } from './pages/contactlist/contactlist.module';
 
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -12,11 +13,13 @@ import { FormsModule } from '@angular/forms';
 import {BrowserAnimationsModule} from'@angular/platform-browser/animations'
 import { AuthInterceptor } from './services/auth.interceptor';
  import { SharedModule } from './shared/shared.module';
+
 @NgModule({
   declarations: [
     AppComponent,
 // MessagesComponent,
     LoginComponent,
+
 
 
   ],
@@ -25,6 +28,7 @@ import { AuthInterceptor } from './services/auth.interceptor';
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,FormsModule,
+
 Ng2SearchPipeModule,
      SharedModule
   ],

@@ -12,12 +12,22 @@ export class ChatComponent implements OnInit {
 
   names=[]
 
+
   ngOnInit(): void {
     // this.names= this.ui.names
     console.log('current user: ',this.ui.authuser);
     // console.log('current user: ',this.ui.userchat);
 
   }
+
+  opencontacts(){
+    this.ui.initialposition=1
+  }
+
+  closecontacts(){
+    this.ui.initialposition=2
+  }
+
 
   openchat(val:string){
     this.ui.usernameval=val

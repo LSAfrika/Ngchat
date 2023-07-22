@@ -1,5 +1,5 @@
 .chatcontainer{
-  @apply   scrollbar-thin  min-w-[400px]  min-h-[calc(100vh-50px)]   bg-slate-100
+  @apply   scrollbar-thin  min-w-[400px]  min-h-[calc(100vh-50px)]   bg-slate-100 w-full
     z-10 overflow-y-scroll    box-border flex flex-col justify-start  relative
     overflow-x-hidden
     rounded-md
@@ -22,7 +22,7 @@
   }
 }
 .chatlistcontainer{
-  @apply w-full px-2 bg-slate-200 min-h-[inherit] max-h-[calc(100vh-100px)] overflow-y-scroll relative scrollbar-thin;
+  @apply w-full px-2 bg-slate-200 min-h-[inherit] max-h-[calc(100vh-100px)] overflow-y-scroll relative scrollbar-thin overflow-x-hidden;
 
 
 }
@@ -68,6 +68,35 @@
   @apply flex-1
 }
 
+.contacts{
+  @apply w-full absolute top-0 left-0 z-[60] min-h-[calc(100vh-50px)] bg-teal-500  rounded-md
+}
 
+.initialcontactsposition{
+@apply left-[-100%]
+}
+.contactsin{
+animation: in .5s forwards;
+}
 
+.contactsout{
+  animation: out .5s forwards;
+  }
 
+@keyframes in{
+  0%{
+    @apply top-[-100%]
+  }
+  100%{
+    @apply top-0
+  }
+}
+
+@keyframes out{
+  0%{
+    @apply  top-0
+  }
+  100%{
+    @apply top-[-100%]
+  }
+}

@@ -1,3 +1,4 @@
+import { FormsModule } from '@angular/forms';
 import { MessagesComponent } from './../components/messages/messages.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -10,6 +11,7 @@ import { ChatpageComponent } from '../components/chatpage/chatpage.component';
 
 import { RouterModule } from '@angular/router';
 import { LoadingComponent } from '../components/loading/loading.component';
+import { ContactsComponent } from '../components/contacts/contacts.component';
 
 
 
@@ -23,11 +25,12 @@ import { LoadingComponent } from '../components/loading/loading.component';
 
     MessagesComponent,
       LoadingComponent,
+      ContactsComponent
 
   ],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,FormsModule
   ],
   exports:[
     NavComponent,
@@ -35,7 +38,7 @@ import { LoadingComponent } from '../components/loading/loading.component';
     ChatComponent,
 
     ChatpageComponent,
-
+    ContactsComponent,
 LoadingComponent,
     MessagesComponent
   ]
