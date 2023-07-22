@@ -80,13 +80,14 @@
 
 </ng-container>
 
-<ng-container *ngIf="count |async as totaluser ">
-  {{totaluser}}
-<div *ngIf="personalcontacts==false"  class="fixed mt-auto w-full  text-center bottom-2 z-[80] max-h=[50px] bg-slate-100">
 
-  <button [ngClass]="{'disabled':allcontacts==totaluser}" [disabled]="allcontacts==totaluser" (click)="fetchmoreusers()" class="min-w-[150px] px-2 py-3 bg-blue-700 text-white font-semibold text-sm rounded-full
-  bottom-2 "> {{allcontacts}}/{{totaluser}}</button>
-</div>
-</ng-container>
           </div>
 
+          <ng-container *ngIf="count |async as totaluser ">
+
+          <div *ngIf="personalcontacts==false"  class="sticky w-full  text-center bottom-0  z-[80] min-h-[50px] pb-2 bg-slate-100">
+
+            <button [ngClass]="{'disabled':allcontacts==totaluser}" [disabled]="allcontacts==totaluser" (click)="fetchmoreusers()" class="min-w-[150px] px-2 py-3 bg-blue-700 text-white font-semibold text-sm rounded-full
+            bottom-2 "> {{allcontacts}}/{{totaluser}}</button>
+          </div>
+          </ng-container>
