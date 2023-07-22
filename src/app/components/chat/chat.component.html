@@ -21,7 +21,7 @@
 <div class="avatar">
   <img style="width:100%;height:100%;background-size: cover;" src="{{chat.chatparticipants[0].profileimg}}" alt="">
 </div>
-<div class="userbio">
+<div  (click)="fetchuserchat(chat.chatparticipants[0]._id,chat.chatparticipants[0])" class="userbio">
 <div class="userinfo">
 
   <div class="name">

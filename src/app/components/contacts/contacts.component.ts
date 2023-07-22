@@ -1,9 +1,12 @@
+import { tap } from 'rxjs/operators';
+import { MessagesService } from './../../services/messages.service';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Subject, switchMap, map, debounceTime, distinctUntilChanged, takeUntil } from 'rxjs';
 import { userfetch, personalcontacts } from 'src/app/interface/user.interfaces';
 import { IOService } from 'src/app/services/io.service';
 import { UiService } from 'src/app/services/ui.service';
 import { UserService } from 'src/app/services/user.service';
+import { participant } from 'src/app/interface/messages.interface';
 
 @Component({
   selector: 'app-contacts',
@@ -35,7 +38,7 @@ export class ContactsComponent implements OnInit {
     map((res:any)=>  {this.allcontacts=res.users.length; return res.users})
 
     )
-    constructor(public ui:UiService,private io:IOService,private user:UserService) {
+    constructor(public ui:UiService,private io:IOService,private user:UserService,private msgservice:MessagesService) {
     this.io.setsocketinstance()
 
     console.log('fav contacts initial list',this.ui.personalcontacts.value);
@@ -67,11 +70,34 @@ export class ContactsComponent implements OnInit {
 
     }
 
-    openchat(i:number){
-      if(i){
-        this.ui.selecteduser=i
-      }
-      this.ui.open_chat()
+    fetchuserchat(chatparticipantid:string,chatingwith){
+
+      this.ui.chatingwith=chatingwith
+      console.log(chatparticipantid);
+      this.ui.activechat$.next(true)
+  this.fetchcurrentchat(chatparticipantid)
+
+
+    }
+
+    fetchcurrentchat(chatparticipantid){
+      console.log('contacts id',chatparticipantid);
+
+
+      if(this.ui.chatingwith._id==chatparticipantid){this.closecontacts(); return}
+      this.msgservice.chatthread$.next([])
+
+      this.msgservice.fetchthread(chatparticipantid).pipe(tap(res=>this.msgservice.chatthread$.next(res)),takeUntil(this.destroy$)).subscribe(
+        ()=>{
+
+       console.log('thread',this.msgservice.chatthread$.value);
+      this.closecontacts()
+
+       this.ui.scrolltobottomdesktop$.next(1)
+
+        }
+       )
+
     }
 
   openaddcontactmodal(){

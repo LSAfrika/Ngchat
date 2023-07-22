@@ -23,7 +23,7 @@
 
     <div   *ngFor="let contact of contacts let i=index  trackBy:identify"
    class="contactlist" [ngClass]="{'contactspacing':i+1==contacts.length && contacts.length>7}">
-       <div [routerLink]="['/profile',contact._id]" class="w-[20%] h-fit py-1  flex justify-center items-center  ">
+       <div  class="w-[20%] h-fit py-1  flex justify-center items-center  ">
 
            <div class="w-[60px] my-1 bg-cover overflow-hidden  h-[60px] box-border p-2 flex justify-center items-center rounded-full bg-slate-200" >
 
@@ -34,7 +34,7 @@
        </div>
 
 
-       <div [routerLink]="['/directmessage',contact._id]" class="w-[65%] h-[inherit]  pl-4   flex    justify-start  items-center ">
+       <div (click)="fetchuserchat(contact._id,contact)" class="w-[65%] h-[inherit]  pl-4   flex    justify-start  items-center ">
            <div  class="flex items-center justify-start h-full text-lg font-semibold text-blue-700 w-fit hover:cursor-pointer "><h1>{{contact.username}}</h1></div>
            <div *ngIf="contact.online== true" class="w-3 h-3 translate-y-[-10px] bg-teal-500 rounded-full mr-auto"></div>
            <!-- <div *ngIf="contact.online== false" class="w-3 h-3 translate-y-[-10px] bg-slate-500 rounded-full mr-auto"></div> -->
@@ -52,7 +52,7 @@
 
  <div   *ngFor="let contact of personalcontacts let i=index  trackBy:identify"
    class="contactlist" [ngClass]="{'contactspacing':i+1==personalcontacts.length && personalcontacts.length>7}">
-       <div [routerLink]="['/profile',contact._id]" class="w-[15%] h-fit py-1  flex justify-center items-center  ">
+       <div  class="w-[15%] h-fit py-1  flex justify-center items-center  ">
 
            <div class="w-[60px] my-1 bg-cover overflow-hidden  h-[60px] box-border p-2 flex justify-center items-center rounded-full bg-slate-200" >
 
@@ -63,7 +63,7 @@
        </div>
 
 
-       <div [routerLink]="['/directmessage',contact._id]" class="w-[80%] h-[inherit]  pl-4   flex   justify-start  items-center ">
+       <div (click)="fetchuserchat(contact._id,contact)" class="w-[80%] h-[inherit]  pl-4   flex   justify-start  items-center ">
            <div  class="flex items-center justify-start h-full text-lg font-semibold text-blue-700 w-fit hover:cursor-pointer "><h1>{{contact.username}}</h1></div>
            <div *ngIf="contact.online== true" class="w-3 h-3 translate-y-[-10px] bg-teal-500 rounded-full mr-auto"></div>
            <!-- <div *ngIf="contact.online== false" class="w-3 h-3 translate-y-[-10px] bg-slate-500 rounded-full mr-auto"></div> -->

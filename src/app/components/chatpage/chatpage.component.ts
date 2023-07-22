@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { MessagesService } from './../../services/messages.service';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { UiService } from 'src/app/services/ui.service';
+import { delay } from 'rxjs';
 
 @Component({
   selector: 'app-chatpage',
@@ -8,13 +10,40 @@ import { UiService } from 'src/app/services/ui.service';
 })
 export class ChatpageComponent implements OnInit {
 
-  constructor(public ui:UiService) { }
+  @ViewChild('chatview') private myScrollContainer: ElementRef;
+
+  constructor(public ui:UiService,public msgservice:MessagesService) { }
 
   ngOnInit(): void {
+
+    this.ui.desktopchatscrolltobotton().pipe(delay(100)).subscribe(res=>{
+      console.log('current res',res);
+      this.scrollToBottom()
+    })
   }
 
-  closechat(){
-    this.ui.close_chat()
-  }
+  // closechat(){
+  //   this.ui.close_chat()
+  // }
+
+   ngAfterViewInit(){
+console.log('checking view',this.myScrollContainer);
+
+  if(this.myScrollContainer !=undefined) return
+   console.log('afterview checked init',this.myScrollContainer)
+  //  this.scrollToBottom()
+
+   }
+
+   scrollToBottom(): void {
+    try {
+        this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
+         console.log('scrolling to bottrom');
+
+    } catch (err) {
+      console.log(err.message);
+
+     }
+}
 
 }

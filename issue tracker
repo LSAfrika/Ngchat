@@ -5,11 +5,11 @@ Add callback to message received to mark message as read DONE
 
 
 ======to do=====
+store temporary id top previous chat user id to comapre to aviod fetching chats all agian URGENT
 
 on token expiration disconnect user from server
 
 oflline user on chat bring current user on main page resolve to link to user
-
 
 
 

@@ -2,7 +2,7 @@ import { Component, HostListener } from '@angular/core';
 import { ApiService } from './services/api.service';
 import { UiService } from './services/ui.service';
 import { initializeApp } from "firebase/app";
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import {getAuth ,signInWithPopup,GoogleAuthProvider } from "firebase/auth"
 import { environment } from '../environments/environment';
 
@@ -31,7 +31,7 @@ export class AppComponent {
 
      this.ui.screenbraekpoint.next(window.innerWidth)
 // console.log('updated screen width bsubject',this.ui.screenbraekpoint.value);
-
+if(this.ui.screenbraekpoint.value>=1000) this.router.navigateByUrl('')
 
 
 
@@ -41,7 +41,7 @@ export class AppComponent {
 
 
 
-  constructor(public ui:UiService,public api:ApiService){
+  constructor(public ui:UiService,public api:ApiService,private router:Router){
 
     this.SH=window.innerHeight
 this.SW=window.innerWidth

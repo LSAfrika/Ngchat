@@ -1,5 +1,9 @@
+import { participant } from './../../interface/messages.interface';
+import { tap, takeUntil } from 'rxjs/operators';
+import { MessagesService } from './../../services/messages.service';
 import { Component, OnInit } from '@angular/core';
 import { UiService } from 'src/app/services/ui.service';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-chat',
@@ -8,9 +12,12 @@ import { UiService } from 'src/app/services/ui.service';
 })
 export class ChatComponent implements OnInit {
 
-  constructor(public ui:UiService) { }
+destroy$=new Subject<number>()
 
-  names=[]
+
+  constructor(public ui:UiService,private msgservice:MessagesService) { }
+
+
 
 
   ngOnInit(): void {
@@ -19,6 +26,24 @@ export class ChatComponent implements OnInit {
     // console.log('current user: ',this.ui.userchat);
 
   }
+  ngOnDestroy(){
+    this.destroy$.next(1)
+    this.destroy$.complete()
+    this.destroy$.unsubscribe()
+  }
+
+  fetchcurrentchat(chatparticipantid){
+    this.msgservice.fetchthread(chatparticipantid).pipe(tap(res=>this.msgservice.chatthread$.next(res)),takeUntil(this.destroy$)).subscribe(
+      ()=>{
+
+     console.log('thread',this.msgservice.chatthread$.value);
+     this.ui.scrolltobottomdesktop$.next(1)
+
+      }
+     )
+
+  }
+
 
   opencontacts(){
     this.ui.initialposition=1
@@ -37,6 +62,16 @@ export class ChatComponent implements OnInit {
     this.ui.usernameval=val
 
     this.ui.open_modal()
+  }
+
+  fetchuserchat(chatparticipantid:string,chatingwith:participant){
+
+    this.ui.chatingwith=chatingwith
+    console.log(chatparticipantid);
+    this.ui.activechat$.next(true)
+this.fetchcurrentchat(chatparticipantid)
+
+
   }
 
 

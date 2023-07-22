@@ -18,11 +18,52 @@ relative
 
 
 }
+
+.usernav{
+  @apply w-full h-[50px] absolute rounded-t-md  top-0 z-40 bg-blue-600 px-3 py-3 flex justify-start items-center
+}
 .chatbody{
-  @apply w-full max-w-[800px]  bg-slate-100
+  @apply w-full max-w-[800px]  bg-white min-h-[calc(100vh-170px)] max-h-[calc(100vh-170px)] overflow-y-scroll scrollbar-thin;
+  .chatcol{
+    @apply min-h-[30px] w-full bg-slate-100 my-1 flex justify-start items-center h-fit px-4;
+
+    .from{
+      @apply bg-slate-800 text-white  rounded-md p-1 px-2 min-w-[30px] text-center
+    }
+    .notfrom{
+      @apply ml-auto bg-blue-600 text-white rounded-md p-1 px-2 min-w-[30px] text-center
+    }
+
+    .chatcolmarginbottom{
+      @apply mb-4
+    }
+  }
+
+
 }
 
+.chatbox{
+  @apply absolute bottom-0 flex items-center justify-center w-full px-4 py-2 bg-cyan-500/60  text-blue-700 rounded-b-md;
 
+}
+
+.noactivechat{
+  @apply  bg-slate-100 shadow-md shadow-black/40 rounded-md z-[60] w-full  h-[calc(100vh-50px)] absolute flex justify-center items-center
+}
+.chatnav{
+  @apply min-w-full h-[50px] bg-blue-600 rounded-t-md  absolute top-0  pl-2 flex justify-start items-center  z-20 ;
+
+  .ngchatlogo{
+    @apply flex justify-start items-center gap-x-2 text-2xl font-semibold text-white;
+
+    // .ng{
+    //   @apply w-[30px] h-[30px] bg-white rounded-sm text-blue-600 font-semibold text-sm text-center align-middle
+    // }
+  }
+}
+.chattext{
+  @apply text-7xl text-blue-600/70
+}
 .animatein{
     animation: in .25s forwards  ;
 }

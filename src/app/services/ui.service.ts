@@ -1,3 +1,4 @@
+import { participant } from './../interface/messages.interface';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { AuthUser, personalcontacts } from '../interface/user.interfaces';
@@ -10,6 +11,9 @@ export class UiService {
 
 
   samechatid=''
+  scrolltobottomdesktop$=new Subject<number>()
+  activechat$=new BehaviorSubject(false)
+  chatingwith:participant=undefined
   initialposition=0
   screenbraekpoint:BehaviorSubject<number>=new BehaviorSubject (0)
   unreadcounter=0
@@ -40,6 +44,10 @@ this.openmodal=true
   }
   close_modal(){
     this.openmodal=false;
+  }
+
+  desktopchatscrolltobotton(){
+    return this.scrolltobottomdesktop$.asObservable()
   }
 
   open_chat(){
