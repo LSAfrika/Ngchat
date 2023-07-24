@@ -48,3 +48,7 @@
 app-contacts{
   // @apply w-full min-h-screen z-[60] bg-slate-200 fixed bottom-0
 }
+
+app-viewprofile{
+  @apply fixed top-0 left-0 min-w-full min-h-screen bg-black/40 z-[100]
+}

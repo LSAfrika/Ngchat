@@ -33,6 +33,17 @@ console.log('checking view',this.myScrollContainer);
    console.log('afterview checked init',this.myScrollContainer)
   //  this.scrollToBottom()
 
+
+  
+   }
+
+   viewprofile(userprofile)
+   {
+console.log('user to view profile (chat page)',userprofile);
+
+     this.ui.viewprofile$.next(true)
+  console.log('profile component view: ',this.ui.viewprofile$.value);
+
    }
 
    scrollToBottom(): void {

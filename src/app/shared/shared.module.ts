@@ -12,6 +12,7 @@ import { ChatpageComponent } from '../components/chatpage/chatpage.component';
 import { RouterModule } from '@angular/router';
 import { LoadingComponent } from '../components/loading/loading.component';
 import { ContactsComponent } from '../components/contacts/contacts.component';
+import { ViewprofileComponent } from '../components/viewprofile/viewprofile.component';
 
 
 
@@ -25,7 +26,8 @@ import { ContactsComponent } from '../components/contacts/contacts.component';
 
     MessagesComponent,
       LoadingComponent,
-      ContactsComponent
+      ContactsComponent,
+      ViewprofileComponent
 
   ],
   imports: [
@@ -36,11 +38,11 @@ import { ContactsComponent } from '../components/contacts/contacts.component';
     NavComponent,
     SidenavComponent,
     ChatComponent,
-
     ChatpageComponent,
     ContactsComponent,
-LoadingComponent,
-    MessagesComponent
+    LoadingComponent,
+    MessagesComponent,
+    ViewprofileComponent
   ]
 })
 export class SharedModule { }

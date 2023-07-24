@@ -32,6 +32,7 @@ export class AppComponent {
      this.ui.screenbraekpoint.next(window.innerWidth)
 // console.log('updated screen width bsubject',this.ui.screenbraekpoint.value);
 if(this.ui.screenbraekpoint.value>=1000) this.router.navigateByUrl('')
+if(this.ui.screenbraekpoint.value<1000)  this.ui.viewprofile$.next(false)
 
 
 

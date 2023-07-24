@@ -1,0 +1,45 @@
+.container{
+    @apply min-w-full min-h-screen  flex justify-center items-center
+}
+
+.profile{
+ @apply max-w-[350px] opacity-0 w-[80%] min-h-[70vh] gap-5 rounded-md shadow-md shadow-black/60 bg-white flex flex-col justify-start items-center   
+}
+
+.closebtn{
+    @apply w-full min-h-[30px] rounded-t-md  px-2
+}
+
+.avatar{
+    @apply w-[80px] h-[80px] bg-cover rounded-full bg-white overflow-hidden
+}
+
+.name{
+    @apply text-lg font-semibold text-slate-900
+}
+.online{
+    @apply font-semibold text-green-500
+}
+
+.lastseen{
+    @apply text-lg font-light text-slate-900
+
+}
+
+.status{
+    @apply text-lg font-light text-slate-900 max-w-[300px]
+
+}
+.open{
+    animation: open .5s    forwards ;
+}
+
+@keyframes open {
+    0%{
+        @apply opacity-0
+    }
+    100%{
+        @apply opacity-100
+    }
+    
+}

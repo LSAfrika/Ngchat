@@ -14,6 +14,7 @@ export class BreakpointGuard implements CanActivate {
     return true}
     else{
       // this.router.navigateByUrl('/')
+      this.ui.viewprofile$.next(false)
     this.router.navigateByUrl('')
 
       return true}

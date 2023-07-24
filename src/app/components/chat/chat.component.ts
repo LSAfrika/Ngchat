@@ -5,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
 import { UiService } from 'src/app/services/ui.service';
 import { Subject } from 'rxjs';
 
+
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
@@ -42,8 +43,28 @@ destroy$=new Subject<number>()
       }
      )
 
-  }
 
+  }
+    viewprofile(currentuser){
+console.log('user to view profile (logged in user)',currentuser);
+
+
+if(currentuser._id==this.ui.authuser._id){
+
+  const userprofile:participant={
+  _id:currentuser._id,username:currentuser.username,profileimg:currentuser.profileimg,lastseen:0,online:true
+  }
+  this.ui.chatingwith=userprofile
+}else{
+
+  this.ui.chatingwith=currentuser
+}
+
+
+  this.ui.viewprofile$.next(true)
+  console.log('profile component view: ',this.ui.viewprofile$.value);
+  
+}
 
   opencontacts(){
     this.ui.initialposition=1

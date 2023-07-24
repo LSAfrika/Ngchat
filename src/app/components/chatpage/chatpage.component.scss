@@ -22,8 +22,11 @@ relative
 .usernav{
   @apply w-full h-[50px] absolute rounded-t-md  top-0 z-40 bg-blue-600 px-3 py-3 flex justify-start items-center
 }
+.userbio{
+  @apply w-fit flex justify-start items-center cursor-pointer
+}
 .chatbody{
-  @apply w-full max-w-[800px]  bg-white min-h-[calc(100vh-170px)] max-h-[calc(100vh-170px)] overflow-y-scroll scrollbar-thin;
+  @apply w-full max-w-[800px]  bg-white min-h-[calc(100vh-170px)] max-h-[calc(100vh-170px)] overflow-y-scroll scrollbar-thin rounded-md;
   .chatcol{
     @apply min-h-[30px] w-full bg-slate-100 my-1 flex justify-start items-center h-fit px-4;
 
@@ -48,7 +51,7 @@ relative
 }
 
 .noactivechat{
-  @apply  bg-slate-100 shadow-md shadow-black/40 rounded-md z-[60] w-full  h-[calc(100vh-50px)] absolute flex justify-center items-center
+  @apply  bg-slate-100 shadow-md overflow-hidden  shadow-black/40 rounded-md rounded-t-lg z-[60] w-full  h-[calc(100vh-50px)] absolute flex justify-center items-center
 }
 .chatnav{
   @apply min-w-full h-[50px] bg-blue-600 rounded-t-md  absolute top-0  pl-2 flex justify-start items-center  z-20 ;

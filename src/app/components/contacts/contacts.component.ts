@@ -53,6 +53,12 @@ export class ContactsComponent implements OnInit {
 
     }
 
+    viewprofile()
+{
+  this.ui.viewprofile$.next(true)
+  console.log('profile component view: ',this.ui.viewprofile$.value);
+
+}
     togglecontacts(){
       this.personalcontacts=!this.personalcontacts
     }
