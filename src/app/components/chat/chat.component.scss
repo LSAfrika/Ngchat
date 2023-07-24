@@ -89,7 +89,7 @@ animation: in .5s forwards;
 
 @keyframes in{
   0%{
-    @apply top-[-100%]
+    @apply top-[-100%] 
   }
   100%{
     @apply top-0
