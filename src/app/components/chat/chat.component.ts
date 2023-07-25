@@ -33,11 +33,31 @@ destroy$=new Subject<number>()
     this.destroy$.unsubscribe()
   }
 
+
+
+  fetchuserchat(chatparticipantid:string,chatingwith:participant){
+
+    this.ui.chatingwith=chatingwith
+    console.log(chatparticipantid);
+    this.ui.activechat$.next(true)
+this.fetchcurrentchat(chatparticipantid)
+
+
+  }
+
+
   fetchcurrentchat(chatparticipantid){
+
+
+    if(this.ui.chatingwith._id==this.ui.currentchatuserid){console.log('user id is similar to previous click') ; return}
+
+
+
     this.msgservice.fetchthread(chatparticipantid).pipe(tap(res=>this.msgservice.chatthread$.next(res)),takeUntil(this.destroy$)).subscribe(
       ()=>{
 
      console.log('thread',this.msgservice.chatthread$.value);
+     this.ui.currentchatuserid=chatparticipantid
      this.ui.scrolltobottomdesktop$.next(1)
 
       }
@@ -63,7 +83,7 @@ if(currentuser._id==this.ui.authuser._id){
 
   this.ui.viewprofile$.next(true)
   console.log('profile component view: ',this.ui.viewprofile$.value);
-  
+
 }
 
   opencontacts(){
@@ -83,16 +103,6 @@ if(currentuser._id==this.ui.authuser._id){
     this.ui.usernameval=val
 
     this.ui.open_modal()
-  }
-
-  fetchuserchat(chatparticipantid:string,chatingwith:participant){
-
-    this.ui.chatingwith=chatingwith
-    console.log(chatparticipantid);
-    this.ui.activechat$.next(true)
-this.fetchcurrentchat(chatparticipantid)
-
-
   }
 
 

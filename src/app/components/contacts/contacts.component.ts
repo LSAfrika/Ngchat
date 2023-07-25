@@ -90,7 +90,7 @@ export class ContactsComponent implements OnInit {
       console.log('contacts id',chatparticipantid);
 
 
-      if(this.ui.chatingwith._id==chatparticipantid){this.closecontacts(); return}
+      if(this.ui.chatingwith._id==this.ui.currentchatuserid){this.closecontacts(); return}
       this.msgservice.chatthread$.next([])
 
       this.msgservice.fetchthread(chatparticipantid).pipe(tap(res=>this.msgservice.chatthread$.next(res)),takeUntil(this.destroy$)).subscribe(
@@ -99,6 +99,7 @@ export class ContactsComponent implements OnInit {
        console.log('thread',this.msgservice.chatthread$.value);
       this.closecontacts()
 
+      this.ui.currentchatuserid=chatparticipantid
        this.ui.scrolltobottomdesktop$.next(1)
 
         }
