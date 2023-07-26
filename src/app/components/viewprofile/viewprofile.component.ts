@@ -16,5 +16,14 @@ closeprofile(){
 
   this.ui.viewprofile$.next(false)
 
+
 }
+
+// get uid(){
+//   return uid
+// }
+
+
+
+
 }

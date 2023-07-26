@@ -25,9 +25,10 @@ export interface chatlist{
 }
 
 export interface participant{
-  _id:string, 
+  _id:string,
   username:string,
   profileimg:string
   lastseen:number
   online:boolean
+  status?:string
 }

@@ -15,8 +15,8 @@
         </div>
 <div class="name">{{ui.chatingwith.username}}</div>
 <div *ngIf="ui.chatingwith.online==true" class="online">online</div>
-<div *ngIf="ui.chatingwith.online==false" class="lastseen">last seen {{ui.chatingwith.lastseen | date :'shortTime'}},{{ui.chatingwith.lastseen | date :'mediumDate'}}</div>
-<div class="status">{{ui.authuser.status}}</div>
+<div *ngIf="ui.chatingwith.online==false" class="lastseen">last seen {{ui.chatingwith.lastseen | date :'shortTime'}},<br>{{ui.chatingwith.lastseen | date :'mediumDate'}}</div>
+<div class="status">{{ui.chatingwith.status}}</div>
 
 
     </div>

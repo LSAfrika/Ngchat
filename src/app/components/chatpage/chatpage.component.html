@@ -26,7 +26,7 @@
 </div>
 
     <div class="chatbox">
-        <input class="w-[80%] lg:w-[60%]  h-fit rounded-full outline-none py-3 px-3  " >
+        <input placeholder="chat away..." class="w-[80%] lg:w-[calc(100%-50px)]  h-fit rounded-md outline-none py-2 px-3  " >
 
         <div class="box-border flex items-center justify-center p-2 ml-2 bg-blue-500 rounded-full w-fit">
 
@@ -37,7 +37,7 @@
     <div *ngIf="ui.activechat$.value==false" class=" noactivechat">
 <!-- <div class="chatnav">
 <div class="ngchatlogo">
- 
+
   <div>NG Chat</div>
 </div>
 
