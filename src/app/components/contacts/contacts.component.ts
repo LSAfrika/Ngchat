@@ -18,7 +18,7 @@ export class ContactsComponent implements OnInit {
   username=''
   allcontacts=0
   destroy$:Subject<boolean>=new Subject()
-  personalcontacts=true
+  personalcontacts=false
   @ViewChild('contactslist') private myScrollContainer: ElementRef;
 
   count=this.user.searchvalue.pipe(switchMap((queryvalue:userfetch)=>{
@@ -48,7 +48,7 @@ return contacts.map(contact=>{
   if(contactsuserids.indexOf(contact._id)==-1)contact.favorited=false
   if(contactsuserids.indexOf(contact._id)!=-1)contact.favorited=true
 
-  console.log(contact)
+  // console.log(contact)
   return contact
 
 })
@@ -69,6 +69,12 @@ return contacts.map(contact=>{
 
 
     }
+    ngOnDestroy(){
+      this.user.searchvalue.next({searchtext:'',pagination:this.user.searchvalue.value.pagination})
+      this.destroy$.next(true)
+      this.destroy$.complete()
+      this.destroy$.unsubscribe()
+    }
 
     viewprofile()
 {
@@ -80,11 +86,10 @@ return contacts.map(contact=>{
       this.personalcontacts=!this.personalcontacts
     }
 
-    ngOnDestroy(){
-      this.user.searchvalue.next({searchtext:'',pagination:this.user.searchvalue.value.pagination})
-      this.destroy$.next(true)
-      this.destroy$.complete()
-      this.destroy$.unsubscribe()
+
+    favoriteacontact(uid){
+      this.user.addremoveforiteuser(uid).pipe(tap(res=>console.log(res)),takeUntil(this.destroy$)).subscribe()
+
     }
 
     searchvalue(event){

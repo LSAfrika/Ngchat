@@ -14,7 +14,7 @@ searchvalue=new BehaviorSubject<userfetch>({searchtext:'',pagination:1 })
   USERURL=environment.API+'user/singleuser/'
   REFRESHURL=environment.API+'user/refresh'
   FETCHUSERS=environment.API+'user/allusers'
-  FETCHFAVORITEUSERS=environment.API+'user/personalusers'
+  FAVORITEUSERSURL=environment.API+'user/personalusers'
   FETCHCOUNT=environment.API+'user/count?search='
   FETCHUSER=environment.API+'user/singleuser/'
   CREATEUSER=environment.API+'user/register'
@@ -39,9 +39,14 @@ searchvalue=new BehaviorSubject<userfetch>({searchtext:'',pagination:1 })
   }
 
   fetchfavoritecontactlist(){
-    return this.http.get(this.FETCHFAVORITEUSERS)
+    return this.http.get(this.FAVORITEUSERSURL)
   }
 
+
+  addremoveforiteuser(uid){
+    return this.http.post(this.FAVORITEUSERSURL,{favoriteuserid:uid})
+
+  }
 
   fetchuser(id:string){
 
