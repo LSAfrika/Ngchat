@@ -35,7 +35,24 @@ export class ContactsComponent implements OnInit {
     switchMap((queryvalue)=>
       this.user.fetchallusers(queryvalue.searchtext,queryvalue.pagination)
     ),
-    map((res:any)=>  {this.allcontacts=res.users.length; return res.users})
+    map((res:any)=>  {this.allcontacts=res.users.length; ;
+     return res.users}),
+     map((contacts:personalcontacts[])=>{
+
+    const contactsuserids=  this.ui.personalcontacts.value.map(user=> user._id)
+    console.log('list of favorite users',contactsuserids);
+
+
+
+return contacts.map(contact=>{
+  if(contactsuserids.indexOf(contact._id)==-1)contact.favorited=false
+  if(contactsuserids.indexOf(contact._id)!=-1)contact.favorited=true
+
+  console.log(contact)
+  return contact
+
+})
+      })
 
     )
     constructor(public ui:UiService,private io:IOService,private user:UserService,private msgservice:MessagesService) {
@@ -43,7 +60,7 @@ export class ContactsComponent implements OnInit {
 
     console.log('fav contacts initial list',this.ui.personalcontacts.value);
 
-   if(this.ui.personalcontacts.value == undefined) this.user.fetchfavoritecontactlist().pipe(takeUntil(this.destroy$)).subscribe((res:personalcontacts[])=>{console.log(res),this.ui.personalcontacts.next(res)})
+   if(this.ui.personalcontacts.value == undefined) this.user.fetchfavoritecontactlist().pipe(takeUntil(this.destroy$)).subscribe((res:personalcontacts[])=>{console.log('personal contact list:',res),this.ui.personalcontacts.next(res)})
     // this.user.searchvalue.subscribe(console.log)
 
     }
@@ -140,5 +157,11 @@ export class ContactsComponent implements OnInit {
 
      }
   }
+
+  endedtest(){
+    console.log('ended test works');
+
+  }
+
 
 }

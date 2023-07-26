@@ -8,10 +8,11 @@ export interface personalcontacts{
   _id:string,
  username: string,
  profileimg:string
- status:string,
+ status?:string,
  email?:string
  lastseen?: number
  online?: boolean,
+ favorited?:boolean
 }
 
 export interface AuthUser{
