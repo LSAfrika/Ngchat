@@ -72,7 +72,7 @@ console.log('user to view profile (logged in user)',currentuser);
 if(currentuser._id==this.ui.authuser._id){
 
   const userprofile:participant={
-  _id:currentuser._id,username:currentuser.username,profileimg:currentuser.profileimg,lastseen:0,online:true
+  _id:currentuser._id,username:currentuser.username,profileimg:currentuser.profileimg,lastseen:0,online:true,status:currentuser.status
   }
   this.ui.chatingwith=userprofile
 }else{

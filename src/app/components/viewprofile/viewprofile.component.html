@@ -13,10 +13,16 @@
 <img style="width: 100%;height: 100%;background-size: cover;" src="{{ui.chatingwith.profileimg}}" alt="" srcset="">
 
         </div>
+        <input type="file" class="hidden" #file>
+<button (click)="file.click()" *ngIf="ui.chatingwith._id==ui.authuser._id" class="min-w-[150px] bg-blue-700 px-2 py-2 text-white  rounded-md">update picture</button>
+
 <div class="name">{{ui.chatingwith.username}}</div>
 <div *ngIf="ui.chatingwith.online==true" class="online">online</div>
 <div *ngIf="ui.chatingwith.online==false" class="lastseen">last seen {{ui.chatingwith.lastseen | date :'shortTime'}},<br>{{ui.chatingwith.lastseen | date :'mediumDate'}}</div>
 <div class="status">{{ui.chatingwith.status}}</div>
+<!-- <pre>{{ui.chatingwith |json}}</pre> -->
+
+<button *ngIf="ui.chatingwith._id==ui.authuser._id" class="min-w-[150px] bg-blue-700 px-2 py-2 text-white  rounded-md mb-10">update profile</button>
 
 
     </div>
