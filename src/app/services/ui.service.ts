@@ -1,7 +1,7 @@
 import { participant } from './../interface/messages.interface';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { Injectable } from '@angular/core';
-import { AuthUser, personalcontacts } from '../interface/user.interfaces';
+import { AuthUser, contacts } from '../interface/user.interfaces';
 import { chatlist } from '../interface/messages.interface';
 
 @Injectable({
@@ -19,7 +19,8 @@ export class UiService {
   screenbraekpoint:BehaviorSubject<number>=new BehaviorSubject (0)
   unreadcounter=0
   editmodal=new BehaviorSubject(false)
-  personalcontacts:BehaviorSubject<personalcontacts[]>=new BehaviorSubject(undefined)
+  personalcontacts:BehaviorSubject<contacts[]>=new BehaviorSubject(undefined)
+  allcontacts:BehaviorSubject<contacts[]>=new BehaviorSubject(undefined)
   userchats:BehaviorSubject<chatlist[]>=new BehaviorSubject([])
 
   contactmodal =new BehaviorSubject(false)

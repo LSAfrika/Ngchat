@@ -4,7 +4,7 @@ export interface userfetch{
 
 }
 
-export interface personalcontacts{
+export interface contacts{
   _id:string,
  username: string,
  profileimg:string

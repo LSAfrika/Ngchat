@@ -15,7 +15,7 @@
   <div (click)="togglecontacts()" class="btncontacts"  [ngClass]="{activebtn:personalcontacts==true}">My contacts</div>
 </div>
 <ng-container *ngIf="personalcontacts==false">
-  <ng-container *ngIf="users|async as contacts ">
+  <ng-container *ngIf="ui.allcontacts|async as contacts ">
 
     <!-- <div *ngFor="let contact of contacts | filter:username">
       {{contact.username}}
@@ -35,7 +35,7 @@
 
 
        <div (click)="fetchuserchat(contact._id,contact)" class="w-[65%] h-[inherit]  pl-4   flex    justify-between  items-center ">
-           <div  class="flex items-center justify-between  h-full text-lg font-semibold text-blue-700 w-fit hover:cursor-pointer "><h1>{{contact.username}}</h1>
+           <div  class="flex items-center justify-between h-full text-lg font-semibold text-blue-700 w-fit hover:cursor-pointer "><h1>{{contact.username}}</h1>
            </div>
            <div *ngIf="contact.online== true" class="w-3 h-3 translate-y-[-10px] bg-teal-500 rounded-full mr-auto flex justify-center items-center">
           </div>
@@ -89,13 +89,15 @@
 </ng-container>
 
 
-          </div>
+</div>
 
-          <ng-container *ngIf="count |async as totaluser ">
+
+
+ <ng-container *ngIf="count |async as totaluser ">
 
           <div *ngIf="personalcontacts==false"  class="sticky w-full  text-center bottom-0  z-[80] min-h-[50px] pb-2 bg-slate-100">
 
             <button [ngClass]="{'disabled':allcontacts==totaluser}" [disabled]="allcontacts==totaluser" (click)="fetchmoreusers()" class="min-w-[150px] px-2 py-3 bg-blue-700 text-white font-semibold text-sm rounded-full
             bottom-2 "> {{allcontacts}}/{{totaluser}}</button>
           </div>
-          </ng-container>
+ </ng-container>

@@ -1,4 +1,4 @@
-import { personalcontacts, userfetch } from '../../interface/user.interfaces';
+import { contacts, userfetch } from '../../interface/user.interfaces';
 import { switchMap, map, debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators';
 import { UserService } from './../../services/user.service';
 import { ApiService } from './../../services/api.service';
@@ -42,7 +42,7 @@ users=this.user.searchvalue.pipe(
 
   console.log('fav contacts initial list',this.ui.personalcontacts.value);
 
- if(this.ui.personalcontacts.value == undefined) this.user.fetchfavoritecontactlist().pipe(takeUntil(this.destroy$)).subscribe((res:personalcontacts[])=>{console.log(res),this.ui.personalcontacts.next(res)})
+ if(this.ui.personalcontacts.value == undefined) this.user.fetchfavoritecontactlist().pipe(takeUntil(this.destroy$)).subscribe((res:contacts[])=>{console.log(res),this.ui.personalcontacts.next(res)})
   // this.user.searchvalue.subscribe(console.log)
 
   }
