@@ -12,6 +12,7 @@ export class UiService {
 
   samechatid=''
   viewprofile$=new BehaviorSubject<boolean>(false)
+  loadingspinner$:BehaviorSubject<number>=new BehaviorSubject(-1)
   scrolltobottomdesktop$=new Subject<number>()
   activechat$=new BehaviorSubject(false)
   chatingwith:participant=undefined

@@ -18,6 +18,7 @@ export class ContactsComponent implements OnInit {
 
   username=''
   allcontacts=0
+
   destroy$:Subject<boolean>=new Subject()
   personalcontacts=false
   @ViewChild('contactslist') private myScrollContainer: ElementRef;
@@ -80,7 +81,7 @@ export class ContactsComponent implements OnInit {
          map((contacts:contacts[])=>{
 
         const contactsuserids=  this.ui.personalcontacts.value.map(user=> user._id)
-        console.log('list of favorite users',contactsuserids);
+        // console.log('list of favorite users',contactsuserids);
 
 
 
@@ -97,7 +98,8 @@ export class ContactsComponent implements OnInit {
             this.ui.allcontacts.next(allcontacts)
 
             this.allcontacts=this.ui.allcontacts.value.length
-            console.log('contacts in all contacts BSubject',this.ui.allcontacts.value);
+            // console.log('contacts in all contacts BSubject',this.ui.allcontacts.value);
+            this.ui.loadingspinner$.next(-1)
 
           }),
           takeUntil(this.destroy$)
@@ -128,24 +130,16 @@ export class ContactsComponent implements OnInit {
     }
 
 
-    favoriteacontact(uid){
+    favoriteacontact(index,uid){
+      this.ui.loadingspinner$.next(index)
+
       this.user.addremoveforiteuser(uid).pipe(
         tap((res:{message:string,favcontacts:contacts[]})=>{
-          console.log(res);
+          // console.log(res);
           this.ui.personalcontacts.next(res.favcontacts );
           this.contactsfetchrequest()
-        })
-
-      //   switchMap((res)=>{
-      //  return   this.user.fetchallusers(this.user.searchvalue.value.searchtext,this.user.searchvalue.value.pagination)
-
-      //   }),tap((res:{users:contacts[]})=>{
-      //     console.log('rsponse from query',res);
-      //    this.ui.allcontacts.next(res.users)
-
-      //   })
-
-        ,takeUntil(this.destroy$)).subscribe()
+        }),
+        takeUntil(this.destroy$)).subscribe()
 
     }
 

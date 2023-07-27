@@ -61,3 +61,16 @@
   .disabled{
     @apply cursor-not-allowed bg-red-700
   }
+
+  .loadingrotation{
+    animation: loadingrot 1.5s linear infinite;
+  }
+
+  @keyframes loadingrot{
+    0%{
+      transform :rotate(0deg);
+    }
+    100%{
+      transform: rotate(360deg);
+    }
+  }
