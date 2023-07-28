@@ -65,7 +65,7 @@ this.fetchcurrentchat(chatparticipantid)
       .subscribe(
       ()=>{
 
-     console.log('thread',this.msgservice.chatthread$.value);
+    //  console.log('thread',this.msgservice.chatthread$.value);
      this.ui.currentchatuserid=chatparticipantid
      this.ui.scrolltobottomdesktop$.next(1)
 
