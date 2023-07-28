@@ -15,7 +15,7 @@ export class UiService {
   loadingspinner$:BehaviorSubject<number>=new BehaviorSubject(-1)
   scrolltobottomdesktop$=new Subject<number>()
   activechat$=new BehaviorSubject(false)
-  chatingwith:participant=undefined
+  chatingwith:participant={_id:'',lastseen:0,online:false,profileimg:'',username:'',status:''}
   initialposition=0
   screenbraekpoint:BehaviorSubject<number>=new BehaviorSubject (0)
   unreadcounter=0

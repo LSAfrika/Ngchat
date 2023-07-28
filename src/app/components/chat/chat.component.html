@@ -32,7 +32,7 @@
 </div>
 <div class="lastmessage">{{chat.lastmessage}}</div>
 
-<div *ngIf="chat.unreadcounter[0].count>0" class="unreadcounter">
+<div *ngIf="chat.unreadcounter[0].count>0 && ui.chatingwith._id !=chat.chatparticipants[0]._id" class="unreadcounter">
   {{chat.unreadcounter[0].count}}
 </div>
 
