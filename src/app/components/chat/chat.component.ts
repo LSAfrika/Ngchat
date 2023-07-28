@@ -1,9 +1,10 @@
-import { participant } from './../../interface/messages.interface';
-import { tap, takeUntil } from 'rxjs/operators';
+import { IOService } from './../../services/io.service';
+import { chatlist, participant } from './../../interface/messages.interface';
+import { tap, takeUntil, map } from 'rxjs/operators';
 import { MessagesService } from './../../services/messages.service';
 import { Component, OnInit } from '@angular/core';
 import { UiService } from 'src/app/services/ui.service';
-import { Subject } from 'rxjs';
+import { Subject, switchMap } from 'rxjs';
 
 
 @Component({
@@ -16,7 +17,7 @@ export class ChatComponent implements OnInit {
 destroy$=new Subject<number>()
 
 
-  constructor(public ui:UiService,private msgservice:MessagesService) { }
+  constructor(public ui:UiService,private msgservice:MessagesService,private io:IOService) { }
 
 
 
@@ -53,7 +54,15 @@ this.fetchcurrentchat(chatparticipantid)
 
 
 
-    this.msgservice.fetchthread(chatparticipantid).pipe(tap(res=>this.msgservice.chatthread$.next(res)),takeUntil(this.destroy$)).subscribe(
+    this.msgservice.fetchthread(chatparticipantid).pipe(
+      tap(res=>this.msgservice.chatthread$.next(res)),
+      switchMap(()=>{ return this.msgservice.unreadcounterreset(chatparticipantid)}),
+      switchMap(()=>{ return this.msgservice.fetchchatlist()}),
+
+      tap((updatechatlist:chatlist[])=>{console.log('reset counter: ',updatechatlist);this.ui.userchats.next(updatechatlist)}),
+
+      takeUntil(this.destroy$))
+      .subscribe(
       ()=>{
 
      console.log('thread',this.msgservice.chatthread$.value);
@@ -65,6 +74,19 @@ this.fetchcurrentchat(chatparticipantid)
 
 
   }
+
+  livechatupdate(){
+    this.io.chatlistupdate().pipe(map((res:any)=> {
+      console.log('initial fetch: ',res);
+if(res ==undefined) return []
+     return res.userschatslist as chatlist[]}),
+     takeUntil(this.destroy$)).subscribe(res=>{
+      // console.log(res)
+      this.ui.userchats.next(res)
+    })
+  }
+
+
     viewprofile(currentuser){
 console.log('user to view profile (logged in user)',currentuser);
 
