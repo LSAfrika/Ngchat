@@ -1,3 +1,4 @@
+import { chatlist } from './../interface/messages.interface';
 import { User } from './../interface/post.interface';
 import { NotificationsService } from './notifications.service';
 import { MessagesService } from './messages.service';
@@ -186,9 +187,9 @@ messagereceived(messagepayload){
 
   console.log('received message: ',messagepayload);
 
-  this.socket.emit('messagereceived',messagepayload, (response) =>{
+  this.socket.emit('messagereceived',messagepayload, (response:{chatmessagetomarkasviewed:Message,chatlist:chatlist[]}) =>{
      console.log('receved message confirmation: ',response);
-
+this.ui.userchats.next(response.chatlist)
       });
 }
 deliveryreport(){
