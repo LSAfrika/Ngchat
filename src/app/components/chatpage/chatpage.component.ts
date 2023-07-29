@@ -15,7 +15,9 @@ export class ChatpageComponent implements OnInit {
 
   destroy$=new Subject()
   @ViewChild('chatview') private myScrollContainer: ElementRef;
+  @ViewChild('messendtosend') messagetosend: ElementRef;
 
+chat=''
   constructor(public ui:UiService,public msgservice:MessagesService,private io:IOService) { }
 
   ngOnInit(): void {
@@ -96,6 +98,13 @@ console.log('user to view profile (chat page)',userprofile);
       console.log(err.message);
 
      }
+}
+
+sendmessage(){
+  if(this.chat.length==0) return
+  console.log(this.chat);
+  this.chat=''
+
 }
 
 }
