@@ -101,9 +101,21 @@ console.log('user to view profile (chat page)',userprofile);
 }
 
 sendmessage(){
-  if(this.chat.length==0) return
-  console.log(this.chat);
-  this.chat=''
+
+ 
+  if (this.chat.trim() == '') { return alert('please input a chat message') }
+
+
+
+  const sentmessagepayload:Message={
+    message:this.chat,
+    from:this.ui.authuser._id,
+    to:this.ui.chatingwith._id,
+    viewed:false
+  }
+  this.io.sendmessage(sentmessagepayload);
+ console.log(this.io.sent);
+ this.chat=''
 
 }
 
