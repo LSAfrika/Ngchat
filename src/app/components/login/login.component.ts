@@ -40,7 +40,11 @@ export class LoginComponent implements OnInit {
   constructor(private io:IOService, public ui:UiService,public api:ApiService,private router:Router,private user:UserService) {
 
     if(!!localStorage.getItem('token'))this.router.navigateByUrl('/')
-    this.io.connected=false
+    // this.io.connected=false
+
+    console.log('testing user log out:');
+    
+    if(this.io.socket !=undefined)this.io.userlogout()
 
     //  this.io.disconnectinstance()
   }

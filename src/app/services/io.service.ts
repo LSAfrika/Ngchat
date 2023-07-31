@@ -73,7 +73,7 @@ this.userlogin()
       this.socket.close()
       console.log('socket value after close: ',this.socket)
       this.socket=undefined
-      console.log('live socket disconnected');
+      console.log('live socket disconnected',this.socket);
 
     }
 
@@ -104,6 +104,7 @@ this.userlogin()
         this.connected=false
          this.disconnectinstance()
         localStorage.removeItem('token')
+        localStorage.removeItem('refreshtoken')
         this.router.navigateByUrl('/login')
       }
     })
