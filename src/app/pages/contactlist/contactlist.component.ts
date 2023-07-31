@@ -1,5 +1,5 @@
 import { contacts, userfetch } from '../../interface/user.interfaces';
-import { switchMap, map, debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators';
+import { switchMap, map, debounceTime, distinctUntilChanged, takeUntil, tap } from 'rxjs/operators';
 import { UserService } from './../../services/user.service';
 import { ApiService } from './../../services/api.service';
 import { IOService } from './../../services/io.service';
@@ -28,15 +28,15 @@ count=this.user.searchvalue.pipe(switchMap((queryvalue:userfetch)=>{
 )
 
 // usercontactlist=this.user.fetchfavoritecontactlist()
-users=this.user.searchvalue.pipe(
-  debounceTime(500),
-  distinctUntilChanged(),
-  switchMap((queryvalue)=>
-    this.user.fetchallusers(queryvalue.searchtext,queryvalue.pagination)
-  ),
-  map((res:any)=>  {this.allcontacts=res.users.length; return res.users})
+// users=this.user.searchvalue.pipe(
+//   debounceTime(500),
+//   distinctUntilChanged(),
+//   switchMap((queryvalue)=>
+//     this.user.fetchallusers(queryvalue.searchtext,queryvalue.pagination)
+//   ),
+//   map((res:any)=>  {this.allcontacts=res.users.length; return res.users})
 
-  )
+//   )
   constructor(public ui:UiService,private io:IOService,private user:UserService) {
   this.io.setsocketinstance()
 
@@ -44,6 +44,7 @@ users=this.user.searchvalue.pipe(
 
  if(this.ui.personalcontacts.value == undefined) this.user.fetchfavoritecontactlist().pipe(takeUntil(this.destroy$)).subscribe((res:contacts[])=>{console.log(res),this.ui.personalcontacts.next(res)})
   // this.user.searchvalue.subscribe(console.log)
+  if(this.ui.allcontacts.value == undefined) this.contactsfetchrequest()
 
   }
 
@@ -112,5 +113,58 @@ closecontactmodal(){
     console.log(err.message);
 
    }
+}
+
+favoriteacontact(index,uid){
+  this.ui.loadingspinner$.next(index)
+
+  this.user.addremoveforiteuser(uid).pipe(
+    tap((res:{message:string,favcontacts:contacts[]})=>{
+      // console.log(res);
+      this.ui.personalcontacts.next(res.favcontacts );
+      this.contactsfetchrequest()
+    }),
+    takeUntil(this.destroy$)).subscribe()
+
+}
+
+contactsfetchrequest(){
+
+  this.user.searchvalue.pipe
+  (
+    debounceTime(500),
+    distinctUntilChanged(),
+    switchMap((queryvalue)=>
+      this.user.fetchallusers(queryvalue.searchtext,queryvalue.pagination)
+    ),
+    map((res:any)=>  {return res.users}),
+     map((contacts:contacts[])=>{
+
+    const contactsuserids=  this.ui.personalcontacts.value.map(user=> user._id)
+    // console.log('list of favorite users',contactsuserids);
+
+
+
+return contacts.map(contact=>{
+  if(contactsuserids.indexOf(contact._id)==-1)contact.favorited=false
+  if(contactsuserids.indexOf(contact._id)!=-1)contact.favorited=true
+
+  // console.log(contact)
+  return contact
+
+})
+      }),
+      tap(allcontacts=>{
+        this.ui.allcontacts.next(allcontacts)
+
+        this.allcontacts=this.ui.allcontacts.value.length
+        // console.log('contacts in all contacts BSubject',this.ui.allcontacts.value);
+        this.ui.loadingspinner$.next(-1)
+
+      }),
+      takeUntil(this.destroy$)
+
+    ).subscribe()
+
 }
 }

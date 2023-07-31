@@ -24,7 +24,7 @@
 .contactsdivider{
   @apply w-full min-h-[30px]  p-1 flex justify-center items-center text-blue-700 ;
   .btncontacts{
-@apply min-w-[45%] text-center text-xs font-semibold py-2 cursor-pointer
+    @apply min-w-[45%] text-center text-xs font-semibold py-2 cursor-pointer
   }
 
   .activebtn{
