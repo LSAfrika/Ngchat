@@ -21,8 +21,11 @@
 
   <div class=" messagecontainer" #chatview >
 
-  <div class="scorillablecontainer"  *ngIf="msgservice.chatthread$|async as chatmessages">
+  <div class="scrollablecontainer"  *ngIf="msgservice.chatthread$|async as chatmessages">
+    <span *ngIf="ui.viewloadmorebutton==true" class="loadoldmessages">
 
+      <button  (click)="fetcholderchats()">view previous messages</button>
+    </span>
     <div class="singlemessagecontainer" *ngFor="let message of chatmessages;">
       <!-- <div class="singlemessagecontainer" *ngFor="let message of chatmessages;"> -->
       <!-- friendmessagebubble: message.from === this.userid , -->

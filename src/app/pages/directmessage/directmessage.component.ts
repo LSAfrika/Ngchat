@@ -73,8 +73,30 @@ readcounterreset(){
 }
 
 
+fetcholderchats(){
+  this.msgservice.messagepagination++
+  this.msgservice.fetchthread(this.chatparticipantid).pipe(
+    tap(res=>{
+      console.log('pagination \n','pagination number:',this.msgservice.messagepagination,'\nmessage rsponse',res);
+      res.length>=20?this.ui.viewloadmorebutton=true:this.ui.viewloadmorebutton=false
+      this.msgservice.chatthread$.next([...res,...this.msgservice.chatthread$.value]);
+      console.log('current chat fetched',this.msgservice.chatthread$.value);
+    }),
+
+
+
+
+
+    takeUntil(this.destroy$))
+    .subscribe()
+}
+
 fetchcurrentchat(){
-  this.msgservice.fetchthread(this.chatparticipantid).pipe(tap(res=>this.msgservice.chatthread$.next(res)),takeUntil(this.destroy$)).subscribe(
+  this.msgservice.fetchthread(this.chatparticipantid).pipe(tap(res=>{
+    res.length>=20?this.ui.viewloadmorebutton=true:this.ui.viewloadmorebutton=false
+    this.msgservice.chatthread$.next(res)
+  })
+    ,takeUntil(this.destroy$)).subscribe(
     ()=>{
 
    console.log('thread',this.DirectChat);
@@ -200,6 +222,7 @@ console.log('callback payload',callbackpayload);
   }
   ngOnDestroy(): void {
 this.msgservice.chatthread$= new BehaviorSubject([])
+this.msgservice.messagepagination=0
     this.destroy$.next(true);
     this.destroy$.unsubscribe();
   }

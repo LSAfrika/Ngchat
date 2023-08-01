@@ -27,8 +27,15 @@ relative
 }
 .chatbody{
 
-@apply w-full max-w-[800px] scroll-smooth  bg-white min-h-[calc(100vh-170px)] max-h-[calc(100vh-170px)] overflow-y-scroll scrollbar-thin rounded-md;
-  .chatcol{
+@apply w-full relative max-w-[800px] scroll-smooth  bg-white min-h-[calc(100vh-170px)] max-h-[calc(100vh-170px)] overflow-y-scroll scrollbar-thin rounded-md;
+ .loadoldmessages{
+  @apply w-full min-h-[20px] flex justify-center ml-auto  text-white p-2 ;
+  button{
+    @apply text-blue-500 px-3 py-1 rounded-md cursor-pointer hover:font-semibold
+  }
+ }
+
+.chatcol{
     @apply min-h-[30px] w-full bg-slate-100 my-1 flex justify-start items-center h-fit px-4;
 
     .from{
@@ -47,7 +54,7 @@ relative
 }
 
 .chatbox{
-@apply absolute bottom-0 flex items-center justify-start w-full px-4 py-2 bg-green-700 text-blue-700 rounded-b-md ;
+@apply absolute bottom-0 flex items-center justify-start w-full px-4 py-2 bg-slate-100 text-blue-700 rounded-b-md ;
 
 }
 

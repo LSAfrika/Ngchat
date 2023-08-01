@@ -10,7 +10,7 @@ import{environment} from '../../environments/environment'
 })
 export class MessagesService {
 
-  messagepagination=-1
+  messagepagination=0
   chatthread$ :BehaviorSubject<Message[]>=new BehaviorSubject([])
 
 chatid=''

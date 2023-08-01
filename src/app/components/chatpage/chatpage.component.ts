@@ -125,4 +125,23 @@ sendmessage(){
 
 }
 
+
+fetcholderchats(){
+  this.msgservice.messagepagination++
+  this.msgservice.fetchthread(this.ui.chatingwith._id).pipe(
+    tap(res=>{
+      console.log('pagination \n','pagination number:',this.msgservice.messagepagination,'\nmessage rsponse',res);
+      res.length>=20?this.ui.viewloadmorebutton=true:this.ui.viewloadmorebutton=false
+      this.msgservice.chatthread$.next([...res,...this.msgservice.chatthread$.value]);
+      console.log('current chat fetched',this.msgservice.chatthread$.value);
+    }),
+
+
+
+
+
+    takeUntil(this.destroy$))
+    .subscribe()
+}
+
 }

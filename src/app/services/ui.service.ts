@@ -11,6 +11,7 @@ export class UiService {
 
 
   samechatid=''
+  viewloadmorebutton=false
   viewprofile$=new BehaviorSubject<boolean>(false)
   loadingspinner$:BehaviorSubject<number>=new BehaviorSubject(-1)
   scrolltobottomdesktop$=new Subject<number>()

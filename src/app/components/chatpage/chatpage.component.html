@@ -17,6 +17,10 @@
           </svg> -->
     </div>
 <div *ngIf="ui.activechat$.value==true" #chatview class="chatbody">
+  <span *ngIf="ui.viewloadmorebutton==true" class="loadoldmessages">
+
+    <button  (click)="fetcholderchats()">view previous messages</button>
+  </span>
   <div class="chatcol" *ngFor="let chat of msgservice.chatthread$.value let i=index">
 
     <span [ngClass]="{from:chat.from !=ui.authuser._id,notfrom:chat.from==ui.authuser._id,chatcolmarginbottom:i+1==msgservice.chatthread$.value.length}">{{chat.message}}</span>
@@ -26,9 +30,10 @@
 
 </div>
     <div class="chatbox">
-        <input placeholder="chat away..." class="w-[80%] lg:w-[calc(100%-50px)]  h-fit rounded-md outline-none py-2 px-3  " [(ngModel)]="chat" >
+        <input placeholder="chat away..."
+        class="w-[80%] lg:w-[calc(100%-50px)]  h-fit rounded-md outline-none py-2 px-3 bg-slate-300 " [(ngModel)]="chat" >
 
-        <div (click)="sendmessage()" class="box-border cursor-pointer flex items-center justify-center p-2 ml-2 bg-blue-500 rounded-full w-fit">
+        <div (click)="sendmessage()" class="box-border flex items-center justify-center p-2 ml-2 bg-blue-500 rounded-full cursor-pointer w-fit">
 
             <img class="w-8 h-8" src="../../../assets/send fill.svg" alt="" srcset="">
         </div>

@@ -16,8 +16,14 @@ scrollbar-none lg:max-w-[800px];
 max-height: calc(100vh - 75px);
 
 }
-.scorillablecontainer{
-  @apply  min-h-fit w-full
+.scrollablecontainer{
+  @apply  min-h-fit w-full;
+  .loadoldmessages{
+    @apply w-full min-h-[20px] flex justify-center ml-auto  text-white p-2 ;
+    button{
+      @apply text-blue-500 px-3 py-1 rounded-md cursor-pointer hover:font-semibold
+    }
+   }
 }
 .messagecontainerclosed{
 

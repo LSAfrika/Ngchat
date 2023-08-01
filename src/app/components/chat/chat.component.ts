@@ -51,11 +51,19 @@ this.fetchcurrentchat(chatparticipantid)
 
 
     if(this.ui.chatingwith._id==this.ui.currentchatuserid){console.log('user id is similar to previous click') ; return}
+    this.ui.viewloadmorebutton=false
+this.msgservice.messagepagination=0
 
+console.log('pagination value reset:',this.msgservice.messagepagination);
 
-
+this.msgservice.chatthread$.next([])
     this.msgservice.fetchthread(chatparticipantid).pipe(
-      tap(res=>this.msgservice.chatthread$.next(res)),
+      tap(res=>{
+
+        res.length>=20?this.ui.viewloadmorebutton=true:this.ui.viewloadmorebutton=false
+        this.msgservice.chatthread$.next([...res,...this.msgservice.chatthread$.value])
+        console.log('initial chat fetch',this.msgservice.chatthread$.value);
+      }),
       switchMap(()=>{ return this.msgservice.unreadcounterreset(chatparticipantid)}),
       switchMap(()=>{ return this.msgservice.fetchchatlist()}),
 
