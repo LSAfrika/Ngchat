@@ -3,7 +3,7 @@
   flex justify-center
   items-center
 flex-1
-
+scroll-smooth
 w-full
 relative
   h-[calc(100vh-50px)]
@@ -26,7 +26,8 @@ relative
   @apply w-fit flex justify-start items-center cursor-pointer
 }
 .chatbody{
-  @apply w-full max-w-[800px]  bg-white min-h-[calc(100vh-170px)] max-h-[calc(100vh-170px)] overflow-y-scroll scrollbar-thin rounded-md;
+
+@apply w-full max-w-[800px] scroll-smooth  bg-white min-h-[calc(100vh-170px)] max-h-[calc(100vh-170px)] overflow-y-scroll scrollbar-thin rounded-md;
   .chatcol{
     @apply min-h-[30px] w-full bg-slate-100 my-1 flex justify-start items-center h-fit px-4;
 
@@ -46,7 +47,7 @@ relative
 }
 
 .chatbox{
-  @apply absolute bottom-0 flex items-center justify-start w-full px-4 py-2 bg-green-700 text-blue-700 rounded-b-md ;
+@apply absolute bottom-0 flex items-center justify-start w-full px-4 py-2 bg-green-700 text-blue-700 rounded-b-md ;
 
 }
 

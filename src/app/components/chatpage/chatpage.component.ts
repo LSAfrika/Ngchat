@@ -102,7 +102,7 @@ console.log('user to view profile (chat page)',userprofile);
 
 sendmessage(){
 
- 
+
   if (this.chat.trim() == '') { return alert('please input a chat message') }
 
 
@@ -116,6 +116,12 @@ sendmessage(){
   this.io.sendmessage(sentmessagepayload);
  console.log(this.io.sent);
  this.chat=''
+
+ console.log('scroll bottom value bsubject: ',this.ui.scrolltobottom$.value);
+
+ this.ui.scrolltobottom$.pipe(takeUntil(this.destroy$)).subscribe(()=>this.scrollToBottom())
+
+ this.scrollToBottom()
 
 }
 
