@@ -17,6 +17,9 @@
 .name{
     @apply text-lg font-semibold text-slate-900
 }
+.nameedit{
+  @apply text-lg font-semibold text-blue-700 max-w-[250px] min-w-[250px] border-2 border-blue-600 rounded-md focus:border-teal-400
+}
 .online{
     @apply font-semibold text-green-500
 }
@@ -28,6 +31,11 @@
 
 .status{
     @apply text-lg font-light text-slate-900 max-w-[300px]
+
+}
+
+.statusedit{
+  @apply text-lg font-light focus:border-teal-400 max-w-[250px]  border-2 border-blue-600 rounded-md  min-w-[250px] text-blue-700
 
 }
 .open{
