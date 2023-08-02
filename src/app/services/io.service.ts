@@ -138,7 +138,7 @@ let resp
     this.socket.emit('message-sent',messageobj,(response:{sent:any,userchats:chatlist[]})=>{
       // console.log(response);
       if(response) {
-        console.log('message sent ',response);
+        console.log('message sent response',response);
 console.log('intial value fo first chat sent: ',this.messageservice.chatthread$.value);
 
 this.messageservice.chatthread$.value==undefined ?this.messageservice.chatthread$.next([response.sent]):this.messageservice.chatthread$.next([...this.messageservice.chatthread$.value,response.sent])

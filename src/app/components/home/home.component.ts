@@ -37,12 +37,12 @@ this.livechatupdate()
   }
 
   livechatupdate(){
-    this.io.chatlistupdate().pipe(map((res:any)=> {
+    this.io.chatlistupdate().pipe(map((res:{message:string,receiveruserschatslist:chatlist[]})=> {
       console.log('initial fetch: ',res);
 if(res ==undefined) return []
-     return res.userschatslist as chatlist[]}),
+     return res.receiveruserschatslist}),
      takeUntil(this.destroy$)).subscribe(res=>{
-      // console.log(res)
+       console.log('live chat update log:',res)
       this.ui.userchats.next(res)
     })
   }
