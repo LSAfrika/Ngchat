@@ -13,12 +13,19 @@
   .bio{
     @apply flex justify-start items-center gap-x-3 w-fit text-white pl-3 cursor-pointer;
     .avatar{
-      @apply w-[30px] h-[30px] rounded-full bg-slate-200 overflow-hidden bg-cover
+      @apply min-w-[30px] min-h-[30px] rounded-full bg-slate-200 overflow-hidden bg-cover
     }
     .name{
       @apply text-sm font-semibold
     }
 
+
+
+  }
+
+  .logout{
+    @apply text-white text-xs cursor-pointer flex justify-center p-1
+     items-center ml-auto mr-2  border-white rounded-full
   }
 }
 .chatlistcontainer{
@@ -89,7 +96,7 @@ animation: in .5s forwards;
 
 @keyframes in{
   0%{
-    @apply top-[-100%]  
+    @apply top-[-100%]
   }
   100%{
     @apply top-0

@@ -34,6 +34,9 @@ destroy$=new Subject<number>()
     this.destroy$.unsubscribe()
   }
 
+  logout(){
+    this.io.userlogout( )
+  }
 
 
   fetchuserchat(chatparticipantid:string,chatingwith:participant){
