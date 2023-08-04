@@ -52,7 +52,8 @@ chatparticipant:participant
 
   const newchatlist=  this.ui.userchats.value.splice(this.deleteindex,1)
   console.log('new chatlist',newchatlist);
-  this.ui.activechat$.next(false)
+
+  if(this.ui.chatingwith._id==this.chatparticipant._id) this.ui.activechat$.next(false)
 
   setTimeout(() => {
     this.ui.opendeletechatmodal=false
