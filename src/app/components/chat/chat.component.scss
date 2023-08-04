@@ -62,7 +62,7 @@
 }
 
 .unreadcounter{
-  @apply  bg-blue-500  absolute right-1 bottom-1 w-[20px] h-[20px] text-sm text-white text-center rounded-full
+  @apply  bg-blue-500  absolute right-7 bottom-1 w-[20px] h-[20px] text-sm text-white text-center rounded-full
 }
 
 .chatpages{
@@ -94,12 +94,35 @@ animation: in .5s forwards;
   animation: out .5s forwards;
   }
 
-@keyframes in{
+
+  .deletemodal{
+    @apply absolute top-0 w-full min-h-full bg-black/40 z-[100] flex justify-center items-center;
+    .delete{
+      @apply  w-[300px] h-[200px] rounded-md bg-slate-200 flex flex-col justify-center items-center gap-5 text-blue-600;
+      .btngroup{
+        @apply w-full flex justify-center items-center gap-2;
+        .btn{
+          @apply text-white bg-blue-600 px-5 py-1 rounded-full text-xs cursor-pointer
+        }
+        .btnhollow{
+          @apply bg-white text-blue-600 border-2 border-blue-600
+        }
+      }
+    }
+  }
+
+
+  .modalpopin{
+    animation: popin .25s ease-in forwards;
+  }
+
+@keyframes popin{
   0%{
-    @apply top-[-100%]
+   transform: scale(0);
   }
   100%{
-    @apply top-0
+    transform: scale(1);
+
   }
 }
 

@@ -15,7 +15,9 @@ import { Subject, switchMap } from 'rxjs';
 export class ChatComponent implements OnInit {
 
 destroy$=new Subject<number>()
-
+menuguard=false
+deleteindex=-1
+chatparticipant:participant
 
   constructor(public ui:UiService,private msgservice:MessagesService,private io:IOService) { }
 
@@ -38,8 +40,39 @@ destroy$=new Subject<number>()
     this.io.userlogout( )
   }
 
+  opendeletemodal(user:participant,index:number){
+    this.chatparticipant=user
+    this.ui.opendeletechatmodal=true
+    this.deleteindex=index
+    console.log('user to delete',user,index);
+
+  }
+
+  deletechat(){
+
+  const newchatlist=  this.ui.userchats.value.splice(this.deleteindex,1)
+  console.log('new chatlist',newchatlist);
+  this.ui.activechat$.next(false)
+
+  setTimeout(() => {
+    this.ui.opendeletechatmodal=false
+  }, 500);
+
+
+  }
+
+
+
+  closedeletemodal(){
+    this.ui.opendeletechatmodal=false
+  }
+
 
   fetchuserchat(chatparticipantid:string,chatingwith:participant){
+
+    console.log('state of menu guard',this.menuguard);
+
+    if(this.menuguard==true)return
 
     this.ui.chatingwith=chatingwith
     console.log(chatparticipantid);

@@ -6,14 +6,17 @@ Add callback to message received to mark message as read DONE
 
 store temporary id top previous chat user id to comapre to aviod fetching chats all agian URGENT==> DONE
 on token expiration disconnect user from server ==>DONE
+favorite contacts section add contacts button in profile page ==>DONE
+pagination of chats ==>DONE
 ======to do=====
-add new chat to array upon chat begining 
+add new chat to array upon chat begining
 
 oflline user on chat bring current user on main page resolve to link to user
 
 
 
 =========feature to add======
-favorite contacts section add contacts button in profile page
-pagination of chats
 invite section
+
+delete chat mark chat as deleted filter fot deleted user if both users deleted  clear from db
+add facebook login
