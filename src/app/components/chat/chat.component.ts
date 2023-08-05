@@ -4,7 +4,7 @@ import { tap, takeUntil, map } from 'rxjs/operators';
 import { MessagesService } from './../../services/messages.service';
 import { Component, OnInit } from '@angular/core';
 import { UiService } from 'src/app/services/ui.service';
-import { Subject, switchMap } from 'rxjs';
+import { Subject, switchMap, Subscription } from 'rxjs';
 
 
 @Component({
@@ -18,10 +18,13 @@ destroy$=new Subject<number>()
 menuguard=false
 deleteindex=-1
 chatparticipant:participant
+deletechatsub:Subscription
+deletenotification=false
+deletenotificationstring='deleting thread ...'
 
   constructor(public ui:UiService,private msgservice:MessagesService,private io:IOService) { }
 
-
+chatparticipanttodelete:participant={_id:'',lastseen:0,online:false,profileimg:'',username:'',status:''}
 
 
   ngOnInit(): void {
@@ -41,32 +44,19 @@ chatparticipant:participant
   }
 
   opendeletemodal(user:participant,index:number){
-    this.chatparticipant=user
+    this.chatparticipanttodelete=user
     this.ui.opendeletechatmodal=true
-    this.deleteindex=index
+    this.ui.deletechatindex=index
     console.log('user to delete',user,index);
 
   }
 
-  deletechat(){
-
-  const newchatlist=  this.ui.userchats.value.splice(this.deleteindex,1)
-  console.log('new chatlist',newchatlist);
-
-  if(this.ui.chatingwith._id==this.chatparticipant._id) this.ui.activechat$.next(false)
-
-  setTimeout(() => {
-    this.ui.opendeletechatmodal=false
-  }, 500);
-
-
-  }
 
 
 
-  closedeletemodal(){
-    this.ui.opendeletechatmodal=false
-  }
+
+
+
 
 
   fetchuserchat(chatparticipantid:string,chatingwith:participant){

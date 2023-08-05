@@ -6,7 +6,7 @@ import { Subject, Observable, combineLatest, BehaviorSubject } from 'rxjs';
 
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { chatlist } from 'src/app/interface/messages.interface';
+import { chatlist, participant } from 'src/app/interface/messages.interface';
 import { IOService } from 'src/app/services/io.service';
 
 
@@ -19,21 +19,15 @@ import { IOService } from 'src/app/services/io.service';
 export class MessagesComponent implements OnInit {
 
   Destroy$=new Subject<boolean>()
-
+  menuguard=false
 names=[]
-  constructor(public ui:UiService,private messageservice:MessagesService,private io:IOService) {
+  constructor(public ui:UiService,private messageservice:MessagesService,private io:IOService) {  }
 
-    // this.names= this.ui.names
+  opendeletemodal(chatparticipant:participant,index:number){
 
-
-
-
-
-
-
-
-
-
+    this.ui.opendeletechatmodal=true
+    this.ui.chatparticipanttodelete=chatparticipant
+    this.ui.deletechatindex=index
 
   }
 

@@ -13,6 +13,7 @@ import { RouterModule } from '@angular/router';
 import { LoadingComponent } from '../components/loading/loading.component';
 import { ContactsComponent } from '../components/contacts/contacts.component';
 import { ViewprofileComponent } from '../components/viewprofile/viewprofile.component';
+import { DeletechatmodalComponent } from '../components/deletechatmodal/deletechatmodal.component';
 
 
 
@@ -27,7 +28,8 @@ import { ViewprofileComponent } from '../components/viewprofile/viewprofile.comp
     MessagesComponent,
       LoadingComponent,
       ContactsComponent,
-      ViewprofileComponent
+      ViewprofileComponent,
+      DeletechatmodalComponent
 
   ],
   imports: [
@@ -42,7 +44,8 @@ import { ViewprofileComponent } from '../components/viewprofile/viewprofile.comp
     ContactsComponent,
     LoadingComponent,
     MessagesComponent,
-    ViewprofileComponent
+    ViewprofileComponent,
+    DeletechatmodalComponent
   ]
 })
 export class SharedModule { }

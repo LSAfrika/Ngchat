@@ -14,12 +14,11 @@ import {BrowserAnimationsModule} from'@angular/platform-browser/animations'
 import { AuthInterceptor } from './services/auth.interceptor';
  import { SharedModule } from './shared/shared.module';
 
+
 @NgModule({
   declarations: [
     AppComponent,
-// MessagesComponent,
     LoginComponent,
-
 
 
   ],

@@ -1,0 +1,16 @@
+<div *ngIf="ui.opendeletechatmodal" class="deletemodal">
+
+  <div  class="delete modalpopin">
+<span *ngIf="deletenotification==false" >delete  chat with <strong>{{chatparticipant.username}}</strong> </span>
+<span *ngIf="deletenotification==true" class="pulsing">{{deletenotificationstring}} </span>
+    <div class="btngroup">
+
+      <ng-container *ngIf="deletenotification==false">
+
+        <button (click)="deletechat()" class="btn ">delete</button>
+        <button (click)="closedeletemodal()" class="btn btnhollow">cancel</button>
+      </ng-container>
+    </div>
+  </div>
+
+</div>

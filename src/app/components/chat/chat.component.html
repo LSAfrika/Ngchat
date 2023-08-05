@@ -58,17 +58,7 @@
   <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24" style="fill: rgba(37 99 235);"><path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm5 11h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"></path></svg>
 
   </div>
-  <div *ngIf="ui.opendeletechatmodal" class="deletemodal">
-
-    <div  class="delete modalpopin">
-<span>delete  chat with <strong>{{chatparticipant.username}}</strong> </span>
-      <div class="btngroup">
-        <button (click)="deletechat()" class="btn ">delete</button>
-        <button (click)="closedeletemodal()" class="btn btnhollow">cancel</button>
-      </div>
-    </div>
-
-  </div>
+<app-deletechatmodal *ngIf="ui.opendeletechatmodal==true" [chatparticipant]="chatparticipanttodelete"></app-deletechatmodal>
 </div>
 
 

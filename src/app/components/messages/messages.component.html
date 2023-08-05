@@ -24,6 +24,9 @@
 </div>
 </div>
 <span class="unreadcounter" *ngIf="chat.unreadcounter[0].count>0">{{chat.unreadcounter[0].count}}</span>
+<div (click)="opendeletemodal(chat.chatparticipants[0],i)" (mouseenter)="menuguard=true" (mouseleave)="menuguard=false" class="absolute flex items-center justify-center w-5 h-5 bottom-1 right-1">
+  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" style="fill: rgb(37 99 235)"><path d="M12 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zM6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"></path></svg>
+</div>
 
 
     </div>
@@ -35,7 +38,6 @@
       <div>start new chats </div>
     </ng-template>
   </ng-container>
-
 
 </div>
 

@@ -11,6 +11,9 @@ export class UiService {
 
 
   samechatid=''
+  deletechatindex=-1
+  chatparticipanttodelete:participant
+
   viewloadmorebutton=false
   opendeletechatmodal=false
   viewprofile$=new BehaviorSubject<boolean>(false)

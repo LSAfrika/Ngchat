@@ -1,6 +1,5 @@
-import { tap } from 'rxjs/operators';
 import { Message } from './../interface/messages.interface';
-import { BehaviorSubject, map, Subject } from 'rxjs';
+import { BehaviorSubject, map, Subject, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import{environment} from '../../environments/environment'
@@ -29,7 +28,8 @@ unreadcounter=0
   fetchthread(userid){
 
  return this.fetchchat(userid).pipe(
-    map((res:any)=>res.chats as Message[]),
+    map((res:Message[])=>{console.log('msg service thread',res);
+    return res }),
     // tap(res=>this.chatthread$.next(res))
     )
     // .subscribe()
@@ -41,6 +41,9 @@ unreadcounter=0
     return this.http.get(this.ROOTCHATSURL+'singlechat/'+`${user}/`+'?pagination='+this.messagepagination)
   }
 
+  deletechatthread(chatparticipant):Observable<{message:string}>{
+    return this.http.delete<{message:string}>(this.ROOTCHATSURL+'singlechat/'+chatparticipant)
+  }
 
   fetchchatlist(){
     return this.http.get(this.ROOTCHATSURL+'allchats')

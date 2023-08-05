@@ -93,6 +93,8 @@ fetcholderchats(){
 
 fetchcurrentchat(){
   this.msgservice.fetchthread(this.chatparticipantid).pipe(tap(res=>{
+    console.log('initial chat fetch',res);
+
     res.length>=20?this.ui.viewloadmorebutton=true:this.ui.viewloadmorebutton=false
     this.msgservice.chatthread$.next(res)
   })
