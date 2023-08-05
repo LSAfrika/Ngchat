@@ -28,8 +28,8 @@ unreadcounter=0
   fetchthread(userid){
 
  return this.fetchchat(userid).pipe(
-    map((res:Message[])=>{console.log('msg service thread',res);
-    return res }),
+    map((res:{chats:Message[]})=>{console.log('msg service thread',res);
+    return res.chats }),
     // tap(res=>this.chatthread$.next(res))
     )
     // .subscribe()

@@ -86,6 +86,7 @@ console.log('pagination value reset:',this.msgservice.messagepagination);
 this.msgservice.chatthread$.next([])
     this.msgservice.fetchthread(chatparticipantid).pipe(
       tap(res=>{
+console.log('current thread desktop ui',res);
 
         res.length>=20?this.ui.viewloadmorebutton=true:this.ui.viewloadmorebutton=false
         this.msgservice.chatthread$.next([...res,...this.msgservice.chatthread$.value])
