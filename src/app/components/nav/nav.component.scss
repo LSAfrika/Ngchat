@@ -1,3 +1,7 @@
+.nav{
+  @apply fixed top-0 z-40 w-full px-4 bg-blue-600
+}
+
 .profile{
-    @apply w-[40px]  h-[40px] px-2 py-1  flex justify-center items-center  bg-white rounded-full  ;
+    @apply w-fit px-1  h-[40px]  py-1  flex justify-center items-center  text-white font-semibold gap-2  ;
 }

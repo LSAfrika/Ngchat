@@ -1,5 +1,5 @@
 .ui{
-  @apply absolute top-0    z-[60] w-full bg-slate-100 max-h-[calc(100vh-50px)] min-h-[calc(100vh-50px)]  overflow-y-scroll pt-[55px]
+  @apply absolute top-0 flex justify-start items-center flex-col   z-[60] w-full bg-slate-100 max-h-[calc(100vh-50px)] min-h-[calc(100vh-50px)]  overflow-y-scroll pt-[55px]
   }
 
 
@@ -8,7 +8,7 @@
   }
 
   .searchbar{
-    @apply fixed top-0 min-h-[50px] bg-white text-blue-700 px-2 flex  justify-start items-center w-full gap-2 z-[70];
+    @apply fixed top-0 min-h-[50px] max-w-[600px] bg-white text-blue-700 px-2 flex  justify-start items-center w-full gap-2 z-[70];
     input{
       outline: none;
       border: none;
@@ -21,7 +21,7 @@
     }
   }
 .contactsdivider{
-  @apply w-full min-h-[30px]  p-1 flex justify-center items-center text-blue-700 ;
+  @apply w-full min-h-[30px]  p-1 flex justify-center items-center text-blue-700 max-w-[600px] ;
   .btncontacts{
 @apply min-w-[45%] text-center text-xs font-semibold py-2 cursor-pointer
   }
@@ -33,7 +33,7 @@
 }
 
   .contactlist{
-    @apply flex justify-start flex-1 w-full mb-1 border-b-2 border-b-white
+    @apply flex justify-start flex-1 w-full mb-1 border-b-2 border-b-white max-w-[600px]
   }
 
 

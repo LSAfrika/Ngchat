@@ -1,4 +1,4 @@
- <div class="fixed top-0 z-40 w-full px-4 bg-blue-500 " [ngClass]="ui.shrinknav" >
+ <div class="nav" [ngClass]="ui.shrinknav" >
    <div class="max-w-[1300px] w-full   h-[50px] flex items-center content-start mx-auto">
   <div class="text-white h-fit w-fit ">
       <h2 class="box-border px-2 text-sm font-semibold text-blue-500 bg-white rounded-full w-fit"><span class="text-xl font-bold ">Ng</span> chat</h2>
@@ -10,12 +10,14 @@
 
 
   </div>
-  <div class="profile ">
-    <div [routerLink]="['/profile',ui.authuser._id]" class="w-8 h-8 overflow-hidden rounded-full ">
+  <a class="profile " [routerLink]="['/profile',ui.authuser._id]">
+
+    <div>hi {{ui.authuser.username}}</div>
+    <div  class="w-8 h-8 overflow-hidden rounded-full ">
       <img class="w-full h-[100%] bg-cover" src="{{ui.authuser?.profileimg}}" alt="" srcset="">
     </div>
     <!-- <div class="font-light text-[18px] text-white ml-2 hidden sm:block ">Hello <strong>wilson</strong></div> -->
-</div>
+</a>
 </div>
 
 
