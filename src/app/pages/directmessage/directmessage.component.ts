@@ -96,7 +96,9 @@ fetchcurrentchat(){
     console.log('initial chat fetch',res);
 
     res.length>=20?this.ui.viewloadmorebutton=true:this.ui.viewloadmorebutton=false
-    this.msgservice.chatthread$.next(res)
+    // this.msgservice.chatthread$.next(res)
+    this.msgservice.chatthread$.next([...res,...this.msgservice.chatthread$.value])
+
   })
     ,takeUntil(this.destroy$)).subscribe(
     ()=>{
@@ -191,7 +193,8 @@ console.log('callback payload',callbackpayload);
   }
 
   back() {
-    this.location.back()
+    // console.log('loction object',this.location)
+    this.location.historyGo(-2)
   }
 
   ngAfterViewInit(){
