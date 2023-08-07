@@ -2,7 +2,7 @@
 //   position: relative;
 // }
 .holder{
-  @apply bg-slate-200 min-w-full min-h-screen
+  @apply bg-slate-200 min-w-full min-h-[calc(100vh-50px)]
 }
 
 app-genericmodal{
@@ -48,6 +48,11 @@ app-genericmodal{
   @apply absolute bottom-5 right-5 w-[40px] h-[40px] bg-blue-500 rounded-full flex justify-center items-center cursor-pointer
 }
 
+
+.nochats{
+  @apply w-full h-[calc(100vh-60px)]  flex flex-col justify-center items-center text-blue-700;
+  
+}
 
 
 
