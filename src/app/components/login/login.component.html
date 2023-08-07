@@ -1,14 +1,14 @@
-<div class="lg:gap-5 fixed top-0 flex-wrap  z-50 w-full h-screen bg-gradient-to-b from-blue-700 to-blue-700 box-border p-2 flex flex-col  justify-start items-center pt-[20px]">
+<div class="logincomponent">
 
     <!-- <div class="hidden lg:flex w-[75%] left-[25%] fixed h-screen mt-[50px] roun ded-tl-lg     flex-col justify-start items-center"> -->
 
 <div class="flex flex-col justify-center items-center  ">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-[150px] w-[150px] lg:w-[300px] lg:h-[200px]   rounded-full p-4 " viewBox="0 0 20 20" fill="rgb(255 255 255)">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-[150px] w-[150px]   rounded-full p-4 " viewBox="0 0 20 20" fill="rgb(255 255 255)">
             <path d="M2 5a2 2 0 012-2h7a2 2 0 012 2v4a2 2 0 01-2 2H9l-3 3v-3H4a2 2 0 01-2-2V5z" />
             <path d="M15 7v2a4 4 0 01-4 4H9.828l-1.766 1.767c.28.149.599.233.938.233h2l3 3v-3h2a2 2 0 002-2V9a2 2 0 00-2-2h-1z" />
           </svg>
 
-        <h1 class=" mt-0 text-3xl    flex justify-center items-center relative font-semibold text-white rounded-md px-7 lg:text-[30px] lg:font-bold  py-2 lg:pr-10 lg:rounded-lg">
+        <h1 class=" mt-0 text-3xl    flex justify-center items-center relative font-semibold text-white rounded-md px-7 ">
           <span class="text-blue-600 bg-white font-bold p-2 rounded-l-md ">NG</span>
           <span class="text-white border-[4px] border-white py-1 relative  rounded-r-full px-5 border-l-0 translate-x-[-5px]">  CHAT</span>
 
@@ -16,7 +16,7 @@
       </div>
         <!-- <button (click)="ui.loginform()" class="flex items-center justify-center px-8 mt-5 font-light text-white bg-transparent border-2 border-white rounded-full w-fit h-fit"><div class="mb-1">login</div></button> -->
         <!-- <div class="w-1/2 font-thin mt-[50px] text-center text-white ">Log in with</div> -->
-<div *ngIf="register==false;" class="logincontainer   lg:min-w-[300px] lg:min-h-[300px]">
+<div *ngIf="register==false;" class="logincontainer   ">
           <!-- <div>sign in</div> -->
          <!-- <div class="flex flex-col items-center justify-start cursor-pointer">   <img (click)="api.googlesignin()" class="w-[40px] h-[40px]" src="../../../assets/fb.svg" alt="" srcset=""> <span class="font-normal text-white"></span></div> -->
           <input (keyup)="emailvalidator($event)" class="input" [(ngModel)]="email" placeholder="email" type="email">
@@ -44,7 +44,7 @@
         </div>
 
 
-<div *ngIf="register==true;" class="registercontainer  lg:min-w-[300px] lg:min-h-[300px]">
+<div *ngIf="register==true;" class="registercontainer  ">
   <input (keyup)="emailvalidator($event)" class="input" placeholder="email" [(ngModel)]="email" type="email">
   <span class="w-full text-xs text-white font-semibold text-left" *ngIf="invalidemailmatch">{{inavlidemailnmatchmessage}}</span>
 

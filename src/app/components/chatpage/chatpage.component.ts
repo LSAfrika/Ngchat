@@ -22,6 +22,8 @@ chat=''
 
   ngOnInit(): void {
 
+    console.log('chating with:',this.ui.chatingwith);
+    
     this.ui.desktopchatscrolltobotton().pipe(delay(50)).subscribe(res=>{
       console.log('current res',res);
       this.scrollToBottom()

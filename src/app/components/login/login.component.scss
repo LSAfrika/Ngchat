@@ -1,5 +1,10 @@
+.logincomponent{
+  @apply  fixed top-0   z-50 w-full h-screen bg-gradient-to-b from-blue-700 to-blue-700 box-border p-2 flex flex-col  justify-start items-center pt-[20px]
+}
+
+
 .logincontainer{
-  @apply flex justify-center flex-col items-center mt-[20px] gap-6 lg:gap-8  lg:max-w-[350px];
+  @apply flex justify-center flex-col items-center mt-[20px] gap-6   lg:max-w-[350px];
   .input{
     @apply bg-blue-700 pl-2 pb-1 border-b-2 border-white/40 text-white outline-none focus:border-white w-full max-w-[350px]
   }
@@ -11,7 +16,7 @@
 
 .registercontainer{
 
-    @apply flex justify-center flex-col items-center mt-[20px] gap-6  lg:gap-12 lg:max-w-[350px];
+    @apply flex justify-center flex-col items-center mt-[20px] gap-6   lg:max-w-[350px];
     .input{
       @apply bg-blue-700 pl-2 pb-1 border-b-2 border-white/40 text-white outline-none focus:border-white w-full max-w-[350px]
     }
