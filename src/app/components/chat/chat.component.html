@@ -15,7 +15,7 @@
 </div>
 
 <ng-container *ngIf="ui.userchats |async as chats">
-<div class="chatlistcontainer">
+<div class="chatlistcontainer" *ngIf="chats.length>0 else nochats">
 <!-- todo REMEBER TO ADD TACK BY FUNCTION BACK TO NG FOR ==>  trackBy:identify    item of [].constructor(21); -->
   <div *ngFor="let chat of chats let i=index " class="user" [ngClass]="{firstcontact: i==0}">
 
@@ -47,6 +47,12 @@
   </div>
 
 </div>
+<ng-template #nochats >
+  <div class="nochats">
+    <span class="text-xl font-semibold">You have no active chats</span> 
+    <span class="text-base italic font-light">begin new conversation</span>
+  </div>
+</ng-template>
 </ng-container>
 
 <div class="contacts " *ngIf="ui.initialposition==1">

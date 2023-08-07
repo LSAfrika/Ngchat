@@ -13,7 +13,7 @@
   .bio{
     @apply flex justify-start items-center gap-x-3 w-fit text-white pl-3 cursor-pointer;
     .avatar{
-      @apply min-w-[30px] min-h-[30px] rounded-full bg-slate-200 overflow-hidden bg-cover
+      @apply min-w-[40px] min-h-[40px] max-w-[40px] max-h-[40px] rounded-full bg-slate-200 overflow-hidden bg-cover
     }
     .name{
       @apply text-sm font-semibold
@@ -92,6 +92,11 @@ animation: in .5s forwards;
 
 .contactsout{
   animation: out .5s forwards;
+  }
+
+  .nochats{
+    @apply w-full h-[calc(100vh-60px)]  flex flex-col justify-center items-center text-blue-700;
+    
   }
 
 
