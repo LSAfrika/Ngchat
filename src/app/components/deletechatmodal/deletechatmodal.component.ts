@@ -38,14 +38,17 @@ deletenotificationstring='deleting thread ...'
     tap(res=>{
       console.log(res);
       this.ui.userchats.value.splice(this.ui.deletechatindex,1)
-      if(this.ui.chatingwith._id==this.chatparticipant._id) this.ui.activechat$.next(false)
-      // this.ui.chatingwith={_id:'',lastseen:0,online:false,profileimg:'',username:'',status:''}
+
+if(this.ui.chatingwith._id==this.chatparticipant._id) {
+this.ui.activechat$.next(false)
+this.msgservice.chatthread$.next([])
+}
+
 
       this.deletenotificationstring='chat deleted'
       setTimeout(() => {
       this.ui.opendeletechatmodal=false
      this.deletenotificationstring='deleting thread ...'
-
         this.deletenotification=false
         this.deletechatsub.unsubscribe()
       }, 1500);

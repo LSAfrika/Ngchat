@@ -150,7 +150,7 @@ export class ContactsComponent implements OnInit {
     }
 
     fetchuserchat(chatparticipantid:string,chatingwith){
-
+      this.ui.viewloadmorebutton=false
       this.ui.chatingwith=chatingwith
       console.log(chatparticipantid);
       this.ui.activechat$.next(true)
@@ -161,6 +161,7 @@ export class ContactsComponent implements OnInit {
 
     fetchcurrentchat(chatparticipantid){
       console.log('contacts id',chatparticipantid);
+      this.ui.viewloadmorebutton=false
 
 
       if(this.ui.chatingwith._id==this.ui.currentchatuserid){this.closecontacts(); return}
