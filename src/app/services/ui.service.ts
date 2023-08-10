@@ -1,8 +1,9 @@
 import { participant } from './../interface/messages.interface';
-import { BehaviorSubject, Subject } from 'rxjs';
+import { BehaviorSubject, filter, Subject } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { AuthUser, contacts } from '../interface/user.interfaces';
 import { chatlist } from '../interface/messages.interface';
+import { NavigationEnd, Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class UiService {
   samechatid=''
   deletechatindex=-1
   chatparticipanttodelete:participant
-
+_urlhistory=[]
   viewloadmorebutton=false
   opendeletechatmodal=false
   viewprofile$=new BehaviorSubject<boolean>(false)
@@ -46,7 +47,12 @@ export class UiService {
   currentchatuserid=''
  // names =[{name:'henry'},{name:'chege'},{name:'wilson'},{name:'jane'},{name:'camil'},{name:'mary'},{name:'john'},{name:'david'},{name:'rafael'},{name:'raphael'},{name:'kim'},{name:'henry'}]
   selecteduser:number=0
+
   constructor() { }
+
+
+
+
 
   open_modal(){
 this.openmodal=true

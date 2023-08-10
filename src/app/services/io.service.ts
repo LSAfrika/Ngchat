@@ -162,9 +162,9 @@ this.ui.userchats.next(response.userchats)
 
     getNewMessage () {
 
-      // console.log('received online message being hit');
-    this.socket.off('message-received').on('message-received', (message) =>{
-//  console.log('socket get new message: ',message);
+      // console.log('received online message being hit'); .off('message-received')
+    this.socket.on('message-received', (message) =>{
+  console.log('socket get new message: ',message);
 
       this.message$.next(message);
     });

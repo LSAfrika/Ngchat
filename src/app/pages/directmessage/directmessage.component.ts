@@ -3,12 +3,12 @@ import { User } from './../../interface/post.interface';
 import { Usermessages,Message } from './../../interface/messages.interface';
 import { MessagesService } from './../../services/messages.service';
 // import { PostService } from './../../services/Post.service';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { ChangeDetectionStrategy, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { UiService } from '../../services/ui.service';
 import { IOService } from '../../services/io.service';
 import { BehaviorSubject, Subject, Observable, from, of } from 'rxjs';
-import { takeUntil, tap, switchMap, map, skip } from 'rxjs/operators';
+import { takeUntil, tap, switchMap, map, skip, filter } from 'rxjs/operators';
 import { Location } from '@angular/common'
 
 @Component({
@@ -33,6 +33,7 @@ loadingchat=false
 chatparticipantid = '';
 message = '';
 chatid=''
+history=[]
 DirectChat:Message[]=[]
 destroy$ = new Subject<boolean>();
 user:Subject<User>=new Subject()
@@ -48,8 +49,10 @@ constructor(public ui: UiService, private router: Router,
     ) {
 
   this.chatparticipantid = this.route.snapshot.params['id']
+
 if(this.ui.authuser._id==this.chatparticipantid) { this.back();return}
   this.io.setsocketinstance()
+console.log('previous urls',this.ui._urlhistory);
 
 
 this.fetchuser()
@@ -60,6 +63,77 @@ this.fetchcurrentchat()
 this.readcounterreset()
 
 }
+
+ngOnInit(): void {
+
+  this.io.deliveryreport().subscribe(res=>console.log('delivery notification',res))
+
+  this.io.getNewMessage().pipe(takeUntil(this.destroy$)).subscribe(
+    (res:Message)=>{
+       console.log('user chat emission: ',res)
+      // console.log(' chat emission id: ',res)
+
+
+    if(res ==undefined) return
+    if(res._id== this.ui.samechatid) return console.log('last chat emission')
+
+      this.msgservice.chatthread$.next([...this.msgservice.chatthread$.value,res])
+      this.ui.samechatid=res._id
+
+  const callbackpayload={
+    ...res,
+    to:this.ui.authuser._id
+  }
+  console.log('loggedin user',this.ui.authuser._id);
+  console.log('callback payload',callbackpayload);
+
+        this.io.messagereceived(callbackpayload)
+
+    setTimeout(() => {
+
+       this.scrollToBottom()
+    }, 100);
+
+
+  })
+
+    }
+ngAfterViewInit(){
+   console.log('afterview init')
+  // this.scrollToBottom()//
+  setTimeout(() => {
+    console.log('afterview init',this.myScrollContainer)
+
+    this.scrollToBottom()
+    // this.updateview()
+
+  }, 1000);
+
+}
+
+ngAfterViewChecked(){
+
+  if(this.myScrollContainer !=undefined) return
+   console.log('view is checking');
+
+
+    console.log('checking');
+    console.log('afterview checked init',this.myScrollContainer)
+    this.scrollToBottom()
+
+
+  //  console.log('checking');
+
+
+}
+ngOnDestroy(): void {
+this.msgservice.chatthread$= new BehaviorSubject([])
+this.msgservice.messagepagination=0
+  this.destroy$.next(true);
+  this.destroy$.unsubscribe();
+}
+
+
 
 readcounterreset(){
   console.log('current unread count:\n',this.ui.unreadcounter);
@@ -157,80 +231,26 @@ const returneduser={_id:user._id,profileimg:user.profileimg,username:user.userna
   .subscribe( )
 
 }
-  ngOnInit(): void {
 
-this.io.deliveryreport().subscribe(res=>console.log('delivery notification',res))
-
-this.io.getNewMessage().pipe(takeUntil(this.destroy$)).subscribe(
-  (res:Message)=>{
-     console.log('user chat emission: ',res)
-    // console.log(' chat emission id: ',res)
-
-
-  if(res ==undefined) return
-  if(res._id== this.ui.samechatid) return console.log('last chat emission')
-
-    this.msgservice.chatthread$.next([...this.msgservice.chatthread$.value,res])
-    this.ui.samechatid=res._id
-
-const callbackpayload={
-  ...res,
-  to:this.ui.authuser._id
-}
-console.log('loggedin user',this.ui.authuser._id);
-console.log('callback payload',callbackpayload);
-
-      this.io.messagereceived(callbackpayload)
-
-  setTimeout(() => {
-
-     this.scrollToBottom()
-  }, 100);
-
-
-})
-
-  }
 
   back() {
     // console.log('loction object',this.location)
-    this.location.historyGo(-2)
-  }
+    if(this.ui._urlhistory.length==1 && this.ui._urlhistory[0]=='/contacts'){
+      this.ui._urlhistory=[]
+      this.location.historyGo(-2)
+      return
+    }
+    if(this.ui._urlhistory.length==2 && this.ui._urlhistory[this.ui._urlhistory.length-1]=='/contacts'){
+      this.ui._urlhistory=[]
+      this.location.historyGo(-2)
+      return
+    }
+    this.ui._urlhistory=[]
 
-  ngAfterViewInit(){
-     console.log('afterview init')
-    // this.scrollToBottom()//
-    setTimeout(() => {
-      console.log('afterview init',this.myScrollContainer)
-
-      this.scrollToBottom()
-      // this.updateview()
-
-    }, 1000);
-
-  }
-
-  ngAfterViewChecked(){
-
-    if(this.myScrollContainer !=undefined) return
-     console.log('view is checking');
-
-
-      console.log('checking');
-      console.log('afterview checked init',this.myScrollContainer)
-      this.scrollToBottom()
-
-
-    //  console.log('checking');
-
+    this.location.historyGo(-1)
 
   }
-  ngOnDestroy(): void {
-this.msgservice.chatthread$= new BehaviorSubject([])
-this.msgservice.messagepagination=0
-    this.destroy$.next(true);
-    this.destroy$.unsubscribe();
-  }
+
 
 
 

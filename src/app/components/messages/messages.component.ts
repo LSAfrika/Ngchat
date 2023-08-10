@@ -21,7 +21,12 @@ export class MessagesComponent implements OnInit {
   Destroy$=new Subject<boolean>()
   menuguard=false
 names=[]
-  constructor(public ui:UiService,private messageservice:MessagesService,private io:IOService) {  }
+  constructor(public ui:UiService,private messageservice:MessagesService,private io:IOService,private router:Router) {
+
+    this.ui._urlhistory.push(this.router.url)
+    console.log('current routes in url history:',this.ui._urlhistory);
+
+   }
 
   opendeletemodal(chatparticipant:participant,index:number){
 

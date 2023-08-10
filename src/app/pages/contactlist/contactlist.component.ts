@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { contacts, userfetch } from '../../interface/user.interfaces';
 import { switchMap, map, debounceTime, distinctUntilChanged, takeUntil, tap } from 'rxjs/operators';
 import { UserService } from './../../services/user.service';
@@ -37,9 +38,11 @@ count=this.user.searchvalue.pipe(switchMap((queryvalue:userfetch)=>{
 //   map((res:any)=>  {this.allcontacts=res.users.length; return res.users})
 
 //   )
-  constructor(public ui:UiService,private io:IOService,private user:UserService) {
+  constructor(public ui:UiService,private io:IOService,private user:UserService,private router:Router) {
   this.io.setsocketinstance()
 
+  this.ui._urlhistory.push(this.router.url)
+  console.log('current routes in url history:',this.ui._urlhistory);
   console.log('fav contacts initial list',this.ui.personalcontacts.value);
 
  if(this.ui.personalcontacts.value == undefined) this.user.fetchfavoritecontactlist().pipe(takeUntil(this.destroy$)).subscribe((res:contacts[])=>{console.log(res),this.ui.personalcontacts.next(res)})
