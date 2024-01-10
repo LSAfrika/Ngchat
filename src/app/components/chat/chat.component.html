@@ -2,8 +2,8 @@
 <div class="chatcontainer">
 <div class="chatnav">
   <div class="bio" (click)="viewprofile(ui.authuser)">
-    <div class="avatar" >
-      <img style="width: 100%;height:100%" src="{{ui.authuser.profileimg}}" alt="">
+    <div class="avatar" [style]="{ 'background-image': 'url(' +ui.authuser.profileimg + ')' }">
+      <!-- <img style="width: 100%;height:100%" src="{{ui.authuser.profileimg}}" alt=""> -->
     </div>
 <div class="name">hi {{ui.authuser.username}}</div>
   </div>

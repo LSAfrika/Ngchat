@@ -15,8 +15,8 @@
 
     </div>
 
-    <div class="avatar">
-      <img class="w-full h-full bg-cover" src="{{user?.profileimg}}" alt="profile image" srcset="">
+    <div class="avatar" [style]="{ 'background-image': 'url(' + user?.profileimg + ')' }">
+      <!-- <img class="w-full h-full bg-cover"  src="{{user?.profileimg}}" alt="profile image" srcset=""> -->
     </div>
     <div class="name"> {{user.username}}</div>
     <!-- <div class="text-blue-600">Last seen</div> -->
