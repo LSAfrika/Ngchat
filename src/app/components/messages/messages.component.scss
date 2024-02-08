@@ -17,7 +17,7 @@ app-genericmodal{
   @apply w-full flex justify-start items-center px-1 box-border relative  min-h-[60px] rounded-md shadow-black/40 shadow-md  gap-3 mt-2 cursor-pointer
 }
 .avatar{
-  @apply min-w-[50px] min-h-[50px] max-w-[50px] max-h-[50px] rounded-full bg-cover  bg-white overflow-hidden
+  @apply min-w-[50px] min-h-[50px] max-w-[50px] max-h-[50px] rounded-full bg-cover  bg-white overflow-hidden bg-center
 }
 .messagesection{
   @apply flex flex-col justify-start items-start w-full truncate  pl-1 relative

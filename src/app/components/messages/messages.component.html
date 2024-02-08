@@ -10,8 +10,8 @@
   <div  class="container" *ngIf="chats.length>0 else nochats " >
 
       <div     class="chatlist" *ngFor="let chat of chats;let i =index ">
-      <div  [routerLink]="['/profile',chat.chatparticipants[0]._id]" class="avatar">
-<img style="width: 100%;height:100%;background-size: cover;" src="{{chat.chatparticipants[0].profileimg}}" alt="" srcset="">
+      <div  [routerLink]="['/profile',chat.chatparticipants[0]._id]" class="avatar" [style]="{ 'background-image': 'url(' + chat.chatparticipants[0].profileimg + ')' }">
+<!-- <img style="width: 100%;height:100%;background-size: cover;" src="{{chat.chatparticipants[0].profileimg}}" alt="" srcset=""> -->
       </div>
       <div   [routerLink]="['/directmessage',chat.chatparticipants[0]._id]"  class=" messagesection">
         <div class="name" >
