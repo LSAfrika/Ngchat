@@ -26,7 +26,7 @@ app-genericmodal{
   @apply w-[100%] truncate text-slate-800 text-sm  relative
 }
 .unreadcounter{
-  @apply bg-blue-500 w-5 rounded-full h-5 ml-auto absolute bottom-3 right-2 flex justify-center items-center text-white p-2 text-xs
+  @apply bg-blue-500 w-5 rounded-full h-5 ml-auto absolute bottom-[6px] right-7 flex justify-center items-center text-white p-2 text-xs
 }
 .name{
   @apply text-sm font-semibold text-blue-600  ; width:100%;display:flex;justify-content:space-between
