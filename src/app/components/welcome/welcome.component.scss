@@ -1,0 +1,37 @@
+.welcomecontainer{
+  @apply w-full sm:max-w-[600px]
+  min-h-[450px] bg-white
+  backdrop-blur-xl rounded-lg
+  flex flex-col justify-start items-center py-5 px-4
+relative
+
+   ;
+   .close{
+    @apply absolute top-2 left-2 cursor-pointer
+
+  }
+  .hello{
+    @apply text-3xl font-semibold mb-5  text-blue-600
+  }
+
+.main{
+  @apply text-lg font-light text-center text-slate-900;
+   strong{
+@apply text-xl text-blue-600 font-semibold
+   }
+
+   .color{
+    @apply text-blue-600 font-semibold
+   }
+}
+
+.link{
+  @apply mt-10 flex justify-center items-center gap-3
+;
+  a{
+    @apply text-lg  text-blue-600 font-semibold
+    cursor-pointer hover:underline
+  }
+}
+
+}

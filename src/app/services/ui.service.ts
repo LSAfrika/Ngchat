@@ -15,6 +15,8 @@ export class UiService {
   deletechatindex=-1
   chatparticipanttodelete:participant
 _urlhistory=[]
+welcome$=new BehaviorSubject<boolean>(true)
+
   viewloadmorebutton=false
   opendeletechatmodal=false
   viewprofile$=new BehaviorSubject<boolean>(false)

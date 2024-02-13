@@ -14,6 +14,7 @@ import { LoadingComponent } from '../components/loading/loading.component';
 import { ContactsComponent } from '../components/contacts/contacts.component';
 import { ViewprofileComponent } from '../components/viewprofile/viewprofile.component';
 import { DeletechatmodalComponent } from '../components/deletechatmodal/deletechatmodal.component';
+import { WelcomeComponent } from '../components/welcome/welcome.component';
 
 
 
@@ -29,7 +30,8 @@ import { DeletechatmodalComponent } from '../components/deletechatmodal/deletech
       LoadingComponent,
       ContactsComponent,
       ViewprofileComponent,
-      DeletechatmodalComponent
+      DeletechatmodalComponent,
+      WelcomeComponent
 
   ],
   imports: [
@@ -45,7 +47,7 @@ import { DeletechatmodalComponent } from '../components/deletechatmodal/deletech
     LoadingComponent,
     MessagesComponent,
     ViewprofileComponent,
-    DeletechatmodalComponent
+    DeletechatmodalComponent,WelcomeComponent
   ]
 })
 export class SharedModule { }

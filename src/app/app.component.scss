@@ -14,3 +14,9 @@ app-loading{
   items-center
   text-white
 }
+
+
+app-welcome{
+  @apply fixed top-0 left-0 z-50 min-w-full min-h-screen bg-slate-200 sm:bg-black/30 flex justify-center items-center
+}
+
